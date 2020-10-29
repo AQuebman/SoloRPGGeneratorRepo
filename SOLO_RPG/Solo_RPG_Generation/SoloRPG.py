@@ -92,7 +92,7 @@ class Generators(BoxLayout):
 #Generic Character Generator
     def Gen_Char_Gen(self, *args): 
         self.onButtonPress()
-        Class_Choice = ('Barbarian', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Sorcerer', 'Wizard')
+        Class_Choice = ('Barbarian', 'Cleric', 'Druid', 'Fighter', 'Gunslinger' 'Monk', 'Sorcerer', 'Wizard')
         self.ids.class_label.text = 'Class: ' + (str(random.choice(Class_Choice)))
         
 
