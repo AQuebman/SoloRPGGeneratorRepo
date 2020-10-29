@@ -1,0 +1,118 @@
+Generators:
+    BoxLayout:   # left side of App
+        orientation: 'vertical'   #Orientation is Vertical instead of horizontal
+        canvas:
+            Color:
+                rgba: 0, .0, 0, .0
+            Rectangle:
+                pos: self.pos
+                size: self.size        
+    	Button:
+        	text: 'Generic Generators'
+        	height: '50dp'
+			size_hint: 0.20, None
+        	on_parent: drop1.dismiss()
+        	on_release: drop1.open(self)           
+            
+    	DropDown:
+        	id: drop1
+        	on_select: btn.text = '{}'.format(args[2])   
+
+        	Button:
+            	text: 'LOUCHE'
+            	size_hint_y: None
+            	height: 45
+            	on_press: root.clear()
+            	on_release:  root.louche()
+            	on_release: drop1.dismiss()
+       	
+        	Button:
+            	text: "Random Name\n    Generator"
+            	size_hint_y: None
+            	height: 45
+            	on_press: root.clear() 
+            	on_release: root.onButtonPress()
+            	on_release: drop1.dismiss()
+            	
+            Button:
+            	text: "Generic Character Generator"
+            	size_hint_y: None
+            	height: 45
+            	on_press: root.clear() 
+            	on_release: root.Gen_Char_Gen()
+            	on_release: drop1.dismiss()
+            	
+
+    	Button:
+        	text: 'Scarlet Heroes'
+        	height: '50dp'
+			size_hint: 0.20, None
+        	on_parent: drop2.dismiss()
+        	on_release: drop2.open(self) 
+        	
+    	DropDown:
+        	id: drop2
+        	on_select: btn.text = '{}'.format(args[1])
+
+        	Button:
+            	text: 'First Item'
+            	size_hint_y: None
+            	on_release: dropdown.select('First Item')
+            	           
+    	Button:
+        	text: 'Drop 3'
+        	height: '50dp'
+			size_hint: 0.20, None
+        	on_parent: drop_content.dismiss()
+        	on_release: drop_content.open(self)           
+            
+    	DropDown:
+        	id: drop_content
+        	on_select: btn.text = '{}'.format(args[1])   
+
+        	Button:
+            	text: 'First Item'
+            	size_hint_y: None
+            	on_release: dropdown.select('First Item')
+            	
+    	Button:
+        	text: 'Drop 4'
+        	height: '50dp'
+			size_hint: 0.20, None
+        	on_parent: drop4.dismiss()
+        	on_release: drop4.open(self) 
+        	
+    	DropDown:
+        	id: drop4
+        	on_select: btn.text = '{}'.format(args[1])
+
+        	Button:
+            	text: 'First Item'
+            	size_hint_y: None
+            	on_release: dropdown.select('First Item')
+
+        Label:					#Random Table Output label in the top center of the app
+            text: "Random Table Output"
+            font_size: 24
+            size_hint_y: .15
+            pos_hint: {'Center_x':.5, 'top':1}
+        Label:					#Label for where Name Prints
+            id: Char_Name
+            text: " "
+            font_size: 24
+            size_hint: (None, None)
+            pos_hint: {"center_y": 0.4}
+    		size: (1000, 100)
+        Label:					#Label for class choice
+            id: class_label
+            text: " "
+            font_size: 24
+            size_hint: (None, None)
+            pos_hint: {"center_y": 0.4}
+    		size: (1000, 0)         
+        Label:					#Starter label in the center of the app that disappears when the generators are activated
+            id: main_label
+            text: "Press a random generator on the side and output will display here."
+            font_size: 24
+            size_hint_y: .95
+            pos_hint: {'center_x':.5, 'top':.1}
