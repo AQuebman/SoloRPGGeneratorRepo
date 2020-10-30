@@ -94,6 +94,9 @@ class Generators(BoxLayout):
         self.onButtonPress()
         Class_Choice = ('Barbarian', 'Cleric', 'Druid', 'Fighter', 'Gunslinger' 'Monk', 'Sorcerer', 'Wizard')
         self.ids.class_label.text = 'Class: ' + (str(random.choice(Class_Choice)))
+        Race_Choice = ('Dwarf', 'Halfling', 'Gnome', 'Elf', 'Human', 'Orc', 'Tiefling')
+        self.ids.race_label.text = 'Race: ' + (str(random.choice(Race_Choice)))
+
         
 
     # On button press - Create a popup dialog with a label and a close button
