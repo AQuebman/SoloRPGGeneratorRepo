@@ -94,32 +94,32 @@ Generators:
         Label:					#Random Table Output label in the top center of the app
             text: "Random Table Output"
             font_size: 24
-            size_hint_y: .15
-            pos_hint: {'Center_x':.5, 'top':1}
+            size_hint_y: .15   
         Label:					#Label for where Name Prints
             id: Char_Name
             text: " "
             font_size: 24
             size_hint: (None, None)
-            pos_hint: {"center_y": 0.4}
-    		size: (1000, 100)
+    		size: (1200, 100)
         Label:					#Label for class choice
             id: class_label
             text: " "
             font_size: 24
             size_hint: (None, None)
-            pos_hint: {"center_y": 0.4}
-    		size: (1000, 0)         
-        Label:					#Label for class choice
+    		size: (1100, 0)         
+        Label:					#Label for race choice
             id: race_label
             text: " "
             font_size: 24
             size_hint: (None, None)
-            pos_hint: {"center_y": 0.4}
-    		size: (1000, 100)       		  		
+    		size: (1100, 100)       
+    	Label:					#Label for body type
+            id: bodytype_label
+            text: " "
+            font_size: 24
+            size_hint: (None, None)
+    		size: (2200, -320)   			
         Label:					#Starter label in the center of the app that disappears when the generators are activated
             id: main_label
             text: "Press a random generator on the side and output will display here."
             font_size: 24
-            size_hint_y: .95
-            pos_hint: {'center_x':.5, 'top':.1}

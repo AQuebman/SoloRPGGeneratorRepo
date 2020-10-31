@@ -37,7 +37,6 @@ class Generators(BoxLayout):
         LOUCHE = ('LOCALITY: Something specifically related to the current environment happens.\nThe buildings now on fire. The ground collapses. It\'s flooding. Moonquake!' , 'OFFER: Offer a bargain, an extra, or a perk for a cost.\noffer a better position, with risk. Offer a temptation.', 'UNEXPECTED DANGER: Make something up or roll it up at random.\nTie it in if you want now or worry about how it fits in later', 'CALLBACK: Use something that they\'ve given you. A backstory element.\nAn off-handed comment. Gear. A character sheet aspect', 'HARM: Deal damage', 'END SOMETHING: End an ongoing effect, bonus, or fictional advantage. Take a \nresource away, something you possess, whether it\'s a piece of gear, \nan ability, or an ally')
         self.ids.main_label.text = (str(random.choice(LOUCHE)))
 
-
 #Female Name Generation
     def Female_name_gen(self, *args):
 #Declares the array variables of First_Name and Last_Name
@@ -82,21 +81,16 @@ class Generators(BoxLayout):
 
 #Print a random first and last name for Males
         self.ids.Char_Name.text = 'Name: ' + random.choice(First_Name) + ' ' + random.choice(Last_Name)        
-
-#Clears what is showing on the main_label of the application     
-    def clear(self, *args):
-        self.ids.main_label.text = ''
-        self.ids.Char_Name.text = ''
-        self.ids.class_label.text = ''
  
 #Generic Character Generator
     def Gen_Char_Gen(self, *args): 
         self.onButtonPress()
-        Class_Choice = ('Barbarian', 'Cleric', 'Druid', 'Fighter', 'Gunslinger' 'Monk', 'Sorcerer', 'Wizard')
+        Class_Choice = ('Barbarian', 'Cleric', 'Druid', 'Fighter', 'Gunslinger', 'Monk', 'Sorcerer', 'Wizard')
         self.ids.class_label.text = 'Class: ' + (str(random.choice(Class_Choice)))
         Race_Choice = ('Dwarf', 'Halfling', 'Gnome', 'Elf', 'Human', 'Orc', 'Tiefling')
         self.ids.race_label.text = 'Race: ' + (str(random.choice(Race_Choice)))
-
+        Body_Type = ('Toned','Built', 'Brawny', 'Slender', 'Typical', 'Chubby')
+        self.ids.bodytype_label.text = 'Body Type: ' + (str(random.choice(Body_Type)))    
         
 
     # On button press - Create a popup dialog with a label and a close button
@@ -134,7 +128,12 @@ class Generators(BoxLayout):
         MaleNameButton.bind(on_release = self.Male_name_gen) 
         FemaleNameButton.bind(on_press=popup.dismiss)
         FemaleNameButton.bind(on_press = self.Female_name_gen)  
-        
+
+#Clears what is showing on the main_label of the application   
+    def clear(self, *args):
+        self.ids.main_label.text = ''
+        self.ids.Char_Name.text = ''
+        self.ids.class_label.text = ''      
         
         
 class app1(App):
