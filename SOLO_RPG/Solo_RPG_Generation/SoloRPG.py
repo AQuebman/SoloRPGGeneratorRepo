@@ -84,17 +84,24 @@ class Generators(BoxLayout):
  
 #Generic Character Generator
     def Gen_Char_Gen(self, *args): 
-        self.onButtonPress()
-        Class_Choice = ('Barbarian', 'Cleric', 'Druid', 'Fighter', 'Gunslinger', 'Monk', 'Sorcerer', 'Wizard')
+        self.onButtonPress() #Grabs a random name for a male or female
+        Class_Choice = ('Alchemist', 'Artificer', 'Assassin', 'Barbarian', 'Bard', 'Blackguard', 'Cavalier', 'Cleric', 'Conjurer', 'Cultist', 'Dragoon', 'Druid', 'Eldritch Knight', 'Fighter', 'Gunslinger', 'Illusionist', 'Monk', 'Necromancer', 'Ninja', 'Paladin', 'Psion', 'Ranger', 'Sage', 'Samurai', 'Shaman', 'Sorcerer', 'Spy', 'Swashbuckler', 'Tactician', 'Thief', 'Warlock', 'Warrior', 'Witch', 'Witch Doctor', 'Wizard') #Picks a random class
         self.ids.class_label.text = 'Class: ' + (str(random.choice(Class_Choice)))
-        Race_Choice = ('Dwarf', 'Halfling', 'Gnome', 'Elf', 'Human', 'Orc', 'Tiefling')
+        Race_Choice = ('Dragonborn', 'Drow', 'Dwarf', 'Elf', 'Gnome', 'Halfling', 'Human', 'Orc', 'Other', 'Tiefling') #Picks a random race
+        Atypical_Race_Choice = ('Angel', 'Cyclops', 'Centaur', 'Demon', 'Dryads', 'Giant', 'Ghost', 'Gnoll', 'Hobgoblin', 'Kobold', 'Lycanthrope', 'Lizardfolk', 'Fairies', 'Goblin', 'Mermaids', 'Nymph', 'Satyr', 'Shade', 'Skeleton', 'Troglodyte', 'Troll', 'Vampires', 'Yeti')
         self.ids.race_label.text = 'Race: ' + (str(random.choice(Race_Choice)))
-        Body_Type = ('Toned','Built', 'Brawny', 'Slender', 'Typical', 'Chubby')
+        if self.ids.race_label.text == 'Race: Other' :
+            self.ids.race_label.text = 'Race: ' + (str(random.choice(Atypical_Race_Choice)))
+        Body_Type = ('Toned','Built', 'Brawny', 'Slender', 'Typical', 'Chubby') #Picks a random body type
         self.ids.bodytype_label.text = 'Body Type: ' + (str(random.choice(Body_Type)))    
+        Occupation = ('Alchemist', 'Animal Trainer', 'Apothecarist', 'Armorer', 'Artisan', 'Astrologer', 'Barber', 'Barrister', 'Beadle', 'Beekeeper', 'Blacksmith', 'Butcher', 'Caravan Guard', 'Chandler', 'Cheesemaker', 'Chest-maker', 'Cobbler', 'Confidence artist', 'Cooper', 'Corn Farmer', 'Costermonger', 'Cutpurse', 'Ditch Digger', 'Dock worker', 'Dyer', 'Falconer', 'Forester', 'Fortune Teller', 'Gambler', 'Glassblower', 'Glovemaker', 'Gong Farmer', 'Grave Digger', 'Guild Beggar', 'Gypsy', 'Haberdasher', 'Healer', 'Herbalist', 'Herder', 'Hunter', 'Indentured servant', 'Jester', 'Jeweler', 'Locksmith', 'Mariner', 'Mendicant', 'Mercenary', 'Merchant', 'Miller/baker', 'Miner', 'Minstrel', 'Moneylender', 'Mushroom farmer', 'Navigator', 'Noble', 'Orphan', 'Ostler', 'Outlaw', 'Parsnip Farmer', 'Potato Farmer', 'Radish Farmer', 'Rat catcher', 'Rice Farmer', 'Rope maker', 'Rutabaga Farmer', 'Sage', 'Scribe', 'Shaman', 'Slave', 'Smuggler', 'Soldier', 'Squire', 'Stonemason', 'Tax Collector', 'Trader', 'Trapper', 'Turnip Farmer', 'Urchin', 'Vagrant', 'Wainwright', 'Weaver', 'Wheat Farmer', 'Wizard\'\s apprentice', 'Woodcutter') #Picks a random occupation
+        self.ids.occupation_label.text = 'Occupation: ' + (str(random.choice(Occupation)))
+
         
+        
+   
 
     # On button press - Create a popup dialog with a label and a close button
-
     def onButtonPress(self):
 
         layout      = GridLayout(cols=1, padding=10)
@@ -139,6 +146,22 @@ class Generators(BoxLayout):
 class app1(App):
     def build(self):
         return Builder.load_file('SoloRPG.kv')
+    
+#Beginnings of a DCC Character Generator
+"""    def Gen_Char_Gen(self, *args): 
+        self.onButtonPress() #Grabs a random name for a male or female
+        Class_Choice = ('Barbarian', 'Cleric', 'Druid', 'Fighter', 'Gunslinger', 'Monk', 'Sorcerer', 'Wizard') #Picks a random class
+        self.ids.class_label.text = 'Class: ' + (str(random.choice(Class_Choice)))
+        Race_Choice = ('Dwarf', 'Halfling', 'Gnome', 'Elf', 'Human', 'Orc', 'Tiefling') #Picks a random race
+        self.ids.race_label.text = 'Race: ' + (str(random.choice(Race_Choice)))
+        Body_Type = ('Toned','Built', 'Brawny', 'Slender', 'Typical', 'Chubby') #Picks a random body type
+        self.ids.bodytype_label.text = 'Body Type: ' + (str(random.choice(Body_Type)))    
+        Occupation = ('Alchemist', 'Animal Trainer') #Picks a random occupation
+        self.ids.occupation_label.text = 'Occupation: ' + (str(random.choice(Occupation)))
+        if (self.ids.occupation_label.text) == 'Occupation: Alchemist': 
+            self.ids.trained_weapon_label.text = 'Starting Weapon: Staff'
+        elif (self.ids.occupation_label.text) == 'Occupation: Animal Trainer':
+            self.ids.trained_weapon_label.text = 'Starting Weapon: Club'"""  
 
 if __name__=="__main__":
     app1().run()
