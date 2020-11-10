@@ -95,49 +95,77 @@ Generators:
             text: "Random Table Output"
             font_size: 24
             size_hint_y: .55   
+            text_size: (300, 450)
+            id: main_label
+            text: "Press a random generator on the side and output will display here."
+            text_size: (1000, 500)
+            font_size: 24
+            valign: 'bottom'
+            halign: 'center'   
         Label:					#Label for where Name Prints
             id: Char_Title
-            text: " "
             font_size: 24
-            size_hint: (None, None)
-    		size: (1400, -20)
+            text_size: (630, 450)
+            valign: 'top'
         Label:					#Label for where Name Prints
             id: Char_Name
             text: " "
             font_size: 24
-            size_hint: (None, None)
-    		size: (1500, 100)
+            text_size: (650, 520)
+    		valign: 'top'
         Label:					#Label for class choice
             id: class_label
             text: " "
             font_size: 24
-            size_hint: (None, None)
-    		size: (1400, 0)         
+            text_size: (650, 600)
+    		valign: 'top'       
         Label:					#Label for race choice
             id: race_label
             text: " "
             font_size: 24
-            size_hint: (None, None)
-    		size: (1400, 100)       
+            text_size: (650, 680)
+    		valign: 'top'       
     	Label:					#Label for body type
             id: bodytype_label
             text: " "
             font_size: 24
-            size_hint: (None, None)
-    		size: (2200, -320)   	
-    	Label:					#Label for body type
+            text_size: (550, 980)
+    		halign: 'right'	
+    		valign: 'top'
+    	Label:					#Label for Occupation
             id: occupation_label
             text: " "
             font_size: 24
-            size_hint: (None, None)
-    		size: (2250, 400) 	
-    	Label:					#Label for body type
-            id: trained_weapon_label
+            text_size: (670, 1050)
+    		halign: 'right'	
+    		valign: 'top'
+    	Label:					#Label for Number of Siblings
+            id: siblings_label
             text: " "
             font_size: 24
-            size_hint: (None, None)
-    		size: (1100, 100) 	
-        Label:					#Starter label in the center of the app that disappears when the generators are activated
-            id: main_label
-            text: "Press a random generator on the side and output will display here."
-            font_size: 24
+            text_size: (650, 1030)
+    		valign: 'top'
+    	Label:					#Label for First Siblings Name
+            id: Sibling_Name1
+            text: " "
+            font_size: 20
+            text_size: (600, 1100)
+    		valign: 'top'
+    	Label:					#Label for Second Siblings Name
+            id: Sibling_Name2
+            text: " "
+            font_size: 20
+            text_size: (600, 1200)
+    		valign: 'top'
+    	Label:					#Label for Third Siblings Name
+            id: Sibling_Name3
+            text: " "
+            font_size: 20
+            text_size: (600, 1300)
+    		valign: 'top'
+    	Label:					#Label for Fourth Siblings Name
+            id: Sibling_Name4
+            text: " "
+            font_size: 20
+            text_size: (600, 1400)
+    		valign: 'top'
