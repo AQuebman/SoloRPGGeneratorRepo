@@ -16,7 +16,7 @@ Generators:
             
     	DropDown:
         	id: drop1
-        	on_select: btn.text = '{}'.format(args[2])   
+        	on_select: btn.text = '{}'.format(args[3])   
 
         	Button:
             	text: 'LOUCHE'
@@ -31,7 +31,7 @@ Generators:
             	size_hint_y: None
             	height: 45
             	on_press: root.clear() 
-            	on_release: root.onButtonPress()
+            	on_release: root.NameGenPop()
             	on_release: drop1.dismiss()
             	
             Button:
@@ -107,67 +107,111 @@ Generators:
         Label:					#Label for where Name Prints
             id: Char_Title
             font_size: 24
-            text_size: (630, 450)
+            text_size: (750, 600)
             valign: 'top'
+    		halign: 'left'
         Label:					#Label for where Name Prints
             id: Char_Name
             text: " "
             font_size: 24
-            text_size: (650, 520)
+            text_size: (770, 640)
     		valign: 'top'
+    		halign: 'left'
         Label:					#Label for class choice
             id: class_label
             text: " "
             font_size: 24
-            text_size: (650, 600)
-    		valign: 'top'       
+            text_size: (770, 670)
+    		valign: 'top' 
+    		halign: 'left'
         Label:					#Label for race choice
             id: race_label
             text: " "
             font_size: 24
-            text_size: (650, 680)
-    		valign: 'top'       
+            text_size: (770, 710)
+    		valign: 'top'  
+    		halign: 'left' 
     	Label:					#Label for body type
             id: bodytype_label
             text: " "
             font_size: 24
-            text_size: (550, 980)
+            text_size: (500, 980)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Occupation
             id: occupation_label
             text: " "
             font_size: 24
-            text_size: (670, 1050)
+            text_size: (620, 1020)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Number of Siblings
             id: siblings_label
             text: " "
             font_size: 24
-            text_size: (650, 1030)
+            text_size: (770, 950)
     		valign: 'top'
+    		halign: 'left'
     	Label:					#Label for First Siblings Name
             id: Sibling_Name1
             text: " "
             font_size: 20
-            text_size: (600, 1100)
+            text_size: (720, 980)
     		valign: 'top'
+    		halign: 'left'
     	Label:					#Label for Second Siblings Name
             id: Sibling_Name2
             text: " "
             font_size: 20
-            text_size: (600, 1200)
+            text_size: (720, 1040)
     		valign: 'top'
+    		halign: 'left'
     	Label:					#Label for Third Siblings Name
             id: Sibling_Name3
             text: " "
             font_size: 20
-            text_size: (600, 1300)
+            text_size: (720, 1100)
     		valign: 'top'
+    		halign: 'left'
     	Label:					#Label for Fourth Siblings Name
             id: Sibling_Name4
             text: " "
             font_size: 20
-            text_size: (600, 1400)
+            text_size: (720, 1160)
     		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Mother's health status
+            id: Mother_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 1180)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Father's health status
+            id: Father_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 1190)
+    		valign: 'top'
+    		halign: 'left'	
+    	Label:					#Label for Relationship Status
+            id: Relationship_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 1200)
+    		valign: 'top'
+    		halign: 'left'		
+    	Label:					#Label for Relationship Status
+            id: Sexual_Orientation
+            text: " "
+            font_size: 24
+            text_size: (770, 1200)
+    		valign: 'top'
+    		halign: 'left'	
+    	Label:					#Label for Relationship Status
+            id: Personality_Traits
+            text: " "
+            font_size: 24
+            text_size: (770, 1200)
+    		valign: 'top'
+    		halign: 'left'
