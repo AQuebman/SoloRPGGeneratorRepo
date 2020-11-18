@@ -29,15 +29,16 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 
 #Imports the kivy layout of Grid
-from kivy.uix.gridlayout import GridLayout  
+from kivy.uix.gridlayout import GridLayout 
 
         
-class Generators(BoxLayout):
+class Louche():
 #Generates random LOUCHE choice for 7-9 rolls in Dungeon World  
     def louche(self, *args):
         LOUCHE = ('LOCALITY: Something specifically related to the current environment happens.\nThe buildings now on fire. The ground collapses. It\'s flooding. Moonquake!' , 'OFFER: Offer a bargain, an extra, or a perk for a cost.\noffer a better position, with risk. Offer a temptation.', 'UNEXPECTED DANGER: Make something up or roll it up at random.\nTie it in if you want now or worry about how it fits in later', 'CALLBACK: Use something that they\'ve given you. A backstory element.\nAn off-handed comment. Gear. A character sheet aspect', 'HARM: Deal damage', 'END SOMETHING: End an ongoing effect, bonus, or fictional advantage. Take a \nresource away, something you possess, whether it\'s a piece of gear, \nan ability, or an ally')
-        self.ids.main_label.text = (str(random.choice(LOUCHE)))
+        App.get_running_app().root.ids.main_label.text = (str(random.choice(LOUCHE)))
 
+class NPC_Generator(BoxLayout):
 #Female Name Generation
     def Female_name_gen(self, *args):
 #Declares the array variables of First_Name and Last_Name
@@ -60,15 +61,12 @@ class Generators(BoxLayout):
                     Last_Name.append(col[2])
                 
 #Print a random first and last name for females\
-                self.ids.Facial_Hair.text = ' ' 
-                self.ids.Char_Name.text = 'Name: ' + random.choice(First_Name) + ' ' + random.choice(Last_Name)    
+                self.ids.Char_Name.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])    
                                       
 #Male Name Generation               
     def Male_name_gen(self, *args):
         First_Name = []
         Last_Name = []
-        Male = 1
-        Male = Male
         with open(r'C:\Users\Aaron\Desktop\Names_List.csv') as f:
             reader = csv.reader(f, skipinitialspace=True)         
             for col in reader: 
@@ -84,30 +82,182 @@ class Generators(BoxLayout):
                     Last_Name.append(col[2])
 
 #Print a random first and last name for Males 
-        self.ids.Char_Name.text = 'Name: ' + random.choice(First_Name) + ' ' + random.choice(Last_Name)
-        return Male
-
- 
+        self.ids.Char_Name.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])
+        Facial_Hair = ('Anchor', 
+                       'Balbo', 
+                       'Bandholz', 
+                       'Chin Curtain', 
+                       'Circle Beard', 
+                       'Clean Shaven', 
+                       'Ducktail', 
+                       'Extended Goatee', 
+                       'French Fork', 
+                       'Full Beard', 
+                       'Garibaldi', 
+                       'Goatee', 
+                       'Horseshoe', 
+                       'Hulihee', 
+                       'Imperial', 
+                       'Klingon', 
+                       'Long Stubble', 
+                       'Mutton Chops', 
+                       'Side Whiskers', 
+                       'Soul Patch', 
+                       'Stubble', 
+                       'Van Dyke', 
+                       'Verdi', 
+                       'Zappa')
+        self.ids.Facial_Hair.text = 'Facial Hair: ' + (str(random.choice(Facial_Hair))) #Grabs a random facial hair if the name generated is for a male
+        if self.ids.Facial_Hair.text == 'Facial Hair: Anchor':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/anchor-beard/]Facial Hair: Anchor[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Balbo':
+            self.ids.Facial_Hair.text = '[ref=https://www.baldingbeards.com/facial-hair-styles/goatee-styles/balbo-beard/]Facial Hair: Balbo[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Bandholz':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/bandholz-beard/]Facial Hair: Bandholz[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Chin Curtain':
+            self.ids.Facial_Hair.text = '[ref=https://www.baldingbeards.com/facial-hair-styles/beard-styles/chin-curtain//]Facial Hair: Chin Curtain[/ref]'            
+        if self.ids.Facial_Hair.text == 'Facial Hair: Circle Beard':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/circle-beard/]Facial Hair: Circle Beard[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Clean Shaven':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/clean-shaven-style/]Facial Hair: Clean Shaven[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Ducktail':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/ducktail-beard/]Facial Hair: Ducktail[/ref]'            
+        if self.ids.Facial_Hair.text == 'Facial Hair: Extended Goatee':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/extended-goatee-beard/]Facial Hair: Extended Goatee[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: French Fork':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/french-fork-beard/]Facial Hair: French Fork[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Full Beard':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/full-beard/]Facial Hair: Full Beard[/ref]'            
+        if self.ids.Facial_Hair.text == 'Facial Hair: Garibaldi':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/garibaldi-beard/]Facial Hair: Garibaldi[/ref]'            
+        if self.ids.Facial_Hair.text == 'Facial Hair: Goatee':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/goatee-beard/]Facial Hair: Goatee[/ref]' 
+        if self.ids.Facial_Hair.text == 'Facial Hair: Horseshoe':
+            self.ids.Facial_Hair.text = '[ref=https://www.baldingbeards.com/facial-hair-styles/mustache-styles/horseshoe-mustache/]Facial Hair: Horseshoe[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Hulihee':
+            self.ids.Facial_Hair.text = '[ref=https://razors.co/beard-styles/hulihee-beard/]Facial Hair: Hulihee[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Imperial':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/imperial-beard/]Facial Hair: Imperial[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Klingon':
+            self.ids.Facial_Hair.text = '[ref=https://www.baldingbeards.com/wp-content/uploads/2017/02/Klingon-beard-1024x715.jpg]Facial Hair: Klingon[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Long Stubble':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/long-stubble-beard/]Facial Hair: Long Stubble[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Mutton Chops':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/mutton-chops-beard/]Facial Hair: Mutton Chops[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Side Whiskers':
+            self.ids.Facial_Hair.text = '[ref=https://www.baldingbeards.com/facial-hair-styles/beard-styles/sideburns/]Facial Hair: Side Whiskers[/ref]'            
+        if self.ids.Facial_Hair.text == 'Facial Hair: Soul Patch':
+            self.ids.Facial_Hair.text = '[ref=https://www.baldingbeards.com/facial-hair-styles/goatee-styles/soul-patch/]Facial Hair: Soul Patch[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Stubble':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/medium-stubble-beard/]Facial Hair: Stubble[/ref]'                                                                                                                                  
+        if self.ids.Facial_Hair.text == 'Facial Hair: Van Dyke':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/van-dyke-beard/]Facial Hair: Van Dyke[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Verdi':
+            self.ids.Facial_Hair.text = '[ref=https://www.realmenrealstyle.com/verdi-beard/]Facial Hair: Verdi[/ref]'
+        if self.ids.Facial_Hair.text == 'Facial Hair: Zappa':
+            self.ids.Facial_Hair.text = '[ref=https://www.beardgrowthworld.com/wp-content/uploads/2016/10/beard-styles-Zappa.jpg]Facial Hair: Zappa[/ref]'
+                                               
 #Generic Character Generator
     def Gen_Char_Gen(self, *args): 
-        Facial_Hair = ('Anchor', 'Balbo', 'Bandholz', 'Chin Curtain', 'Circle Beard', 'Clean Shaven', 'Ducktail', 'Extended Goatee', 'French Fork', 'Full Beard', 'Garibaldi', 'Goatee', 'Horseshoe', 'Hulihee', 'Imperial', 'Klingon', 'Long Stubble', 'Mutton Chops', 'Side Whiskers', 'Soul Patch', 'Stubble', 'Van Dyke', 'Verdi', 'Zappa')
-        if self.Male_name_gen():
-            self.ids.Facial_Hair.text = 'Facial Hair ' + (str(random.choice(Facial_Hair))) #Grabs a random facial hair if the name generated is for a male
         self.NameGenPop() #Grabs a random name for a male or female
         Class_Choice = ('Alchemist', 'Artificer', 'Assassin', 'Barbarian', 'Bard', 'Blackguard', 'Cavalier', 'Cleric', 'Conjurer', 'Dragoon', 'Druid', 'Eldritch Knight', 'Fighter', 'Gunslinger', 'Illusionist', 'Monk', 'Necromancer', 'Ninja', 'Paladin', 'Psion', 'Ranger', 'Samurai', 'Shaman', 'Sorcerer', 'Spy', 'Swashbuckler', 'Thief', 'Warlock', 'Warrior', 'Witch', 'Witch Doctor', 'Wizard') #Picks a random class
-        self.ids.class_label.text = 'Class: ' + (str(random.choice(Class_Choice))) #Picks a random character class
+        self.ids.class_label.text = " ".join(['Class: ', (str(random.choice(Class_Choice)))]) #Picks a random character class    
         Race_Choice = ('Dragonborn', 'Drow', 'Dwarf', 'Elf', 'Gnome', 'Half-elf', 'Half-Orc', 'Halfling', 'Human', 'Orc', 'Other', 'Tiefling') #Picks a random race
-        Atypical_Race_Choice = ('Aasimar', 'Angel', 'Cyclops', 'Centaur', 'Demon', 'Dryads', 'Fairies', 'Firbolg', 'Giant', 'Ghost', 'Ghoul', 'Goblin', 'Goliath', 'Gnoll', 'Hobgoblin', 'Kenku', 'Kobold', 'Lich', 'Lycanthrope', 'Lizardfolk', 'Mermaids', 'Nymph', 'Satyr', 'Shade', 'Skeleton', 'Troglodyte', 'Troll', 'Vampires', 'Yeti')
-        self.ids.race_label.text = 'Race: ' + (str(random.choice(Race_Choice)))
+        Atypical_Race_Choice = ('Aasimar', 'Angel', 'Centaur', 'Cyclops', 'Demon', 'Dryads', 'Fairies', 'Firbolg', 'Giant', 'Ghost', 'Ghoul', 'Goblin', 'Goliath', 'Gnoll', 'Hobgoblin', 'Kenku', 'Kobold', 'Lich', 'Lycanthrope', 'Lizardfolk', 'Merfolk', 'Nymph', 'Satyr', 'Shade', 'Skeleton', 'Troglodyte', 'Troll', 'Vampires', 'Yeti')
+        self.ids.race_label.text = " ".join(['Race:',(str(random.choice(Race_Choice)))])   
         if self.ids.race_label.text == 'Race: Other' : #If Other is the race then roll from the atypical race choice
-            self.ids.race_label.text = 'Race: ' + (str(random.choice(Atypical_Race_Choice)))
+            self.ids.race_label.text = " ".join(['Race:',(str(random.choice(Atypical_Race_Choice)))])   
         Body_Type = ('Toned','Built', 'Brawny', 'Slender', 'Typical', 'Chubby') #Picks a random body type
-        self.ids.bodytype_label.text = 'Body Type: ' + (str(random.choice(Body_Type)))    
+        self.ids.bodytype_label.text = " ".join(['Body Type: ', (str(random.choice(Body_Type)))])      
         Occupation = ('Alchemist', 'Animal Trainer', 'Apothecarist', 'Armorer', 'Artisan', 'Astrologer', 'Barber', 'Barrister', 'Beadle', 'Beekeeper', 'Blacksmith', 'Butcher', 'Caravan Guard', 'Chandler', 'Cheesemaker', 'Chest-maker', 'Cobbler', 'Confidence artist', 'Cooper', 'Corn Farmer', 'Costermonger', 'Cutpurse', 'Ditch Digger', 'Dock worker', 'Dyer', 'Falconer', 'Forester', 'Fortune Teller', 'Gambler', 'Glassblower', 'Glovemaker', 'Gong Farmer', 'Grave Digger', 'Guild Beggar', 'Gypsy', 'Haberdasher', 'Healer', 'Herbalist', 'Herder', 'Hunter', 'Indentured servant', 'Jester', 'Jeweler', 'Locksmith', 'Mariner', 'Mendicant', 'Mercenary', 'Merchant', 'Miller/baker', 'Miner', 'Minstrel', 'Moneylender', 'Mushroom farmer', 'Navigator', 'Noble', 'Orphan', 'Ostler', 'Outlaw', 'Parsnip Farmer', 'Potato Farmer', 'Radish Farmer', 'Rat catcher', 'Rice Farmer', 'Rope maker', 'Rutabaga Farmer', 'Sage', 'Scribe', 'Shaman', 'Slave', 'Smuggler', 'Soldier', 'Squire', 'Stonemason', 'Tax Collector', 'Trader', 'Trapper', 'Turnip Farmer', 'Urchin', 'Vagrant', 'Wainwright', 'Weaver', 'Wheat Farmer', 'Wizard\'s apprentice', 'Woodcutter') #Picks a random occupation
-        self.ids.occupation_label.text = 'Occupation: ' + (str(random.choice(Occupation))) #Picks a random occupation
+        self.ids.occupation_label.text = " ".join(['Occupation: ', (str(random.choice(Occupation)))]) #Picks a random occupation    
         Char_Title = ('Abjurer', 'Adept', 'Apparitionist', 'Archveult', 'Astrologist', 'Astrologue', 'Augurer', 'Baleful', 'Beguiler', 'Bonder', 'Capricious', 'Chamberlain', 'Charmer', 'Chronicler', 'Clairvoyant', 'Collector', 'Conjurer', 'Controller', 'Cryomancer', 'Cultist', 'Curse-giver', 'Dangerous', 'Diabolist', 'Diviner', 'Dreamer', 'Elementalist', 'Enchanter', 'Encylopaedist', 'Ensorceller', 'Ensqualmer', 'Epicure', 'Evoker', 'Factotum', 'Fortune-teller', 'Fulgurator', 'Harbinger', 'Haruspex', 'Herald', 'Horologist', 'Hypnotist', 'Illusionist', 'Immolator', 'Infinitist', 'Insidiator', 'Lich', 'Logician', 'Mage', 'Magician', 'Magic-User', 'Magus', 'Marvelous', 'Master', 'Mentalist', 'Mezmerizer', 'Mind-reader', 'Mnemonist', 'Mummer', 'Mysteriarch', 'Mystic', 'Necrope', 'Nigromancer', 'Oath-taker', 'Palmist', 'Pedant', 'Phantasmist', 'Preceptor', 'Prestidigitator', 'Prosecutor', 'Psychic', 'Sage', 'Savant', 'Scientist', 'Seancer', 'Seer', 'Shabbat', 'Shibbol(eth)', 'Soothsayer', 'Sophist', 'Spellbinder', 'Spellslinger', 'Spellweaver', 'Summoner', 'Telepath', 'Teratologist', 'Thaumaturgist', 'Theurgist', 'Thought Master', 'Transformer', 'Transmogrifier', 'Trickster', 'Truth-teller', 'Tyro', 'Vigilant', 'Visionist', 'Warden', 'Demon-Binder', 'Demon-Keeper', 'Devil-Binder', 'Devil-Keeper', 'Dragon-Binder', 'Dragon-Keeper', 'Giant-Binder', 'Giant-Keeper', 'Vampire-Binder', 'Vampire-Keeper', 'Hydra-Binder', 'Hydra-Keeper', 'Medusa-Binder', 'Medusa-Keeper', 'Cyclops-Binder', 'Cyclops-Keeper', 'Abbey', 'Acolyte', 'Advocate', 'Alienist', 'Apostle', 'Ascetic', 'Aspirant', 'Astrologue', 'Beatific', 'Bishop', 'Blackcoat', 'Brother', 'Cabalist', 'Caller', 'Cardinal', 'Celibate', 'Chaplain', 'Conclavist', 'Confessor', 'Convert', 'Curate', 'Deacon', 'Dean', 'Deist', 'Disciple', 'Ecclesiast', 'Elder', 'Eternal', 'Evangelist', 'Evil eye', 'Exorcist', 'Faithful', 'Father', 'Friar', 'Heathen-slayer', 'Hierophant', 'Imam', 'Initiate', 'Inquisitor', 'Judge', 'Keeper', 'Lama', 'Lawyer', 'Medicine Man', 'Medium', 'Missionary', 'Mullah', 'Oath-keeper', 'Occultist', 'Omen-bringer', 'Ovate', 'Padre', 'Parson', 'Patriarch', 'Petitioner', 'Philosopher', 'Pilgrim', 'Pious', 'Pontiff', 'Pope', 'Preacher', 'Priest', 'Primate', 'Prognosticator', 'Prophet', 'Proselytizer', 'Psalmist', 'Pupil', 'Quixotic', 'Rabbi', 'Rector', 'Reverend', 'Revivalist', 'Rakshasa', 'Saint', 'Scholar', 'Seeker', 'Sensei', 'Sermonizer', 'Shepherd', 'Shrinist', 'Soul-saver', 'Speaker', 'Spirit-raiser', 'Theist', 'Vicar', 'Vowmaker', 'Wanderer', 'Witness', 'Wonder worker', 'Zealot', 'Amazon', 'Archer', 'Armigerent', 'Artillerist', 'Athlete', 'Bandit', 'Battler', 'Berserker', 'Bludgeoner', 'Bodyguard', 'Brave', 'Brawler', 'Brigand', 'Bruiser', 'Brute', 'Bushwhacker', 'Cadet', 'Campaigner', 'Captain', 'Cavalier', 'Champion', 'Charger', 'Chevalier', 'Chieftain', 'Colossus', 'Conqueror', 'Defender', 'Defiler', 'Duelist', 'Exemplar', 'Fencer', 'Footman', 'Freelancer', 'Gallant', 'General', 'Gentleman', 'Giant', 'Gladiator', 'Grenadier', 'Guardian', 'Guerilla', 'Headman', 'Horseman', 'Huntsman', 'Impaler', 'Janissary', 'Jouster', 'Justicar', 'Khan', 'Knight', 'Lancer', 'Legionnaire', 'Lieutenant', 'Lord', 'Man-at-arms', 'Manslayer', 'Marauder', 'Marine', 'Mercenary', 'Myrmidon', 'Protector', 'Pugilist', 'Ravager', 'Reaver', 'Scout', 'Sentinel', 'Sergeant', 'Sharpshooter', 'Shield-bearer', 'Skirmisher', 'Soldier', 'Squire', 'Standard-bearer', 'Swordsman', 'Tank', 'Templar', 'Titan', 'Trooper', 'Vanquisher', 'Veteran', 'Victor', 'Viking', 'Vindicator', 'Warlord', 'Warmonger', 'Wildling', 'Wrestler', 'Apprentice', 'Arch-rogue', 'Artisan', 'Balladeer', 'Beggar', 'Bilker', 'Body snatcher', 'Boss', 'Bounty hunter', 'Bravo', 'Bully', 'Burglar', 'Capo', 'Card shark', 'Charlatan', 'Cheat', 'Clockworker', 'Con man', 'Cove', 'Cozener', 'Cracksman', 'Cretin', 'Crony', 'Cutpurse', 'Cutthroat', 'Darksider', 'Devil', 'Dice rattler', 'Embezzler', 'Entrepreneur', 'Executioner', 'Expert', 'Explorer', 'Fence', 'Filcher', 'Footpad', 'Forger', 'Fortunist', 'Gambler', 'Gammoner', 'Godfather', 'Guildmaster', 'Guildsman', 'Hedge creeper', 'Hit man', 'Informer', 'Jongleur', 'Journeyman', 'Juggler', 'Junkman', 'Killer', 'Knave', 'Liar', 'Lorist', 'Lyrist', 'Made man', 'Magnate', 'Magsman', 'Minstrel', 'Moneylender', 'Mugger', 'Murderer', 'Muscle', 'Muse', 'Pawnbroker', 'Racaraide', 'Raconteur', 'Rake', 'Rascal', 'Rhymer', 'Robber', 'Rogue', 'Rowdy', 'Rutterkin', 'Scallywag', 'Scammer', 'Scoundrel', 'Second story man', 'Shadow walker', 'Shark', 'Sharper', 'Shiv', 'Skald', 'Slaver', 'Sonneteer', 'Swindler', 'Thief', 'Thug', 'Tomb robber', 'Trapsmith', 'Treasure hunter', 'Troubadour', 'Villain', 'Waghalter', 'Wordsmith' )
-        self.ids.Char_Title.text = 'Title: ' + (str(random.choice(Char_Title))) #Picks a random character title
+        self.ids.Char_Title.text = " ".join(['Title: ', (str(random.choice(Char_Title)))]) #Picks a random character title
         
+#Generating Age of the generic NPC based on Race
+        if self.ids.race_label.text == 'Race: Aasimar':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 160)))])
+        if self.ids.race_label.text == 'Race: Angel':
+            self.ids.Age.text = " ".join(['Age: Timeless'])
+        if self.ids.race_label.text == 'Race: Centaur':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 60)))])
+        if self.ids.race_label.text == 'Race: Cyclops':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(15, 500)))])
+        if self.ids.race_label.text == 'Race: Demon':
+            self.ids.Age.text = " ".join(['Age: Timeless'])
+        if self.ids.race_label.text == 'Race: Dragonborn':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(15, 80)))])
+        if self.ids.race_label.text == 'Race: Drow':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(20, 400)))])
+        if self.ids.race_label.text == 'Race: Dryads':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(35, 999)))])
+        if self.ids.race_label.text == 'Race: Dwarf':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(50, 350)))])
+        if self.ids.race_label.text == 'Race: Elf':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(100, 750)))])
+        if self.ids.race_label.text == 'Race: Fairies':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 150)))])
+        if self.ids.race_label.text == 'Race: Firbolg':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(30, 500)))])
+        if self.ids.race_label.text == 'Race: Giant':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(20, 400)))])
+        if self.ids.race_label.text == 'Race: Ghost':
+            self.ids.Age.text = " ".join(['Age: Unknown'])
+        if self.ids.race_label.text == 'Race: Ghoul':
+            self.ids.Age.text = " ".join(['Age: Unknown'])
+        if self.ids.race_label.text == 'Race: Gnome':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(40, 500)))])
+        if self.ids.race_label.text == 'Race: Goblin':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(8, 60)))])
+        if self.ids.race_label.text == 'Race: Goliath':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 80)))])
+        if self.ids.race_label.text == 'Race: Gnoll':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(2, 30)))])
+        if self.ids.race_label.text == 'Race: Half-elf':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(20, 180)))])
+        if self.ids.race_label.text == 'Race: Half-Orc':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(14, 175)))])            
+        if self.ids.race_label.text == 'Race: Halfling':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 250)))])
+        if self.ids.race_label.text == 'Race: Hobgoblin':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 80)))])
+        if self.ids.race_label.text == 'Race: Human':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 80)))])
+        if self.ids.race_label.text == 'Race: Kenku':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(12, 60)))])
+        if self.ids.race_label.text == 'Race: Kobold':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(8, 135)))])
+        if self.ids.race_label.text == 'Race: Lich':
+            self.ids.Age.text = " ".join(['Age: Unknown'])
+        if self.ids.race_label.text == 'Race: Lizardfolk':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(14, 60)))])
+        if self.ids.race_label.text == 'Race: Lycanthrope':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 80)))])
+        if self.ids.race_label.text == 'Race: Merfolk':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(20, 120)))])
+        if self.ids.race_label.text == 'Race: Nymph':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(20, 999999)))])
+        if self.ids.race_label.text == 'Race: Orc':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(12, 50)))])
+        if self.ids.race_label.text == 'Race: Satyr':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(50, 500)))])
+        if self.ids.race_label.text == 'Race: Shade':
+            self.ids.Age.text = " ".join(['Age: Unknown'])
+        if self.ids.race_label.text == 'Race: Skeleton':
+            self.ids.Age.text = " ".join(['Age: Unknown'])           
+        if self.ids.race_label.text == 'Race: Tiefling':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(18, 150)))])
+        if self.ids.race_label.text == 'Race: Troglodyte':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(15, 50)))])         
+        if self.ids.race_label.text == 'Race: Troll':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(10, 100)))])
+        if self.ids.race_label.text == 'Race: Vampires':
+            self.ids.Age.text = " ".join(['Age: Unknown']) 
+        if self.ids.race_label.text == 'Race: Yeti':
+            self.ids.Age.text = " ".join(['Age: ',  (str(random.randint(9, 200)))])            
+            
+                        
+                                                
 #This section randomizes how many siblings the character has then determines their sex randomly and rolls the appropriate male or female name generator                                                           
         NumChildren = random.randint(0,100)
         SubSex = random.randint(0,1)
@@ -170,8 +320,7 @@ class Generators(BoxLayout):
                 self.Female_name_gen()
                 self.ids.Sibling_Name3.text = self.ids.Char_Name.text
                 self.Female_name_gen()
-                self.ids.Sibling_Name4.text = self.ids.Char_Name.text
-
+                self.ids.Sibling_Name4.text = self.ids.Char_Name.text 
 #This section randomly generates if the mother and father are alive, dead, or impaired by a disability or illness
         Mother = random.randint(0,3)
         Father = random.randint(0,3)
@@ -179,30 +328,30 @@ class Generators(BoxLayout):
             self.ids.Mother_Status.text = 'Mother\'s Health: Dead '
         if Mother == 1: 
             Disabilities = ('A Learning Disability', 'A Locomotor Disability', 'A Neurological Condition', 'A Speech and Language Disability', 'An Intellectual Disability', 'Autism', 'Blindness', 'Cerebral Palsy', 'Deafness', 'Dwarfism', 'Hearing Loss', 'Low Vision', 'Missing Both Arms', 'Missing Both Eyes', 'Missing Both Feet', 'Missing Both Legs', 'Muscular Dystrophy', 'Missing Fingers', 'Missing Left Arm', 'Missing Left Ear', 'Missing Left Eye', 'Missing Left Foot', 'Missing Left Hand', 'Missing Left Leg', 'Missing Nose', 'Missing Right Arm', 'Missing Right Ear', 'Missing Right Eye', 'Missing Right Foot', 'Missing Right Hand', 'Missing Right Leg', 'Missing Toes') #Picks a random disability
-            self.ids.Mother_Status.text = 'Mother\'s Disabled with: ' + (str(random.choice(Disabilities)))
+            self.ids.Mother_Status.text = " ".join(['Mother\'s Disabled with: ', (str(random.choice(Disabilities)))])
         if Mother == 2:
             Illness = ('Acidblight', 'Alcohol Addiction', 'Beggar\'s Pox', 'Brain Fever', 'Cackle Fever', 'Carrion Fever', 'Creeping Cough', 'Cobblestone Sickness', 'Dementia', 'Demon Ears', 'Desert Fever', 'Devil Rot', 'Dreaded Mallergy', 'Drug Addiction', 'Dryad\'s Rot', 'Gambling Addiction', 'Goblinitis', 'Golden Tumor', 'Grave Grub', 'Hemophilia', 'Hippogryff Hives', 'Hydrophobia', 'Leprousy', 'Mental Illness', 'Medusa Rash', 'Narcolepsy', 'Necrotic Blight', 'Ogre Poisoning', 'Puffs', 'Red Rot', 'Respiratory Disease', 'Screaming Sickness', 'Ser Avidore\'s Fire', 'Sewer Plague', 'Sewer Rat Flu', 'Sex Addiction', 'Sight Rot', 'Slate Fever', 'Slime Stomach', 'Slippery Sickness', 'Soft Bones', 'Spectre\'s Decay', 'Swamp Rage', 'Swordbearer\'s Bane', 'Tapeworm', 'Third Eye Blind', 'Turquoise Death', 'Vertigo', 'Vorel\'s Phage', 'Winter Insomnia', 'Woodland Mania', 'Yellow Plague', 'Wraith Eyes','Wyrm Flu') #Picks a random Illness
-            self.ids.Mother_Status.text = 'Mother\'s Ill with: ' + (str(random.choice(Illness)))
+            self.ids.Mother_Status.text = " ".join(['Mother\'s Ill with: ', (str(random.choice(Illness)))])
         if Mother == 3:
             self.ids.Mother_Status.text = 'Mother\'s Health: Alive & Well '               
         if Father == 0:
             self.ids.Father_Status.text = 'Father\'s Health: Dead '
         if Father == 1: 
             Disabilities = ('A Learning Disability', 'A Locomotor Disability', 'A Neurological Condition', 'A Speech and Language Disability', 'An Intellectual Disability', 'Autism', 'Blindness', 'Cerebral Palsy', 'Deafness', 'Dwarfism', 'Hearing Loss', 'Low Vision', 'Missing Both Arms', 'Missing Both Eyes', 'Missing Both Feet', 'Missing Both Legs', 'Muscular Dystrophy', 'Missing Fingers', 'Missing Left Arm', 'Missing Left Ear', 'Missing Left Eye', 'Missing Left Foot', 'Missing Left Hand', 'Missing Left Leg', 'Missing Nose', 'Missing Right Arm', 'Missing Right Ear', 'Missing Right Eye', 'Missing Right Foot', 'Missing Right Hand', 'Missing Right Leg', 'Missing Toes') #Picks a random disability
-            self.ids.Father_Status.text = 'Father\'s Disabled with: ' + (str(random.choice(Disabilities)))
+            self.ids.Father_Status.text = " ".join(['Father\'s Disabled with: ', (str(random.choice(Disabilities)))])
         if Father == 2:
             Illness = ('Acidblight', 'Alcohol Addiction', 'Beggar\'s Pox', 'Brain Fever', 'Cackle Fever', 'Carrion Fever', 'Creeping Cough', 'Cobblestone Sickness', 'Dementia', 'Demon Ears', 'Desert Fever', 'Devil Rot', 'Dreaded Mallergy', 'Drug Addiction', 'Dryad\'s Rot', 'Gambling Addiction', 'Goblinitis', 'Golden Tumor', 'Grave Grub', 'Hemophilia', 'Hippogryff Hives', 'Hydrophobia', 'Leprousy', 'Mental Illness', 'Medusa Rash', 'Narcolepsy', 'Necrotic Blight', 'Ogre Poisoning', 'Puffs', 'Red Rot', 'Respiratory Disease', 'Screaming Sickness', 'Ser Avidore\'s Fire', 'Sewer Plague', 'Sewer Rat Flu', 'Sex Addiction', 'Sight Rot', 'Slate Fever', 'Slime Stomach', 'Slippery Sickness', 'Soft Bones', 'Spectre\'s Decay', 'Swamp Rage', 'Swordbearer\'s Bane', 'Tapeworm', 'Third Eye Blind', 'Turquoise Death', 'Vertigo', 'Vorel\'s Phage', 'Winter Insomnia', 'Woodland Mania', 'Yellow Plague', 'Wraith Eyes','Wyrm Flu') #Picks a random Illness
-            self.ids.Father_Status.text = 'Father\'s Ill with: ' + (str(random.choice(Illness)))
+            self.ids.Father_Status.text = " ".join(['Father\'s Ill with: ', (str(random.choice(Illness)))])
         if Father == 3:
             self.ids.Father_Status.text = 'Father\'s Health: Alive & Well '   
  
 #Generating random relationship status for the generated NPC         
         Relationship_Status = ('Single','Divorced', 'In a relationship', 'Married', 'Married and having an affair')
-        self.ids.Relationship_Status.text = 'Relationship Status: ' + (str(random.choice(Relationship_Status))) #Picks a random Relationship Status
+        self.ids.Relationship_Status.text = " ".join(['Relationship Status: ', (str(random.choice(Relationship_Status)))]) #Picks a random Relationship Status
 
 #Generating random sexual orientation for the generated NPC
         Sexual_Orientation = ('Heterosexual', 'Homosexual', 'Bi-Sexual', 'Asexual', 'Transgender', 'Questioning')
-        self.ids.Sexual_Orientation.text = 'Sexual Orientation: ' + (str(random.choice(Sexual_Orientation))) #Picks a random Sexual Orientation
+        self.ids.Sexual_Orientation.text = " ".join(['Sexual Orientation: ', (str(random.choice(Sexual_Orientation)))]) #Picks a random Sexual Orientation
            
 
 #Generating 3 Personality Traits for generic npc
@@ -464,23 +613,24 @@ class Generators(BoxLayout):
 
 #Generating eye color for the generated NPC
         Eye_Color = ('Light Blue', 'Ice Blue', 'Blue', 'Grey-blue', 'White', 'Black', 'Grey', 'Teal', 'Ice Green', 'Green', 'Grey-green', 'Pale gold', 'Yellow', 'Gold', 'Orange', 'Brown', 'Dark Brown', 'Red', 'Pale Purple', 'Purple', 'Magenta', 'Yellow-green', 'Brown & Green', 'Gold & Green', 'Albino', 'Blind')
-        self.ids.Eye_Color.text = 'Eye Color: ' + (str(random.choice(Eye_Color))) #Picks a random Eye color
+        self.ids.Eye_Color.text = " ".join(['Eye Color: ', (str(random.choice(Eye_Color)))]) #Picks a random Eye color
         
 #Generating Hair Style/Hair color for the generated NPC
         Hair_Style = ('Afro', 'Afro Puffs', 'Asymmetric Cut', 'Bangs', 'Beehive', 'Big Hair', 'Blowout', 'Bowl Cut', 'Bob Cut', 'Bouffant', 'Braid', 'Brush Cut', 'Bun', 'Butch Cut', 'Buzz Cut', 'Caesar Cut', 'Chignon', 'Chonmage', 'Comb Over', 'Comma Hair', 'Conk', 'Cornrows', 'Crew Cut', 'Crop', 'Crown Braid', 'Croydon Facelift', 'Curtained Hair', 'Devilock', 'Dido Flip', 'Double Buns', 'Dreadlocks', 'Ducktail', 'Eton Crop', 'Extensions', 'Fade', 'Fallera Hairdo', 'Fauxhawk', 'Feather Cut', 'Feathered Hair', 'Finger Waves', 'Fishtail Hair', 'Flattop', 'Flipped-up ends', 'Fontange', 'French Braid', 'French Twist', 'Fringe(bangs)', 'Frosted Tips', 'Full Crown', 'Half Crown', 'Half Updo', 'Harvard Clip', 'Hi-Top Fade', 'High and Tight', 'Highlights', 'Hime Cut', 'Induction Cut', 'Ivy league', 'Jewfro', 'Jheri Curl', 'Layered Curl', 'Liberty Spikes', 'Line Up', 'Lob', 'Marcel Waves', 'Mod Cut', 'Mohawk', 'Mop Top', 'Mullet', 'Odango', 'Oseledets', 'Pageboy', 'Payot', 'Perm', 'Pigtails', 'Pixie Cut', 'Pompadour', 'Ponyhawk', 'Ponytail', 'Psychobilly Wedge', 'Queue', 'Quiff', 'Rattail', 'Razor Cut', 'Ringlets', 'Shag Cut', 'Shape-Up', 'Shingle-Bob', 'Short Back and Sides', 'Short Brush Cut', 'Short Hair', 'Slicked Back', 'Spiky Cut', 'Step Cut', 'Surfer Hair', 'Tail on Back', 'Taper Cut', 'The Rachel', 'Tonsure', 'Undercut', 'Updo', 'Waves', 'Weave', 'Widow\'s Peak', 'Wings')
         Hair_Color = ('Black', 'Blonde', 'Brown', 'Grey', 'Red', 'White')
-        self.ids.Hair_Style.text = 'Hair Style: ' + (str(random.choice(Hair_Color)))  + ' ' + (str(random.choice(Hair_Style)))#Picks a random Hair Style
+        self.ids.Hair_Style.text = " ".join(['Hair Style: ', (str(random.choice(Hair_Color))), ' ', (str(random.choice(Hair_Style)))])#Picks a random Hair Style
 
         
 #Generating Height for the generated NPC
         Height = ('Very Short', 'Short', 'Rather Short', 'Medium Height', 'Rather Tall', 'Tall', 'Very Tall')
-        self.ids.Height.text = 'Height: ' + (str(random.choice(Height))) #Picks a random generic height
+        self.ids.Height.text = " ".join(['Height: ', (str(random.choice(Height)))]) #Picks a random generic height
 
 #Generating Unique Traits for the generated NPC
         Unique_Trait = ('Albino', 'Allergic to gnomes', 'Curved Spine', 'Deaf in left Ear', 'Deaf in right ear', 'Elaborate abstract tattoo on left leg', 'Four tiny piercings on left eyebrow', 'Four tiny piercings on right eyebrow', 'Frequently smokes a pipe', 'Frequently Squints', 'Gestures profusely during a conversation', 'Has a large scar on left arm', 'Has a large scar on left hand', 'Has a large scar on right arm', 'Has a large scar on right hand', 'Heavily scarred on face', 'High pitched voice', 'Impressive lisp', 'Inherited a family estate', 'Inherited a small forest', 'Missing all fingers from left hand', 'Missing all toes from left foot', 'Missing all fingers from right hand', 'Missing all toes from right foot', 'Missing both feet', 'Missing both legs', 'Missing left ear', 'Missing left foot', 'Missing left leg', 'Missing right ear', 'Missing right foot', 'Missing right leg', 'Missing four fingers from left hand', 'Missing four toes from left foot', 'Missing four fingers from right hand', 'Missing four toes from right foot', 'Missing one finger from left hand', 'Missing one toe from left foot', 'Missing one finger from right hand', 'Missing one toe from right foot', 'Missing three fingers from left hand', 'Missing three toes from left foot', 'Missing three fingers from right hand', 'Missing three toes from right foot', 'Missing two fingers from left hand', 'Missing two toes from left foot', 'Missing two fingers from right hand', 'Missing two toes from right foot', 'Piercing through nose', 'Piercings on both ears', 'Piercing on left ear', 'Piercing on right ear', 'Smells of Cabbage', 'Smells of dog', 'Smells of garbage', 'Smells lightly of dirt', 'Sunken Breastbone', 'Uses a beautiful walking cane', 'Tattoos on face', 'Wears dark glasses to mask eyes', 'Wears an eye patch on left eye', 'Wears an eye patch on right eye')
-        self.ids.Unique_Trait.text = 'Unique Physical Trait: ' + (str(random.choice(Unique_Trait)))#Picks a random unique trait   
+        self.ids.Unique_Trait.text = " ".join(['Unique Physical Trait: ', (str(random.choice(Unique_Trait)))]) #Picks a random unique trait   
 
-    # Name Gen Pop - Create a popup dialog with a label and a close button
+
+    # Name Gen Pop - Create a popup dialog to creating a random generated name when were creating a random npc
     def NameGenPop(self):
 
         layout      = GridLayout(cols=1, padding=10)
@@ -513,7 +663,7 @@ class Generators(BoxLayout):
         MaleNameButton.bind(on_release = self.Male_name_gen) 
         FemaleNameButton.bind(on_press=popup.dismiss)
         FemaleNameButton.bind(on_press = self.Female_name_gen)  
-
+        
 #Clears what is showing on the main_label of the application   
     def clear(self, *args):
         self.ids.main_label.text = ''
@@ -538,7 +688,93 @@ class Generators(BoxLayout):
         self.ids.Facial_Hair.text = ''
         self.ids.Height.text = ''
         self.ids.Unique_Trait.text = ''
+        self.ids.Age.text = ''
+
+
+class NameGenOriginal():
+    # Name Gen Orig - Create a popup dialog with a label and a close button
+    def NameGenOrig(self):
+
+        layout      = GridLayout(cols=1, padding=10)
+
+       
+
+        MaleNameButton  = Button(text  = "Click for Male Name Generation")
+
+        FemaleNameButton = Button(text = "Click for Female Name Generation")
+
+ 
+
+        layout.add_widget(MaleNameButton)
+
+        layout.add_widget(FemaleNameButton)       
+
+   
+
+        # Instantiate the modal popup and display
+
+        popup = Popup(title='Random Name Generator',
+
+                      content=layout)  
+
+        popup.open()   
+
+       
+        # Dismiss causes the popup to go away. Release generates the call to the name generator specified
+        MaleNameButton.bind(on_press=popup.dismiss)
+        MaleNameButton.bind(on_release = self.Random_Male) 
+        FemaleNameButton.bind(on_press=popup.dismiss)
+        FemaleNameButton.bind(on_press = self.Random_Female)
+                        
+#Female Name Generation
+    def Random_Female(self, *args):
+#Declares the array variables of First_Name and Last_Name
+        First_Name = []
+        Last_Name = []
+#Opens the csv file that contains the random names
+        with open(r'C:\Users\Aaron\Desktop\Names_List.csv') as f:
+            reader = csv.reader(f, skipinitialspace=True)         
+            for col in reader: 
+                #This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
+                if not col[1] or col[1] == "Female First Name": continue
+                else:
+                #This appends column 1 to First_Name
+                    First_Name.append(col[1])
+                #This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
+                if not col[2]: continue
+                if not col[2] or col[2] == "Last Names": continue
+                else:
+                #This appends column 2 to Last_Name
+                    Last_Name.append(col[2])
+                
+#Print a random first and last name for females\
+        App.get_running_app().root.ids.Char_Name.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])
+                                      
+#Male Name Generation               
+    def Random_Male(self, *args):
+        First_Name = []
+        Last_Name = []
+        with open(r'C:\Users\Aaron\Desktop\Names_List.csv') as f:
+            reader = csv.reader(f, skipinitialspace=True)         
+            for col in reader: 
+                ##This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
+                if not col[0] or col[0] == "Male First Name": continue
+                else:
+                #This appends column 0 to First_Name
+                    First_Name.append(col[0])
+                ##This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
+                if not col[2] or col[2] == "Last Names": continue
+                else:
+                #This appends column 2 to Last_Name
+                    Last_Name.append(col[2])
+                    
+#Print a random first and last name for Males 
+        App.get_running_app().root.ids.Char_Name.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])
          
+
+
+
+
 
 class MonsterGenerator(GridLayout):  
     # Monster Generation - Gives users buttons to select to randomly generate a monster
@@ -573,10 +809,21 @@ class MonsterGenerator(GridLayout):
         DragonButton.bind(on_press=popup.dismiss)
         DragonButton.bind(on_release = self.Dragon_kind_gen) 
         HumanoidButton.bind(on_press=popup.dismiss)
-        HumanoidButton.bind(on_press = self.Humanoid_gen)  
+        HumanoidButton.bind(on_press = self.Humanoid_gen)
+        
+#Dragon-kind Monster Generation
+    def Dragon_kind_gen(self, *args): 
+        pass
+
+#Humanoid Monster Generation
+    def Humanoid_gen(self, *args): 
+        pass
 
       
 class app1(App):
+    Name_Variable = NameGenOriginal()  
+    Louche_Variable = Louche()  
+    Monster_Variable = MonsterGenerator()
     def build(self):
         return Builder.load_file('SoloRPG.kv')
     

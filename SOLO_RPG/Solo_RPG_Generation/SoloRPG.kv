@@ -1,4 +1,4 @@
-Generators:
+NPC_Generator:
     BoxLayout:   # left side of App
         orientation: 'vertical'   #Orientation is Vertical instead of horizontal
         canvas:
@@ -23,15 +23,15 @@ Generators:
             	size_hint_y: None
             	height: 45
             	on_press: root.clear()
-            	on_release:  root.louche()
-            	on_release: drop1.dismiss()
-       	
+            	on_release: app.Louche_Variable.louche()
+            	on_release: drop1.dismiss() 
+            	    	
         	Button:
             	text: "Random Name\n    Generator"
             	size_hint_y: None
             	height: 45
             	on_press: root.clear() 
-            	on_release: root.NameGenPop()
+            	on_release: app.Name_Variable.NameGenOrig()
             	on_release: drop1.dismiss()
             	
             Button:
@@ -40,6 +40,14 @@ Generators:
             	height: 45
             	on_press: root.clear() 
             	on_release: root.Gen_Char_Gen()
+            	on_release: drop1.dismiss()
+            	
+            Button:
+            	text: "Random Monster Generator"
+            	size_hint_y: None
+            	height: 45
+            	on_press: root.clear() 
+            	on_release: app.Monster_Variable.MonsterGeneration()
             	on_release: drop1.dismiss()
             	
 
@@ -107,119 +115,126 @@ Generators:
         Label:					#Label for where Name Prints
             id: Char_Title
             font_size: 24
-            text_size: (750, 580)
+            text_size: (750, 550)
             valign: 'top'
     		halign: 'left'
         Label:					#Label for where Name Prints
             id: Char_Name
             text: " "
             font_size: 24
-            text_size: (770, 610)
+            text_size: (770, 580)
     		valign: 'top'
     		halign: 'left'
         Label:					#Label for class choice
             id: class_label
             text: " "
             font_size: 24
-            text_size: (770, 640)
+            text_size: (770, 605)
     		valign: 'top' 
     		halign: 'left'
         Label:					#Label for race choice
             id: race_label
             text: " "
             font_size: 24
-            text_size: (770, 670)
+            text_size: (770, 630)
+    		valign: 'top'  
+    		halign: 'left' 
+        Label:					#Label for race choice
+            id: Age
+            text: " "
+            font_size: 24
+            text_size: (770, 650)
     		valign: 'top'  
     		halign: 'left' 
     	Label:					#Label for Number of Siblings
             id: siblings_label
             text: " "
             font_size: 24
-            text_size: (770, 700)
+            text_size: (770, 670)
     		valign: 'top'
     		halign: 'left'
     	Label:					#Label for First Siblings Name
             id: Sibling_Name1
             text: " "
             font_size: 20
-            text_size: (720, 730)
+            text_size: (720, 700)
     		valign: 'top'
     		halign: 'left'
     	Label:					#Label for Second Siblings Name
             id: Sibling_Name2
             text: " "
             font_size: 20
-            text_size: (720, 770)
+            text_size: (720, 740)
     		valign: 'top'
     		halign: 'left'
     	Label:					#Label for Third Siblings Name
             id: Sibling_Name3
             text: " "
             font_size: 20
-            text_size: (720, 810)
+            text_size: (720, 780)
     		valign: 'top'
     		halign: 'left'
     	Label:					#Label for Fourth Siblings Name
             id: Sibling_Name4
             text: " "
             font_size: 20
-            text_size: (720, 845)
+            text_size: (720, 815)
     		valign: 'top'
     		halign: 'left'
-    	Label:					#Label for Mother's health status
-            id: Mother_Status
-            text: " "
-            font_size: 24
-            text_size: (770, 660)
-    		valign: 'top'
-    		halign: 'left'
-    	Label:					#Label for Father's health status
-            id: Father_Status
-            text: " "
-            font_size: 24
-            text_size: (770, 680)
-    		valign: 'top'
-    		halign: 'left'	
     	Label:					#Label for Relationship Status
             id: Relationship_Status
             text: " "
             font_size: 24
-            text_size: (770, 590)
+            text_size: (770, 640)
     		valign: 'top'
     		halign: 'left'		
     	Label:					#Label for Sexual Orientation
             id: Sexual_Orientation
             text: " "
             font_size: 24
-            text_size: (770, 760)
+            text_size: (770, 800)
     		valign: 'top'
     		halign: 'left'	
     	Label:					#Label for Personality Traits
             id: Personality_Traits
             text: " "
             font_size: 24
-            text_size: (770, 630)
+            text_size: (770, 660)
     		valign: 'top'
     		halign: 'left'
     	Label:					#Label for Personality Traits
             id: Unique_Trait
             text: " "
             font_size: 24
-            text_size: (770, 150)
+            text_size: (770, 1050)
     		valign: 'top'
     		halign: 'left'
+    	Label:					#Label for Mother's health status
+            id: Mother_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 180)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Father's health status
+            id: Father_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 140)
+    		valign: 'top'
+    		halign: 'left'	
     	Label:					#Label for body type
             id: Height
             text: " "
             font_size: 24
-            text_size: (500, 1640)
+            text_size: (500, 1650)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for body type
             id: bodytype_label
             text: " "
             font_size: 24
-            text_size: (500, 1660)
+            text_size: (500, 1670)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Occupation
@@ -246,7 +261,12 @@ Generators:
     	Label:					#Label for Hair Style
             id: Facial_Hair
             text: " "
+            markup: True
             font_size: 24
             text_size: (580, 1800)
     		halign: 'right'	
     		valign: 'top'
+    		color:  0.071, 0.541, 1
+    		on_ref_press:
+        		import webbrowser
+        		webbrowser.open(args[1])
