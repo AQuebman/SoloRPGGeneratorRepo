@@ -1321,13 +1321,14 @@ class NPC_Generator(BoxLayout):
         self.ids.Relationship_Status.text = ''
         self.ids.Sexual_Orientation.text = ''
         self.ids.Personality_Traits.text = ''
+        self.ids.Personalitylabel.text = ''
         self.ids.Eye_Color.text = ''
         self.ids.Hair_Style.text = ''
         self.ids.Facial_Hair.text = ''
         self.ids.Height.text = ''
         self.ids.Unique_Trait.text = ''
         self.ids.Age.text = ''
-        self.ids.Family_Label = ''
+        self.ids.Family.text = ''
 
 
 class NameGenOriginal():
@@ -1447,7 +1448,7 @@ class MonsterGenerator(GridLayout):
         # Dismiss causes the popup to go away. Release generates the call to the monster generator specified
         DragonButton.bind(on_press=popup.dismiss)
         DragonButton.bind(on_release = self.Dragon_kind_gen)
-        DragonButton.bind(on_release = self.Dragon_kind_gen) 
+#        DragonButton.bind(on_release = self.Dragon_kind_gen) 
         HumanoidButton.bind(on_press=popup.dismiss)
         HumanoidButton.bind(on_press = self.Humanoid_gen)
         
@@ -1455,12 +1456,91 @@ class MonsterGenerator(GridLayout):
     def Dragon_kind_gen(self, *args): 
 #        LOUCHE = ('LOCALITY: Something specifically related to the current environment happens.\nThe buildings now on fire. The ground collapses. It\'s flooding. Moonquake!' , 'OFFER: Offer a bargain, an extra, or a perk for a cost.\noffer a better position, with risk. Offer a temptation.', 'UNEXPECTED DANGER: Make something up or roll it up at random.\nTie it in if you want now or worry about how it fits in later', 'CALLBACK: Use something that they\'ve given you. A backstory element.\nAn off-handed comment. Gear. A character sheet aspect', 'HARM: Deal damage', 'END SOMETHING: End an ongoing effect, bonus, or fictional advantage. Take a \nresource away, something you possess, whether it\'s a piece of gear, \nan ability, or an ally')
 
-        Dragons = ('Young Brass Dragon', 'Young Brass Dragon')        
-        App.get_running_app().root.ids.Dragons.text = " ".join(['Race:',(str(random.choice(Dragons)))])
-        if App.get_running_app().root.ids.Dragons.text == 'Race: Young Brass Dragon':
+        Dragons = ('Copper Dragon Wyrmling', 'Copper Dragon Wyrmling')        
+        App.get_running_app().root.ids.Dragons.text = " ".join(['Monster:',(str(random.choice(Dragons)))])
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Copper Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'download2.jpg'
-        print(App.get_running_app().root.ids.Dragons.text)
+            App.get_running_app().root.ids.DragonImage.source = 'Copper Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (500, 200)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Dragon Turtle':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Dragon Turtle.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (810, 650)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Gold Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Gold Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (600, 50)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Green Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Green Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (600, 150)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Pseudodragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Pseudodragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (650, 20)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Red Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Red Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (600, 250)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Silver Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Silver Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (600, 200)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: White Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'White Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (600, 300)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Wyvern':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Wyvern.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (750, 600)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Black Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Black_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (700, 50)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Blue Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Blue_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (700, 50)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Brass Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Brass_Dragon.jpg'
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Bronze Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Bronze_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (700, 400)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Copper Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Copper_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (660, 350)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Gold Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Gold_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (660, 100)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Green Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Green_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (850, 600)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Red Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Red_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (850, 600)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Silver Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_Silver_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (850, 600)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Young White Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Young_White_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (600, 150)
+                
+
 #Humanoid Monster Generation
     def Humanoid_gen(self, *args): 
         pass
