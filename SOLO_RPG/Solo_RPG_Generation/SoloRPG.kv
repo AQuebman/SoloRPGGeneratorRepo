@@ -1,4 +1,4 @@
-Generators:
+NPC_Generator:
     BoxLayout:   # left side of App
         orientation: 'vertical'   #Orientation is Vertical instead of horizontal
         canvas:
@@ -16,22 +16,22 @@ Generators:
             
     	DropDown:
         	id: drop1
-        	on_select: btn.text = '{}'.format(args[2])   
+        	on_select: btn.text = '{}'.format(args[3])   
 
         	Button:
             	text: 'LOUCHE'
             	size_hint_y: None
             	height: 45
             	on_press: root.clear()
-            	on_release:  root.louche()
-            	on_release: drop1.dismiss()
-       	
+            	on_release: app.Louche_Variable.louche()
+            	on_release: drop1.dismiss() 
+            	    	
         	Button:
             	text: "Random Name\n    Generator"
             	size_hint_y: None
             	height: 45
             	on_press: root.clear() 
-            	on_release: root.onButtonPress()
+            	on_release: app.Name_Variable.NameGenOrig()
             	on_release: drop1.dismiss()
             	
             Button:
@@ -40,6 +40,14 @@ Generators:
             	height: 45
             	on_press: root.clear() 
             	on_release: root.Gen_Char_Gen()
+            	on_release: drop1.dismiss()
+            	
+            Button:
+            	text: "Random Monster Generator"
+            	size_hint_y: None
+            	height: 45
+            	on_press: root.clear() 
+            	on_release: app.Monster_Variable.MonsterGeneration()
             	on_release: drop1.dismiss()
             	
 
@@ -94,25 +102,198 @@ Generators:
         Label:					#Random Table Output label in the top center of the app
             text: "Random Table Output"
             font_size: 24
-            size_hint_y: .15
-            pos_hint: {'Center_x':.5, 'top':1}
+            text_size: (300, 430)
+            valign: 'top'
+            halign: 'center'      
+        Label:					#Starter label in the center of the app that disappears when the generators are activated
+            id: main_label
+            text: "Press a random generator on the side and output will display here."
+            text_size: (1000, 500)
+            font_size: 24
+            valign: 'bottom'
+            halign: 'center'   
+        Label:					#Label for where Name Prints
+            id: Char_Title
+            font_size: 24
+            text_size: (750, 520)
+            valign: 'top'
+    		halign: 'left'
         Label:					#Label for where Name Prints
             id: Char_Name
             text: " "
             font_size: 24
-            size_hint: (None, None)
-            pos_hint: {"center_y": 0.4}
-    		size: (1000, 100)
+            text_size: (770, 540)
+    		valign: 'top'
+    		halign: 'left'
         Label:					#Label for class choice
             id: class_label
             text: " "
             font_size: 24
-            size_hint: (None, None)
-            pos_hint: {"center_y": 0.4}
-    		size: (1000, 0)         
-        Label:					#Starter label in the center of the app that disappears when the generators are activated
-            id: main_label
-            text: "Press a random generator on the side and output will display here."
+            text_size: (770, 555)
+    		valign: 'top' 
+    		halign: 'left'
+        Label:					#Label for race choice
+            id: race_label
+            text: " "
             font_size: 24
-            size_hint_y: .95
-            pos_hint: {'center_x':.5, 'top':.1}
+            text_size: (770, 570)
+    		valign: 'top'  
+    		halign: 'left' 
+        Label:					#Label for race choice
+            id: Age
+            text: " "
+            font_size: 24
+            text_size: (770, 590)
+    		valign: 'top'  
+    		halign: 'left' 
+    	Label:					#Label for Relationship Status
+            id: Relationship_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 340)
+    		valign: 'top'
+    		halign: 'left'		
+    	Label:					#Label for Sexual Orientation
+            id: Sexual_Orientation
+            text: " "
+            font_size: 24
+            text_size: (770, 470)
+    		valign: 'top'
+    		halign: 'left'	
+    	Label:					#Label for Personality Traits
+            id: Personalitylabel
+            text: " "
+            font_size: 34
+            text_size: (770, 330)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Personality Traits
+            id: Personality_Traits
+            text: " "
+            font_size: 24
+            text_size: (770, 410)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Unique Traits
+            id: Unique_Trait
+            text: " "
+            font_size: 24
+            text_size: (770, 540)
+    		valign: 'top'
+    		halign: 'left'
+		Label:					#Label for Number of Siblings
+            id: Family
+            text: " "
+            font_size: 34
+            text_size: (770, 70)
+    		valign: 'top'
+    		halign: 'left'   		
+		Label:					#Label for Number of Siblings
+            id: siblings_label
+            text: " "
+            font_size: 24
+            text_size: (770, 0)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for First Siblings Name
+            id: Sibling_Name1
+            text: " "
+            font_size: 20
+            text_size: (720, 20)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Second Siblings Name
+            id: Sibling_Name2
+            text: " "
+            font_size: 20
+            text_size: (720, 50)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Third Siblings Name
+            id: Sibling_Name3
+            text: " "
+            font_size: 20
+            text_size: (720, 80)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Fourth Siblings Name
+            id: Sibling_Name4
+            text: " "
+            font_size: 20
+            text_size: (720, 115)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Mother's health status
+            id: Mother_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 70)
+    		valign: 'top'
+    		halign: 'left'
+    	Label:					#Label for Father's health status
+            id: Father_Status
+            text: " "
+            font_size: 24
+            text_size: (770, 30)
+    		valign: 'top'
+    		halign: 'left'	
+    	Label:					#Label for body type
+            id: Height
+            text: " "
+            font_size: 24
+            text_size: (500, 1685)
+    		halign: 'right'	
+    		valign: 'top'
+    	Label:					#Label for body type
+            id: bodytype_label
+            text: " "
+            font_size: 24
+            text_size: (500, 1700)
+    		halign: 'right'	
+    		valign: 'top'
+    	Label:					#Label for Occupation
+            id: occupation_label
+            text: " "
+            font_size: 24
+            text_size: (620, 1870)
+    		halign: 'right'	
+    		valign: 'top'
+    	Label:					#Label for Eye Color
+            id: Eye_Color
+            text: " "
+            font_size: 24
+            text_size: (500, 1785)
+    		halign: 'right'	
+    		valign: 'top'
+    	Label:					#Label for Hair Style
+            id: Hair_Style
+            text: " "
+            font_size: 24
+            text_size: (600, 1800)
+    		halign: 'right'	
+    		valign: 'top'
+    	Label:					#Label for Hair Style
+            id: Facial_Hair
+            text: " "
+            markup: True
+            font_size: 24
+            text_size: (580, 1820)
+    		halign: 'right'	
+    		valign: 'top'
+    		color:  0.071, 0.541, 1
+    		on_ref_press:
+        		import webbrowser
+        		webbrowser.open(args[1])               
+    	Label:					#Label for Dragon Color
+            id: Dragons
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: DragonImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)
