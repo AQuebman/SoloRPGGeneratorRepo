@@ -169,230 +169,358 @@ class NPC_Generator(BoxLayout):
             self.ids.race_label.text = " ".join(['Race:',(str(random.choice(Atypical_Race_Choice)))])   
         Body_Type = ('Toned','Built', 'Brawny', 'Slender', 'Typical', 'Chubby') #Picks a random body type
         self.ids.bodytype_label.text = " ".join(['Body Type: ', (str(random.choice(Body_Type)))])      
-        Occupation = ('Abbey', #Picks a random occupation
-        'Abjurer', 
-        'Acolyte', 
-        'Adept', 
-        'Advocate', 
-        'Alchemist', 
-        'Alienist', 
-        'Amazon', 
-        'Animal Trainer', 
+        Occupation = ( #Picks a random occupation
+        'Abbot/Abbess', #the head of an abbey of monks.
+        'Abcedarian', #teaches the illiterate.
+        'Abjurer', #a mage focused in protective spells.
+        'Acater', #provides and prepares foodstuffs or delicacies for events such as festivals.
+        'Accoucheur/Obstetrician/Midwife', #assists in childbirth and the care of women giving birth. 
+        'Accountant', #keeps and inspects financial accounts.
+        'Accoutrementer/Coinsmith', #makes currency for the government.
+        'Acolyte', #assists the celebrant in a religious service or procession.
+        'Acrobat', #performs spectacular gymnastic feats.
+        'Actor', #impersonates characters, typically on stage in a theatrical production.
+        'Actuary', #compiles and analyzes statistics and uses them to calculate risk. 
+        'Adept',
+        'Admiral', #commands a fleet or naval squadron. 
+        'Advocate',
+        'Aerialist/Trapezist', #performs acrobatics high above the ground on a tightrope or trapeze. 
+        'Affeeror', #determines the values of fines and amercements.
+        'Agister', #affords pasture to the livestock of others for a price.
+        'Alchemist', #transforms or creates something within nature through (usually) ritualist magic.
+        'Alderman', #a civic dignitary in the local council ranked below the mayor.
+        'Alienist', #assesses the competence of a defendant in a court of law.
+        'Almoner', #distributes money and food to poor people.
+        'Amazon',
+        'Animal Collector', #collects and deals in rare and exotic animals and monsters.
+        'Animal Handler', 
+        'Animal Trainer',
+        'Anthropologist', #studies the customs, beliefs, and relationships of humanoids and intellectually and culturally advanced creatures. 
         'Apostle', 
-        'Apothecarist', 
-        'Apparitionist', 
-        'Apprentice', 
-        'Archer', 
-        'Arch-rogue', 
-        'Archveult', 
+        'Apothecarist', #prepares and sells medicines, drugs, and potions. 
+        'Apparitionist',
+        'Appraiser', #assesses the monetary value of something. 
+        'Apprentice', #studies a trade under a skilled employer.
+        'Arborist',
+        'Archaeologist', #studies humanoid history and prehistory through the excavation of sites and the analysis of artifacts and other physical remains.
+        'Arch-rogue',
+        'Archbishop', #responsible for an archdiocese, their surrounding district.
+        'Archivist', #maintains and is in charge of archives.
+        'Archmage', #an extremely powerful mage. 
+        'Archveult',
+        'Architect', #designs buildings or landscapes and in many cases supervises their construction. 
         'Armigerent', 
-        'Armorer', 
+        'Armorer', #specializes in making and repairing armor.
+        'Arranger', #adapts a musical composition for performance.
         'Artillerist', 
         'Artisan', 
         'Artist', 
         'Ascetic', 
-        'Aspirant', 
-        'Astrologer', 
+        'Aspirant',
+        'Assay Master', #oversees the testing of currency. 
+        'Assayer', #determiner of the proportions of metal in ore and the amount of copper, silver, gold, or platinum in coins.
+        'Astrologer', #uses astrology to tell others about their character or to predict their future.
         'Astrologist', 
         'Astrologue', 
-        'Athlete', 
+        'Athlete', #proficient in sports and other forms of physical exercise.
+        'Auctioneer', #conducts auctions by accepting bids and declaring goods sold. 
         'Augurer', 
-        'Baleful', 
+        'Bagniokeeper', #owner of a bath house or brothel.
+        'Bailiff', #looks after prisoners.
+        'Baker', #bakes bread and cakes.
+        'Baler', 
         'Balladeer', 
-        'Bandit',
-        'Banker',
-        'Barber', 
+        'Bandit', #a robber or outlaw belonging to a gang and typically operating in an isolated or lawless area.
+        'Banker', #an officer or owner of a bank or group of banks.
+        'Barber', #cuts hair and shaves or trims beards.
+        'Barkeep', #works and serves drinks in a bar.
+        'Barmaid/Barboy', #serves drinks and food in a bar as well as engaging with customers.
+        'Baron/Baroness', #a member of the lowest order of the British nobility.
         'Barrister', 
         'Battler', 
-        'Beadle', 
-        'Beatific', 
+        'Beadle',  
         'Beekeeper', 
         'Beggar', 
         'Beguiler', 
         'Berserker', 
-        'Bilker', 
-        'Bishop', 
+        'Bilker',
+        'Billboardposter', #a person who puts up notices, signs and advertisements. 
+        'Bishop', #a senior member of the clergy, usually in charge of a diocese and empowered to confer holy orders.
         'Blackcoat',
         'Blackmailer', 
-        'Blacksmith', 
+        'Blacksmith', #forges and repairs things in metal, including weapons, armor, utensils, etc.
+        'Bladesmith', #specializes in making and repairing bladed weapons, especially swords and daggers. 
         'Bludgeoner', 
         'Body snatcher', 
-        'Bodyguard', 
+        'Bodyguard', #escorts and protects another person, especially a dignitary.
         'Bonder', 
+        'Bookbinder', #binds books and wraps scrolls.
+        'Bookkeeper', #keeps records of financial affairs.
         'Bookseller', 
+        'Bottler', #bottles drinks and other liquids.
+        'Bouncer', #prevents troublemakers from entering or to eject them from the premises of an establishment.
         'Bounty hunter', 
+        'Bowyer', #makes bows and crossbows.
         'Brave', 
         'Bravo', 
-        'Brawler', 
-        'Brigand', 
+        'Brawler',
+        'Breeder',
+        'Brewer', #brews ale.
+        'Brickmaker', #crafts bricks from clay, stone, or other materials.
+        'Brickmason', #builds with mineral products such as stones, bricks, cinder blocks, or tiles, usually with the use of mortar as a bonding agent. 
+        'Brigand',
+        'Broom Maker', #makes brooms and brushes. 
         'Brother', 
         'Bruiser', 
         'Brute', 
         'Bully', 
-        'Burglar', 
-        'Bushwhacker', 
-        'Butcher', 
+        'Burglar', #illegally enters buildings and steals things.
+        'Bushwhacker',
+        'Business Owner', #owns a business entity in an attempt to profit from its successful operations.
+        'Busker/Street Musician', #performs in a public place, often for money. 
+        'Butcher', #cuts up and sells meat.
+        'Butler', #the chief servant of a household.
         'Cabalist', 
         'Cadet', 
         'Caller', 
-        'Campaigner', 
+        'Campaigner',
+        'Candlemaker', #makes candles and wax from honey and tallow. 
+        'Cantor', #sings liturgical music and leads prayer in a synagogue.
         'Capo', 
         'Capricious', 
-        'Captain', 
+        'Captain', #an army officer of high rank in charge of commanding squadrons of soldiers.
         'Caravan Guard', 
         'Card shark', 
-        'Cardinal', 
-        'Cavalier', 
+        'Cardinal', #a leading dignitary of a church, nominated by the highest official.
+        'Caregiver', #looks after a sick, elderly, or disabled person.
+        'Carpenter', #makes and repairs wooden objects and structures.
+        'Cartwright', #makes and repairs carts and wagons. 
+        'Castellan', #the governor of a castle.
+        'Cavalryman/Cavalier', #a skilled horseback rider.
+        'Celebrity', #a famous person.
         'Celibate', 
         'Chamberlain', 
         'Champion', 
-        'Chandler', 
-        'Chaplain', 
+        'Chancellor', #a senior state or legal official.
+        'Chandler', #deals in provisions and supplies.
+        'Chaplain', #a member of the clergy attached to a private chapel, institution, ship, branch of the armed forces, etc.
+        'Charcoal Maker', #manufactures charcoal by carbonizing wood in a kiln.
         'Charger', 
         'Charlatan',
         'Charity Worker',
-        'Charmer', 
+        'Charlatan/Conman', #tricks people by gaining their trust and persuading them to believe something that is not true in order to benefit from the encounter.
+        'Charmer',
+        'Chatelaine/Majordomo', #a person in charge of a large household. 
         'Cheat', 
-        'Cheesemaker', 
+        'Cheesemaker',
+        'Chef', #a professional cook trained in the culinary arts. 
         'Chest-maker', 
         'Chevalier', 
-        'Chieftain', 
+        'Chieftain', #leads or rules a people or clan.
+        'Chimney Sweeper', #a small person, typically a child, who ascends chimneys to clean them.
+        'Choirmaster', #trains a choir and orchestrates their singing when they perform. 
         'Chronicler', 
-        'Clairvoyant', 
-        'Clockworker', 
-        'Cobbler', 
-        'Collector', 
-        'Colossus', 
+        'City Watch', #an officer of law enforcement who resides in larger towns or cities.
+        'Clairvoyant',
+        'Clerk', #undertakes routine administrative duties in a business or bank. 
+        'Clockworker',
+        'Clown', #comic entertainer who wears a traditional costume and exaggerated makeup. 
+        'Cobbler', #makes and repairs footwear.
+        'Cockfighter/Gamefighter', #engages in arena matches in which animals or monsters are pitted against one another, typically to the death.
+        'Collector', #collects things of a specified type, professionally or as a hobby.
+        'Colossus',
+        'Comedian', #entertainer whose act is designed to make an audience laugh. 
+        'Commissar', #teaches principles and policies to military units.
         'Con man', 
-        'Conclavist', 
-        'Confessor', 
+        'Conclavist',
+        'Conductor', #directs the performance of an orchestra. 
+        'Confessor', #hears confessions and gives absolution and spiritual counsel.
         'Confidence artist', 
-        'Conjurer', 
-        'Conqueror', 
+        'Conjurer',
+        'Constable', #an officer with limited policing authority, typically in a small town.
+        'Cook', #prepares food for eating.
+        'Cooper/Hooper', #makes and repairs casks and barrels. 
+        'Conqueror',
+        'Conservationist', #advocates for the protection and preservation of the environment and wildlife.
+        'Construction Worker', #a laborer in the physical construction of a built environment and its infrastructure. 
+        'Contortionist', #twists and bends their body into strange and unnatural positions.
         'Controller', 
         'Convert', 
-        'Cooper', 
+        'Cooper',
+        'Copyist', #makes copies of handwritten documents or music. 
         'Corn Farmer', 
-        'Costermonger', 
-        'Cove', 
+        'Costermonger',
+        'Costumer', #makes theatrical costumes.
+        'Count/Earl/Countess', #a nobleperson ranking above a viscount and below a marquess.
+        'Courier', #transports packages and documents. 
+        'Courtier', #attends court as a companion or adviser to the king or queen.
+        'Cove',
+        'Cowherd', 
         'Cozener', 
         'Cracksman', 
-        'Cretin', 
+        'Cretin',
+        'Crime Boss', #controls and supervises a criminal organization. 
         'Crony', 
+        'Croupier', #runs a gaming table by gathering in and paying out money or tokens.
         'Cryomancer', 
-        'Cultist', 
-        'Curate', 
+        'Cult Leader', #the organizational leader of a cult who is occasionally also the founder.
+        'Cultist', #a member of a cult who generally lives outside of conventional society and worships an unorthodox patron.
+        'Curator', #keeper and custodian of a museum or other collections of precious items.
         'Curse-giver', 
-        'Cutpurse', 
+        'Cutler', #makes cutlery.
+        'Cutpurse', #a pickpocket or thief.
         'Cutthroat', 
         'Cyclops-Binder', 
-        'Cyclops-Keeper', 
-        'Dancer', 
+        'Cyclops-Keeper',
+        'Dairyboy/Dairymaid', 
+        'Dancer', #moves their body rhythmically with or without musical accompaniment.
         'Dangerous', 
         'Darksider', 
         'Day Laborer', 
-        'Deacon', 
-        'Dean', 
+        'Deacon', #an ordained minister of an order ranking below that of priest.
+        'Dean',
+        'Debt Collector', #recovers money owed on delinquent accounts. 
         'Defender', 
         'Defiler', 
         'Deist', 
         'Demon-Binder', 
-        'Demon-Keeper', 
+        'Demon-Keeper',
+        'Detective/Investigator', #investigates and solves crimes. 
         'Devil', 
         'Devil-Binder', 
         'Devil-Keeper', 
         'Diabolist', 
         'Dice rattler',
-        'Diplomat', 
+        'Diplomat', #an official representing a country abroad.
         'Disciple', 
         'Ditch Digger', 
-        'Diviner', 
+        'Diviner', #seeks ultimate divination in order to further understand or meet godly substance.
         'Dock worker', 
         'Dragon-Binder', 
-        'Dragon-Keeper', 
+        'Dragon-Keeper',
+        'Draper', #an alcohol merchant. 
         'Dreamer', 
-        'Duelist', 
-        'Dyer', 
+        'Drug Dealer', #dealer of illegal substances.
+        'Drug Lord', #controls a network of persons involved in the illegal drugs trade and transactions.
+        'Drummer/Fifer', #a non-combatant foot soldier who sounds signals for changes in formation in combat.
+        'Duelist', #skilled in one-on-one combat.
+        'Duke/Duchess', #rules over a duchy and is of the highest rank below the monarch.
+        'Dyer', #dyes cloth and other materials. 
         'Ecclesiast', 
         'Elder', 
-        'Elementalist', 
-        'Embezzler', 
-        'Enchanter', 
-        'Encylopaedist', 
+        'Elementalist', #manipulates nature’s elements to their will.
+        'Embezzler',
+        'Embroiderer', #ornaments with needlework. 
+        'Emperor/Empress', #the supreme sovereign ruler of an extensive group of states or countries under a single authority.
+        'Enchanter', #uses sorcery to put someone or something under a spell.
+        'Encylopaedist',
+        'Engraver', #incises a design onto a hard surface by cutting grooves into it. 
         'Ensorceller', 
         'Ensqualmer', 
-        'Entrepreneur', 
-        'Epicure', 
+        'Entrepreneur', #organizes and operates a business or businesses, taking on greater than normal financial risks in order to do so.
+        'Epicure',
+        'Equilibrist', #performs balancing feats. 
         'Eternal', 
         'Evangelist', 
         'Evil eye', 
-        'Evoker', 
+        'Evoker', #manipulates energy or taps into an unseen source of power in order to produce a desired kinetic end.
         'Ex-Adventurer',
         'Ex-Noble', 
-        'Executioner', 
+        'Executioner', #carries out a sentence of death on a legally condemned person.
         'Exemplar', 
-        'Exorcist',
-        'Explorer', 
+        'Exorcist', #expels or attempts to expel evil spirits from a person or place.
+        'Explorer',
+        'Exterminator', #exterminates unwanted rodents and insects.
+        'Extortioner', #extorts money from someone by threatening to expose embarrassing information about them. 
         'Factotum',
         'Faithful', 
-        'Falconer', 
+        'Falconer',
+        'Farmer',
+        'Farrier', #trims and shoes horses’ hooves. 
+        'Fashion Designer', #applies design, aesthetics and natural beauty to garments and their accessories.
         'Father', 
-        'Fence', 
+        'Fence', #deals in stolen goods.
         'Fencer', 
-        'Filcher', 
+        'Filcher',
+        'Firefighter', #extinguishes fires.
+        'Fisher',
+        'Fletcher', #makes and repairs arrows.
+        'Florist', 
+        'Food & Drink Taster', #ingests food that was prepared for someone else to confirm it is safe to eat.
         'Footman', 
-        'Footpad', 
+        'Footpad',
+        'Forager', 
         'Forester', 
-        'Forger', 
+        'Forger', #produces fraudulent copies or imitations.
         'Fortune Teller', 
-        'Fortunist', 
+        'Fortunist',
+        'Fowler', 
         'Freelancer', 
         'Friar', 
-        'Fulgurator', 
+        'Fugitive', #a person who has escaped from a place or is in hiding, especially to avoid arrest or persecution.
+        'Fulgurator',
+        'Furniture Artisan', #makes and repairs furniture.
+        'Furrier', #prepares furs for adornment. 
         'Gallant', 
-        'Gambler', 
-        'Gammoner', 
-        'General', 
+        'Gambler',
+        'Gamekeeper' #breeds and protects game, typically for a large estate
+        'Gammoner', # A thief's accomplice who distracts the victim while the thief steals.
+        'Gardener/Landscaper', #tends and cultivates a garden.
+        'General', #the chief commander of an army.
+        'General Contractor', #supervises a construction site, manages its vendors and trades, and communicates information to all involved parties. 
         'Gentleman', 
         'Giant', 
         'Giant-Binder', 
         'Giant-Keeper', 
-        'Gladiator', 
-        'Glassblower', 
-        'Glovemaker', 
+        'Gladiator', # fights against other people, wild animals, or monsters in an arena.
+        'Glassworker', # blows glass planes and items.
+        'Glasspainter', #produces colorful designs on or in glass.
+        'Glazier', #fits glass into windows and doors. 
+        'Glovemaker', #makes and repairs gloves.
         'Godfather', 
-        'Gong Farmer', 
+        'Goldsmith/Silversmith', #a smith who specializes in precious metals.
+        'Gong Farmer', #digs out and removes excrement from privies and cesspits.
         'Government Official',
         'Governor', 
-        'Grave Digger', 
+        'Gravedigger', #digs graves for the purposes of a funeral ceremony.
         'Grave Tender', 
-        'Grenadier', 
+        'Grenadier',
+        'Grocer', #a food merchant.
+        'Groom', #cleans and brushes the coats horses, dogs, or other animals.
+        'Groundskeeper', #maintains an athletic field, a park, or the grounds of a graveyard or other institution.\
+        'Guard/Sentinel', #a person who keeps watch, especially a soldier or other person formally assigned to protect a person or to control access to a place. 
         'Guardian', 
         'Guerilla', 
         'Guild Beggar', 
-        'Guildmaster', 
+        'Guildmaster', #leads an economically independent producer (a “guild,” an association of craftsmen or merchants that often holds considerable bureaucratic power).
         'Guildsman', 
         'Gypsy', 
         'Haberdasher', 
         'Harbinger', 
-        'Haruspex', 
+        'Haruspex',
+        'Hatter/Milliner', #makes and repairs headwear. 
         'Headman', 
-        'Healer', 
+        'Healer', #able to cure a disease or injury using magic.
+        'Hearth Witch/Hearth Wizard', #incorporates spells and enchantments in cooking.
         'Heathen-slayer', 
         'Hedge creeper', 
-        'Herald', 
+        'Herald', #a messenger who carries important news.
         'Herbalist', 
-        'Herder', 
+        'Herder', #supervises a herd of livestock or makes a living from keeping livestock, especially in open country.
         'Hierophant',
+        'High Priest/Pope', #the chief priest of a religion.
+        'Highwayman', #robs travelers on a road.
         'Hit man', 
         'Horologist', 
-        'Horseman', 
-        'Hunter', 
+        'Horseman',
+        'Horse Trainer', #tends to horses and teaches them different disciplines. 
+        'Hunter', #hunts game or other wild animals.
         'Huntsman', 
         'Hydra-Binder', 
         'Hydra-Keeper', 
-        'Hypnotist', 
-        'Illusionist', 
+        'Hypnotist',
+        'Illuminator', #paints and calligraphs to adorn or enlighten scrolls and manuscripts. 
+        'Illusionist', #performs tricks and spells that deceive the senses.
         'Imam', 
         'Immolator', 
         'Impaler', 
@@ -400,257 +528,387 @@ class NPC_Generator(BoxLayout):
         'Infinitist', 
         'Informer', 
         'Initiate', 
-        'Inquisitor', 
+        'Innkeeper', #owns and runs an inn.
+        'Inquisitor', #seeks to eliminate heresy and other things contrary to the doctrine or teachings of their faith.
         'Insidiator',
+        'Inspection Officer', #responsible for the inspection of military units to ensure they meet appropriate standards of training and efficiency.
+        'Instrument Maker', #makes and repairs musical instruments.
+        'Intelligence Officer', #collects, compiles and organizes information about the enemy.
+        'Interpreter', #interprets language and its meaning, especially within ancient manuscripts.
         'Investigator',
+        'Jailer', #supervises a jail and the prisoners in it.
         'Janissary', 
-        'Jester', 
-        'Jeweler', 
+        'Jester', #professional joker or “fool” at court, typically wearing a cap with bells on it and carrying a mock scepter.
+        'Jeweler', #designs, makes, and repairs necklaces, bracelets, watches, etc., often containing jewels.
         'Jongleur', 
         'Journeyman', 
         'Jouster', 
-        'Judge', 
-        'Juggler', 
+        'Judge', #decides cases in a court of law.
+        'Juggler', #keeps several objects in motion in the air at the same time by alternately tossing and catching them. 
         'Junkman', 
         'Justicar', 
         'Keeper', 
-        'Khan', 
+        'Khan',
+        'Kidnapper', #abducts people and holds them captive, typically to obtain a ransom. 
         'Killer', 
+        'King/Queen', #the ruler of an independent state and its people.
+        'Kitchen Drudge', #performs menial work in a kitchen.
+        'Knacker', #disposes of dead or unwanted animals.
         'Knave', 
-        'Knight',
+        'Knight', #serves his or her sovereign after being bestowed a rank of royal honor.
         'Labor Boss', 
+        'Lady-in-Waiting', #attends a queen, princess, or other high-ranking feminine nobleperson.
         'Lama', 
-        'Lancer', 
-        'Lawyer', 
+        'Lamplighter', #lights street or road lights at dusk.
+        'Lancer',
+        'Land Surveyor', #establishes maps and boundaries for ownership or other purposes required by government or civil law.
+        'Lapidary', #turns stone, minerals, or gemstones into decorative items such as cabochons, engraved gems, and faceted designs.
+        'Laundry Worker', #a laborer who takes part in the washing, drying, and ironing of clothes and other fabric items. 
+        'Lawyer/Advocate', #practices or studies law, typically an attorney or a counselor.
+        'Leatherworker', #makes items from leather such as pouches, scabbards, straps, etc. 
+        'Lector', #reads to others while they work for entertainment.
         'Legionnaire',
         'Legbreaker', 
         'Liar', 
         'Lich', 
-        'Lieutenant', 
-        'Locksmith', 
+        'Lieutenant', #an officer of middle rank in the armed forces.
+        'Limner', #paints portraits or miniatures.
+        'Linguist', #studies the essence of communication, including the units, nature, structure, and modification of language.
+        'Loan Shark', #charges extremely high rates of interest for moneylending, typically under illegal conditions.
+        'Locksmith', #makes and repairs locks.
         'Logician', 
-        'Lorist', 
+        'Longshoreman', #loads and unloads ships in a port.
+        'Lorist',
+        'Lumberjack', #fells trees, cuts them into logs, and transports them to a sawmill. 
+        'Luthier', #makes and repairs stringed instruments.
         'Lyrist',
-        'Madame',
         'Made man', 
-        'Mage', 
+        'Mage', #a magic-user.
         'Magician', 
         'Magic-User',
         'Magistrate',
         'Magnate', 
         'Magsman', 
-        'Magus', 
+        'Magus',
+        'Maid', #a domestic servant of a household. 
+        'Makeup Artist', #applies cosmetics to models, actors, nobles, etc.
         'Man-at-arms', 
         'Manslayer', 
         'Marauder', 
         'Marine', 
         'Mariner',
         'Marketeer',
-        'Marvelous', 
-        'Medicine Man', 
-        'Medium', 
+        'Marksman/Archer', 
+        'Marquess/Marchioness', #a nobleperson ranking above a count and below a duke.
+        'Marshall', #has the charge of the cavalry in the household of a monarch.
+        'Marvelous',
+        'Master-of-Coin', #supervises the royal treasury, advises the monarch on financial matters, and is responsible for raising money through taxation.
+        'Master-of-Horses', #supervises and commands all horses under a jurisdiction.
+        'Master-of-Hounds', #maintains a pack of hounds and their associated staff, equipment, and hunting arrangements. 
+        'Master-of-the-Revels', #responsible for overseeing royal festivities.
+        'Medic', #a medical practitioner equipped for the battlefield. 
+        'Medium', #uses extrasensory perception, magic, or divine powers to identify information hidden from the normal senses. 
         'Medusa-Binder', 
         'Medusa-Keeper', 
         'Mendicant', 
         'Mentalist', 
-        'Mercenary', 
-        'Merchant', 
+        'Mercenary', #a soldier without allegiance who works for money, typically a member of a company or guild.
+        'Mercer', #weaves textile fabrics, especially silks, velvets, and other fine materials.
+        'Merchant', #sells and trades goods.
+        'Messenger', #carries messages between recipients.
+        'Meteorologist', #forecasts and manipulates weather.
         'Mezmerizer', 
-        'Miller/baker', 
+        'Miller/baker', #owns or works in a grain mill. 
         'Mind-reader', 
-        'Miner', 
-        'Minstrel', 
-        'Missionary', 
+        'Miner', #works underground in mines in order to obtain minerals such as coal, diamonds, or gold
+        'Minister' #assists with the administration of business.
+        'Minstrel', #recites lyric or heroic poetry for nobility.
+        'Missionary', #goes on a religious mission to promote their faith in a foreign place.
         'Mistress', 
-        'Mnemonist', 
-        'Moneylender', 
+        'Mnemonist',
+        'Moneychanger', #exchanges one currency for another. 
+        'Moneylender', #lends money to others who pay interest.
+        'Model', #poses as a subject for an artist, fashion designer, or sculptor.
+        'Monster Collector', #collects and deals in rare and exotic animals and monsters.
+        'Monster Handler', #Handles and managers exotic animals and monsters
         'Mugger', 
         'Mullah', 
         'Mummer', 
-        'Murderer', 
-        'Muscle', 
         'Muse', 
-        'Mushroom farmer', 
+        'Mushroom farmer',
+        'Musician', #plays a musical instrument. 
         'Myrmidon', 
         'Mysteriarch', 
-        'Mystic', 
+        'Mystic',
+        'Nanny/Nursemaid', #a servant employed to look after a young child or children. 
         'Navigator', 
         'Necrope', 
-        'Necromancer',
+        'Necromancer', #communicates with and conjures the spirits of the dead.
+        'Noble/Aristocrat', #a person belonging to a class with high social or political status.
+        'Notary', #performs certain legal formalities, especially to draw up or certify contracts, deeds, and other documents for use in other jurisdictions.
+        'Nun', #a member of a religious community of women, especially a cloistered one, living under vows of poverty, chastity, and obedience.
         'Oath-keeper', 
         'Oath-taker', 
         'Occultist', 
-        'Omen-bringer', 
+        'Omen-bringer',
+        'Operator', #a laborer who operates equipment, typically in construction.
+        'Optician' #makes and repairs eyeglasses.
+        'Orator/Spokesman', #makes statements on behalf of a group or individual nobleperson. 
         'Orphan', 
         'Ostler', 
         'Outlaw', 
         'Ovate', 
-        'Padre', 
+        'Padre',
+        'Page', #a young attendant to a person of noble rank. 
+        'Painter', #paints pictures.
         'Palmist', 
+        'Pardoner', #raises money for religious works by soliciting offerings and granting indulgences.
         'Parsnip Farmer', 
-        'Parson', 
+        'Parson',
+        'Pastry Chef', #makes desserts, especially cakes and pastries.
+        'Pathfinder', #scouts ahead and discovers a path or way for others. 
         'Patriarch', 
         'Pawnbroker', 
         'Pedant', 
+        'Peddler', #travels from place to place selling assorted items.
         'Petitioner', 
         'Phantasmist', 
         'Philosopher',
         'Physician',
         'Pick Pocket',
-        'Pilgrim', 
+        'Pilgrim',
+        'Pimp/Madame', #controls prostitutes and arranges clients for them, taking part of their earnings in return. 
         'Pious',
+        'Pirate', #attacks and robs ships at sea.
+        'Plantation Owner', #an owner of an estate on which crops are cultivated by resident labor, typically slave labor.
+        'Plasterer', #applies plaster to walls, ceilings, or other surfaces.
+        'Playwright', #writes plays or musicals.
+        'Plumber', #installs and repairs the fittings of water supply and sanitation.
+        'Plumer', #hunts birds for their plumes.
         'Plutocrat',
+        'Poacher', #hunts illegal game.
+        'Poet', #writes ballads, epics, sonnets, or other forms of poetry.
+        'Poisoner', #makes poisons to harm or kill.
         'Pontiff', 
-        'Pope', 
-        'Potato Farmer', 
-        'Preacher', 
+        'Porter', #carries luggage and other loads. 
+        'Potato Farmer', #A farmer who specializes in potatoes
+        'Potter', #makes pots, bowls, plates, etc., out of clay.
         'Preceptor', 
         'Prestidigitator', 
-        'Priest', 
-        'Primate', 
+        'Priest', #has the authority to perform certain rites and administer certain sacraments.
+        'Primate',
+        'Prince/Princess', #the direct descendant of a monarch.
+        'Printer', #a person who applies pressure to an inked surface resting upon a print medium (such as paper or cloth), thereby transferring the ink to manufacture a text. 
+        'Privateer', #engages in maritime warfare under a commission of war.
         'Prognosticator', 
-        'Prophet',
+        'Prophet', #regarded as an inspired teacher or proclaimer of the will of God.
         'Proprietor',
         'Prosecutor', 
-        'Proselytizer', 
-        'Prostitute',
+        'Proselytizer',
+        'Prospector', #searches for mineral deposits, especially by drilling and excavation. 
+        'Prostitute', #engages in sexual activity for payment.
         'Protector', 
         'Psalmist', 
         'Psychic', 
         'Pugilist', 
         'Pupil',
+        'Quarryman/Quarrywoman', #quarries stone.
+        'Quartermaster', #responsible for providing quarters, rations, clothing, and other supplies.
         'Quixotic', 
         'Rabbi', 
         'Racaraide', 
         'Raconteur', 
-        'Radish Farmer', 
+        'Radish Farmer',
+        'Raider/Marauder', #makes sudden, unprompted attacks against defenseless or near-defenseless settlements. 
         'Rake', 
         'Rakshasa', 
         'Rascal', 
         'Rat catcher', 
         'Ravager', 
         'Reaver', 
-        'Rector', 
+        'Rector',
+        'Renderer', #converts waste animal tissue into usable materials.
+        'Restorer', #repairs or renovates a work of art so as to return it to its original condition. 
         'Reverend', 
         'Revivalist', 
         'Rhymer', 
-        'Rice Farmer', 
+        'Rice Farmer',
+        'Ringmaster/Ringmistress', #master of ceremony who introduces the circus acts to the audience.
+        'Ritualist', #practices or advocates the observance of ritual (formula intended to trigger a magical effect on a person or objects).
+        'Roadlayer/Streetlayer', #paves roads or streets. 
         'Robber', 
-        'Rogue', 
-        'Rope maker', 
-        'Rowdy', 
+        'Rogue',
+        'Roofer/Thatcher', #builds and repairs roofs. 
+        'Rope maker', #braids rope.
+        'Ropewalker', #walks along a tightrope to entertain others. 
+        'Rowdy',
+        'Royal Guard', #responsible for the protection of a royal person.
+        'Rugmaker', #makes and repairs rugs by braiding, hooking, weaving, etc.
+        'Runecaster', #uses special alphabets to create runes (symbols possessing magical effects capable of being used multiple times). 
+        'Runner', #carries information between lines in wartime.
         'Rutabaga Farmer', 
-        'Rutterkin', 
-        'Sage', 
-        'Saint', 
+        'Rutterkin',
+        'Saddler', #makes and repairs saddlery. 
+        'Sage', #a wise and experienced magic-user.
+        'Saint',
+        'Sapper', #a soldier responsible for tasks such as building and repairing roads and bridges, laying and clearing mines, etc. 
         'Savant', 
         'Scallywag', 
         'Scammer', 
         'Scholar', 
         'Scientist', 
         'Scoundrel', 
-        'Scout', 
+        'Scout', #sent ahead of a main force so as to gather information about the enemy’s position, strength, or movements.
         'Scribe',
+        'Sculptor', #crafts art by carving or casting blocks of marble, stones, or other hardened minerals.
+        'Seamstress/Tailor', #makes, alters, repairs, as well as occasionally designing garments.
         'Seancer', 
         'Second story man', 
         'Seeker', 
-        'Seer', 
+        'Seer/Oracle', #able to see what the future holds through supernatural insight.
+        'Senator', #partakes in governmental decision-making after being elected. 
         'Sensei', 
         'Sentinel', 
-        'Sergeant', 
+        'Sergeant', #an officer instructed with a protective duty, typically worth “half a knight” in regard.
+        'Sergeant-at-Arms', #charged with keeping order during meetings and, if necessary, participates in battle. 
         'Sermonizer', 
+        'Servant', #performs duties for others, especially a person employed in a house or as a personal attendant.
+        'Sexton', #looks after a church and churchyard, sometimes acting as bell-ringer and formerly as a gravedigger.
         'Shabbat', 
         'Shadow walker', 
-        'Shaman', 
+        'Shapeshifter', #a person with the ability to change their physical form.
         'Shark', 
         'Sharper', 
         'Sharpshooter', 
-        'Shepherd', 
-        'Shibbol(eth)', 
+        'Shepherd', #herds, tends, and guards sheep.
+        'Sheriff', #the chief executive officer in a county, having various administrative and judicial functions. 
         'Shield-bearer', 
         'Shiv', 
-        'Shrinist', 
-        'Skald', 
+        'Shrinist',
+        'Siege Artillerist', #works the artillery machines of an army.
+        'Singer/Soprano', #sings with or without instrumental accompaniment.
+        'Skald', #composes and recites poems honoring heroes and their deeds.
         'Skirmisher', 
-        'Slave Trader', 
+        'Slave Driver', #oversees and urges on slaves at work.
+        'Slave Trader', #A merchant who specializes in the buying/trading of enslaved people
         'Slave', 
         'Slaver', 
-        'Smuggler', 
-        'Soldier', 
+        'Smuggler', #manages the import or export of goods secretly, in violation of the law, especially without payment of legal duty.
+        'Soaper', #makes soap from accumulated mutton fat, wood ash, and natural soda. 
+        'Soldier/Man-at-Arms', #serves in an army. 
         'Sonneteer', 
         'Soothsayer', 
         'Sophist', 
         'Soul-saver', 
-        'Speaker', 
+        'Speaker',
+        'Special Force Soldier', #carries out special operations.
+        'Speculator', #invests in stocks, property, or other ventures in the hope of making a profit. 
         'Spellbinder', 
         'Spellslinger', 
         'Spellweaver', 
         'Spice Merchant',
-        'Spirit-raiser', 
-        'Squire', 
-        'Standard-bearer', 
-        'Stonemason', 
-        'Summoner', 
+        'Spirit-raiser',
+        'Spy', #secretly collects and reports information on the activities, movements, and plans of an enemy or competitor.
+        'Spymaster', #directs a network of subordinate espionage agents for a state, kingdom, or empire. 
+        'Squire', #acts as an attendant to a knight before attempting to become a knight themselves.
+        'Standard-bearer',
+        'Stablehand', #works in a stable.
+        'Stage Magician', #deceives their audience with seemingly impossible feats while using only natural means.
+        'Stagehand', #moves scenery or props before or during the performance of a theatrical production.
+        'Steward', #supervises both the estate and household of his lord or lady while they are away.
+        'Street Cleaner', #cleans streets and alleyways after dark. 
+        'Stonemason', #cuts and prepares stone for use in construction.
+        'Stuntman/Stuntwoman', #performs dangerous stunts for their audience.
+        'Summoner', #a mage able to summon forth magical beasts, creatures, and monsters. 
         'Swindler', 
         'Swordsman', 
-        'Tank', 
-        'Tavern Owner', 
-        'Tax Collector', 
-        'Tea House Owner', 
+        'Tactician', #uses a carefully planned military strategy to achieve a specific end.
+        'Talent Scout', #searches for talented individuals who can be employed or promoted.
+        'Tanner', #treats the skins and hides of animals to produce leather.
+        'Tattooist', #illustrates the skin with indelible patterns, pictures, legends, etc.
+        'Tax Collector', #collects unpaid taxes from people, guilds, or businesses.
+        'Taxidermist', #prepares, stuffs, and mounts the skins of animals. 
+        'Tea House Owner', #Someone who owns a Tea House business
+        'Templar', #fights in a religious military order. 
         'Telepath', 
         'Templar', 
         'Teratologist', 
-        'Thaumaturgist', 
+        'Thaumaturgist',
+        'Theater Director', #supervises and orchestrates the mounting of a theatre production by unifying various endeavors and aspects of production. 
         'Theist', 
         'Theurgist', 
-        'Thief', 
-        'Thought Master', 
-        'Thug', 
-        'Titan', 
+        'Thief', #steals people’s property, especially by stealth and without using force or violence. 
+        'Thought Master',
+        'Thresher', #separates grain from the plants by beating. 
+        'Thug',
+        'Thriftdealer', #deals in secondhand items.
+        'Tinker', #travels from place to place mending utensils. 
+        'Titan',
+        'Tollkeeper', #collects tolls at a bridge, road etc. where a charge is made. 
         'Tomb robber', 
-        'Trader', 
+        'Torturer', #inflicts severe pain on someone as a punishment or in order to force them to do or say something.
+        'Town Crier', #makes public announcements in the streets or marketplace.
+        'Toymaker', #makes and repairs toys.
+        'Tradesman', #deals exclusively in bartering. 
+        'Trainer', #trains someone in a particular skill, usually physical, for money.
         'Transformer', 
+        'Translator', #translates between languages.
         'Transmogrifier', 
-        'Trapper', 
+        'Transmuter', #alters matter in form, appearance, or nature.
+        'Trapper', #traps wild animals, especially for their fur.
         'Trapsmith', 
         'Treasure hunter', 
         'Trickster', 
         'Trooper', 
         'Troubadour', 
-        'Truth-teller', 
-        'Turnip Farmer', 
+        'Truth-teller',
+        'Tunner', #fills casks in a brewery or winery. 
+        'Turnip Farmer', #A farmer who specializes in Turnip production 
         'Tyro', 
         'Urchin', 
         'Vagrant', 
         'Vampire-Binder', 
         'Vampire-Keeper', 
-        'Vanquisher', 
+        'Vanquisher',
+        'Vendor', #deals items in the street. 
         'Vicar', 
         'Victor', 
         'Vigilant', 
         'Viking', 
         'Villain', 
-        'Vindicator', 
+        'Vindicator',
+        'Vintner', #engages in winemaking, especially with monitoring and harvesting the grapes. 
+        'Viscount/Viscountess', #a nobleperson ranking above a baron and below a count.
         'Visionist', 
         'Vowmaker', 
         'Waghalter', 
         'Wainwright', 
         'Wanderer', 
-        'Warden'
+        'Ward', #a member of a noble house who has been taken in by another noble family to be raised for a time.
+        'Warden' #responsible for the supervision of a particular place or thing or for ensuring that regulations associated with it are obeyed.
         'Warlord', 
+        'Warmage', #a soldier skilled in destructive battle magic.
         'Warmonger',
-        'Watch leader',    
-        'Weaver', 
-        'Wheat Farmer', 
+        'Watch leader', 
+        'Watchmaker', #makes and repairs watches and clocks.
+        'Water Bearer', #brings water from rivers, wells, and lakes back to their settlement.
+        'Weaponsmith', #specializes in making and repairing weapons.   
+        'Weaver', #makes fabric by weaving fiber together.
+        'Wet Nurse', #a woman employed to suckle another woman’s child.
+        'Wheat Farmer', #A farmer specialized in growing wheat
+        'Wheelwright', #makes and repairs wooden wheels.
+        'Whittler/Woodcarver', #fashions wood into various shapes.
         'Whore',
         'Wildling', 
         'Witness', 
         'Wizard\'s apprentice', 
         'Wonder worker', 
         'Woodcutter'
-        'Wordsmith'
-        'Wrestler', 
-        'Zealot')
+        'Wordsmith' #draws their power from language and casts by dictation.
+        'Wrestler', #performs in matches involving grappling and grappling-type techniques.
+        'Writer', #commits his or her thoughts, ideas, etc., into written language. 
+        'Zealot',
+        'Zookeeper') #maintains and cares for animals or monsters in a zoo.
         self.ids.occupation_label.text = " ".join(['Occupation: ', (str(random.choice(Occupation)))]) #Picks a random occupation 
    
         Char_Title = (
@@ -1329,6 +1587,8 @@ class NPC_Generator(BoxLayout):
         self.ids.Unique_Trait.text = ''
         self.ids.Age.text = ''
         self.ids.Family.text = ''
+        App.get_running_app().root.ids.Dragons.text = ''
+        App.get_running_app().root.ids.DragonImage.source = ''
 
 
 class NameGenOriginal():
@@ -1448,16 +1708,103 @@ class MonsterGenerator(GridLayout):
         # Dismiss causes the popup to go away. Release generates the call to the monster generator specified
         DragonButton.bind(on_press=popup.dismiss)
         DragonButton.bind(on_release = self.Dragon_kind_gen)
-#        DragonButton.bind(on_release = self.Dragon_kind_gen) 
         HumanoidButton.bind(on_press=popup.dismiss)
         HumanoidButton.bind(on_press = self.Humanoid_gen)
         
 #Dragon-kind Monster Generation
     def Dragon_kind_gen(self, *args): 
-#        LOUCHE = ('LOCALITY: Something specifically related to the current environment happens.\nThe buildings now on fire. The ground collapses. It\'s flooding. Moonquake!' , 'OFFER: Offer a bargain, an extra, or a perk for a cost.\noffer a better position, with risk. Offer a temptation.', 'UNEXPECTED DANGER: Make something up or roll it up at random.\nTie it in if you want now or worry about how it fits in later', 'CALLBACK: Use something that they\'ve given you. A backstory element.\nAn off-handed comment. Gear. A character sheet aspect', 'HARM: Deal damage', 'END SOMETHING: End an ongoing effect, bonus, or fictional advantage. Take a \nresource away, something you possess, whether it\'s a piece of gear, \nan ability, or an ally')
-
-        Dragons = ('Copper Dragon Wyrmling', 'Copper Dragon Wyrmling')        
+        Dragons = ('Adult White Dragon', 'Adult White Dragon')        
         App.get_running_app().root.ids.Dragons.text = " ".join(['Monster:',(str(random.choice(Dragons)))])
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult White Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Adult White Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (700, 520)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Black Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Black Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (770, 450)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Blue Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Blue Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (500, 250)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Brass Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Brass Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (760, 450)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Bronze Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Bronze Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (720, 350)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Copper Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Copper Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (850, 525)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Gold Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Gold Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (670, 325)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Green Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Green Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (740, 330)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Red Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Red Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (650, 500)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Silver Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient Silver Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (750, 350)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient White Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Ancient White Dragon.png'
+            App.get_running_app().root.ids.DragonImage.pos = (500, 250)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Black Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Black Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (630, 250)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Blue Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Blue Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (700, 350)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Brass Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Brass Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (700, 400)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Bronze Dragon Wyrmling':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Bronze Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (850, 600)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Copper Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
             App.get_running_app().root.ids.DragonImage.source = 'Copper Dragon Wyrmling.jpg'
