@@ -1713,8 +1713,32 @@ class MonsterGenerator(GridLayout):
         
 #Dragon-kind Monster Generation
     def Dragon_kind_gen(self, *args): 
-        Dragons = ('Adult White Dragon', 'Adult White Dragon')        
+        Dragons = ('Adult Gold Dragon', 'Adult Gold Dragon')        
         App.get_running_app().root.ids.Dragons.text = " ".join(['Monster:',(str(random.choice(Dragons)))])
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Gold Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Adult Gold Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (630, 380)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Green Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Adult Green Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (680, 480)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Red Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Adult Red Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (680, 480)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Silver Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Adult Silver Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (870, 580)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult White Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
             App.get_running_app().root.ids.DragonImage.source = 'Adult White Dragon.jpg'
