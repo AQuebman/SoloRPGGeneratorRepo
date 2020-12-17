@@ -31,6 +31,8 @@ from kivy.uix.popup import Popup
 #Imports the kivy layout of Grid
 from kivy.uix.gridlayout import GridLayout 
 
+from kivy.uix.spinner import Spinner
+
         
 class Louche():
 #Generates random LOUCHE choice for 7-9 rolls in Dungeon World  
@@ -45,7 +47,7 @@ class NPC_Generator(BoxLayout):
         First_Name = []
         Last_Name = []
 #Opens the csv file that contains the random names
-        with open(r'C:\Users\Aaron\Desktop\Names_List.csv') as f:
+        with open(r'Names_List.csv') as f:
             reader = csv.reader(f, skipinitialspace=True)         
             for col in reader: 
                 #This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
@@ -67,7 +69,7 @@ class NPC_Generator(BoxLayout):
     def Male_name_gen(self, *args):
         First_Name = []
         Last_Name = []
-        with open(r'C:\Users\Aaron\Desktop\Names_List.csv') as f:
+        with open(r'Names_List.csv') as f:
             reader = csv.reader(f, skipinitialspace=True)         
             for col in reader: 
                 ##This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
@@ -181,9 +183,9 @@ class NPC_Generator(BoxLayout):
         'Acrobat', #performs spectacular gymnastic feats.
         'Actor', #impersonates characters, typically on stage in a theatrical production.
         'Actuary', #compiles and analyzes statistics and uses them to calculate risk. 
-        'Adept',
         'Admiral', #commands a fleet or naval squadron. 
-        'Advocate',
+        'Adventurer', #wanders the world in search of knowledge, treasure, fame, glory or a multitude of additional wants and desires
+        'Advocate', #Advises on all matters of law
         'Aerialist/Trapezist', #performs acrobatics high above the ground on a tightrope or trapeze. 
         'Affeeror', #determines the values of fines and amercements.
         'Agister', #affords pasture to the livestock of others for a price.
@@ -191,705 +193,645 @@ class NPC_Generator(BoxLayout):
         'Alderman', #a civic dignitary in the local council ranked below the mayor.
         'Alienist', #assesses the competence of a defendant in a court of law.
         'Almoner', #distributes money and food to poor people.
-        'Amazon',
         'Animal Collector', #collects and deals in rare and exotic animals and monsters.
-        'Animal Handler', 
-        'Animal Trainer',
+        'Animal Handler', #care for, train, and study animals in such places as zoos, parks, research laboratories, animal breeding facilities, rodeos, and museums
+        'Animal Trainer', #knows how to teach dogs, horses, or even marine animals to display certain behaviors or keep them from exhibiting others
         'Anthropologist', #studies the customs, beliefs, and relationships of humanoids and intellectually and culturally advanced creatures. 
-        'Apostle', 
+        'Apostle', #A religious teacher
         'Apothecarist', #prepares and sells medicines, drugs, and potions. 
-        'Apparitionist',
+        'Apparitionist', #A believer in apparitions
         'Appraiser', #assesses the monetary value of something. 
         'Apprentice', #studies a trade under a skilled employer.
-        'Arborist',
+        'Arborist', #a tree surgeon
         'Archaeologist', #studies humanoid history and prehistory through the excavation of sites and the analysis of artifacts and other physical remains.
-        'Arch-rogue',
+        'Arch-rogue', #An extremely powerful and skilled rogue
         'Archbishop', #responsible for an archdiocese, their surrounding district.
         'Archivist', #maintains and is in charge of archives.
         'Archmage', #an extremely powerful mage. 
-        'Archveult',
         'Architect', #designs buildings or landscapes and in many cases supervises their construction. 
-        'Armigerent', 
         'Armorer', #specializes in making and repairing armor.
         'Arranger', #adapts a musical composition for performance.
-        'Artillerist', 
-        'Artisan', 
-        'Artist', 
-        'Ascetic', 
-        'Aspirant',
+        'Artillerist', #A person who operates artillery 
+        'Artisan', #a worker in a skilled trade, especially one that involves making things by hand
+        'Artist', #a person who produces paintings or drawings as a profession or hobby
+        'Ascetic', #a person who practices severe self-discipline and abstention
+        'Aspirant', #a person who has ambitions to achieve something
         'Assay Master', #oversees the testing of currency. 
         'Assayer', #determiner of the proportions of metal in ore and the amount of copper, silver, gold, or platinum in coins.
         'Astrologer', #uses astrology to tell others about their character or to predict their future.
-        'Astrologist', 
-        'Astrologue', 
+        'Astronomer', #makes observations of celestial and scientific phenomena within the material plane.
         'Athlete', #proficient in sports and other forms of physical exercise.
         'Auctioneer', #conducts auctions by accepting bids and declaring goods sold. 
-        'Augurer', 
+        'Augurer', #a priest and official whose main role is the practice of augury: Interpreting the will of the gods by studying the flight of birds
         'Bagniokeeper', #owner of a bath house or brothel.
         'Bailiff', #looks after prisoners.
         'Baker', #bakes bread and cakes.
-        'Baler', 
-        'Balladeer', 
+        'Balladeer', #a singer or composer of ballads
         'Bandit', #a robber or outlaw belonging to a gang and typically operating in an isolated or lawless area.
         'Banker', #an officer or owner of a bank or group of banks.
         'Barber', #cuts hair and shaves or trims beards.
         'Barkeep', #works and serves drinks in a bar.
         'Barmaid/Barboy', #serves drinks and food in a bar as well as engaging with customers.
         'Baron/Baroness', #a member of the lowest order of the British nobility.
-        'Barrister', 
-        'Battler', 
-        'Beadle',  
-        'Beekeeper', 
-        'Beggar', 
-        'Beguiler', 
-        'Berserker', 
-        'Bilker',
+        'Barrister', # lawyer entitled to practice as an advocate
+        'Battler', #a person who battles or fights
+        'Beadle', #ceremonial officer of a church, college, or similar institution  
+        'Beekeeper', #a person who owns and breeds bees, especially for their honey
+        'Beggar/Pauper', #lives by asking for money or food. 
+        'Beguiler', #someone who leads you to believe something that is not true
+        'Berserker', #A warrior who fights in a wild frenzy
+        'Bilker', #A cheat, especially one who evades payment
         'Billboardposter', #a person who puts up notices, signs and advertisements. 
         'Bishop', #a senior member of the clergy, usually in charge of a diocese and empowered to confer holy orders.
-        'Blackcoat',
-        'Blackmailer', 
+        'Blackmailer', #a person who demands money or another benefit from someone in return for not revealing compromising or damaging information about them
         'Blacksmith', #forges and repairs things in metal, including weapons, armor, utensils, etc.
         'Bladesmith', #specializes in making and repairing bladed weapons, especially swords and daggers. 
-        'Bludgeoner', 
-        'Body snatcher', 
+        'Blood Hunter/Monster Hunter', #takes on jobs to hunt down and kill or capture dangerous creatures.
+        'Bloodletter', #surgically removes some of a patient’s blood for therapeutic purposes.
+        'Bludgeoner', #an assailant who uses a bludgeon. aggressor, assailant, assaulter, attacker 
+        'Boatman', #mans a small seacraft
+        'Body snatcher', #a person who steals corpses from a graveyard for dissection or other purposes
         'Bodyguard', #escorts and protects another person, especially a dignitary.
-        'Bonder', 
         'Bookbinder', #binds books and wraps scrolls.
         'Bookkeeper', #keeps records of financial affairs.
-        'Bookseller', 
+        'Bookseller', #responsible for selling books, magazines, and related items to customers
         'Bottler', #bottles drinks and other liquids.
+        'Botanist', #an expert in or student of the scientific study of plants.
+        'Bosun', #in charge of organizing the equipment and crew of a ship.
         'Bouncer', #prevents troublemakers from entering or to eject them from the premises of an establishment.
-        'Bounty hunter', 
+        'Bounty hunter', #pursues a criminal or fugitive for whom a reward is offered
         'Bowyer', #makes bows and crossbows.
-        'Brave', 
-        'Bravo', 
-        'Brawler',
-        'Breeder',
+        'Brawler', #a person who engages in rough or noisy fights or quarrels
+        'Breeder', #a person who breeds livestock, racehorses, other animals, or plants
         'Brewer', #brews ale.
         'Brickmaker', #crafts bricks from clay, stone, or other materials.
         'Brickmason', #builds with mineral products such as stones, bricks, cinder blocks, or tiles, usually with the use of mortar as a bonding agent. 
-        'Brigand',
+        'Brigand', #a member of a gang that ambushes and robs people in forests and mountains
         'Broom Maker', #makes brooms and brushes. 
-        'Brother', 
-        'Bruiser', 
-        'Brute', 
-        'Bully', 
+        'Bruiser', #a professional boxer or brawler
+        'Bully', #a person who habitually seeks to harm or intimidate those whom they perceive as vulnerable
         'Burglar', #illegally enters buildings and steals things.
-        'Bushwhacker',
+        'Bushwhacker', #a guerrilla fighter
         'Business Owner', #owns a business entity in an attempt to profit from its successful operations.
         'Busker/Street Musician', #performs in a public place, often for money. 
         'Butcher', #cuts up and sells meat.
         'Butler', #the chief servant of a household.
-        'Cabalist', 
-        'Cadet', 
-        'Caller', 
-        'Campaigner',
+        'Cabbie/Wagoner', #drives a horse-drawn wagon.
+        'Cabin Boy/Cabin Girl', #waits on the orders of a ship’s officers and passengers.
+        'Cadet', #a young trainee in the armed services or police force
+        'Campaigner', #a person who actively promotes the goals of a cause
         'Candlemaker', #makes candles and wax from honey and tallow. 
         'Cantor', #sings liturgical music and leads prayer in a synagogue.
-        'Capo', 
-        'Capricious', 
+        'Capo', #Captain or leadership in a criminal organization
         'Captain', #an army officer of high rank in charge of commanding squadrons of soldiers.
-        'Caravan Guard', 
-        'Card shark', 
+        'Caravan Guard', #A guard who protects a caravan
+        'Caravaneer', #travels or lives in a caravan.
+        'Card shark', #a person who cheats at cards in order to win money
         'Cardinal', #a leading dignitary of a church, nominated by the highest official.
         'Caregiver', #looks after a sick, elderly, or disabled person.
         'Carpenter', #makes and repairs wooden objects and structures.
+        'Carter', #transports goods by cart.
+        'Cartographer', #a scholar and illustrator of maps.
         'Cartwright', #makes and repairs carts and wagons. 
         'Castellan', #the governor of a castle.
         'Cavalryman/Cavalier', #a skilled horseback rider.
         'Celebrity', #a famous person.
-        'Celibate', 
-        'Chamberlain', 
-        'Champion', 
+        'Chamberlain', #n officer who manages the household of a monarch or noble
+        'Champion', #a person who has defeated or surpassed all rivals in a competition
         'Chancellor', #a senior state or legal official.
         'Chandler', #deals in provisions and supplies.
         'Chaplain', #a member of the clergy attached to a private chapel, institution, ship, branch of the armed forces, etc.
         'Charcoal Maker', #manufactures charcoal by carbonizing wood in a kiln.
-        'Charger', 
-        'Charlatan',
-        'Charity Worker',
+        'Charlatan', #a person falsely claiming to have a special knowledge or skill; a fraud
+        'Charioteer', #drives a chariot.
+        'Charity Worker', # Someone who works for charitable organizations, distributing aid, or evaluating the need for aid
         'Charlatan/Conman', #tricks people by gaining their trust and persuading them to believe something that is not true in order to benefit from the encounter.
-        'Charmer',
         'Chatelaine/Majordomo', #a person in charge of a large household. 
-        'Cheat', 
-        'Cheesemaker',
-        'Chef', #a professional cook trained in the culinary arts. 
-        'Chest-maker', 
-        'Chevalier', 
+        'Cheat', #a person who behaves dishonestly in order to gain an advantage
+        'Cheesemaker', #a person who makes cheese
+        'Chef', #a professional cook trained in the culinary arts.
+        'Chemist', #engaged in chemical research or experiments. 
+        'Chest-maker', #A person who makes chests
+        'Chevalier', #A chivalrous Knight
         'Chieftain', #leads or rules a people or clan.
         'Chimney Sweeper', #a small person, typically a child, who ascends chimneys to clean them.
         'Choirmaster', #trains a choir and orchestrates their singing when they perform. 
-        'Chronicler', 
+        'Chronicler', #a person who writes accounts of important or historical events
         'City Watch', #an officer of law enforcement who resides in larger towns or cities.
-        'Clairvoyant',
+        'Clairvoyant', #a person who claims to have a supernatural ability to perceive events in the future or beyond normal sensory contact
         'Clerk', #undertakes routine administrative duties in a business or bank. 
-        'Clockworker',
+        'Clockworker', #A person who specializes in creation and repair of clocks and clock like devices
         'Clown', #comic entertainer who wears a traditional costume and exaggerated makeup. 
         'Cobbler', #makes and repairs footwear.
         'Cockfighter/Gamefighter', #engages in arena matches in which animals or monsters are pitted against one another, typically to the death.
         'Collector', #collects things of a specified type, professionally or as a hobby.
-        'Colossus',
         'Comedian', #entertainer whose act is designed to make an audience laugh. 
         'Commissar', #teaches principles and policies to military units.
-        'Con man', 
-        'Conclavist',
+        'Con man', #a person who tricks other people in order to get their money
+        'Conclavist', #Personal aide to the priesthood
         'Conductor', #directs the performance of an orchestra. 
         'Confessor', #hears confessions and gives absolution and spiritual counsel.
-        'Confidence artist', 
-        'Conjurer',
+        'Confidence artist', #a person adept at swindling by means of confidence games
         'Constable', #an officer with limited policing authority, typically in a small town.
         'Cook', #prepares food for eating.
         'Cooper/Hooper', #makes and repairs casks and barrels. 
-        'Conqueror',
+        'Conqueror', #a person who conquers a place or people
         'Conservationist', #advocates for the protection and preservation of the environment and wildlife.
         'Construction Worker', #a laborer in the physical construction of a built environment and its infrastructure. 
         'Contortionist', #twists and bends their body into strange and unnatural positions.
-        'Controller', 
-        'Convert', 
-        'Cooper',
+        'Cooper', #a maker or repairer of casks and barrels
         'Copyist', #makes copies of handwritten documents or music. 
-        'Corn Farmer', 
-        'Costermonger',
+        'Corn Farmer', #A farmer who specializes in the production of Corn
+        'Costermonger', #a person who sells goods, especially fruit and vegetables, from a handcart in the street
         'Costumer', #makes theatrical costumes.
         'Count/Earl/Countess', #a nobleperson ranking above a viscount and below a marquess.
         'Courier', #transports packages and documents. 
         'Courtier', #attends court as a companion or adviser to the king or queen.
-        'Cove',
-        'Cowherd', 
-        'Cozener', 
-        'Cracksman', 
-        'Cretin',
+        'Cowherd', #a person who tends grazing cattle
+        'Cozener', #An imposter, a swindler
+        'Cracksman', #a thief who breaks open safes to steal valuable contents
         'Crime Boss', #controls and supervises a criminal organization. 
-        'Crony', 
+        'Crossing Sweeper', #sweeps a path ahead of people crossing dirty urban streets in exchange for a gratuity 
         'Croupier', #runs a gaming table by gathering in and paying out money or tokens.
-        'Cryomancer', 
+        'Cryomancer', #A user of magic who focuses on cold related spells and spell like effects
         'Cult Leader', #the organizational leader of a cult who is occasionally also the founder.
         'Cultist', #a member of a cult who generally lives outside of conventional society and worships an unorthodox patron.
         'Curator', #keeper and custodian of a museum or other collections of precious items.
-        'Curse-giver', 
+        'Curse-giver', #Either via natural or magical means someone who specializes in cursing others usually for a fee or a group for which they belong 
         'Cutler', #makes cutlery.
         'Cutpurse', #a pickpocket or thief.
-        'Cutthroat', 
-        'Cyclops-Binder', 
-        'Cyclops-Keeper',
-        'Dairyboy/Dairymaid', 
+        'Cutthroat', #a murderer or other violent criminal
+        'Cyclops-Binder', #A spellcaster who specializes in binding Cyclops to it's will
+        'Cyclops-Keeper', #A person who specializes in trapping Cyclops and keeping them for personal use
+        'Dairyboy/Dairymaid', #A person employed at a dairy
         'Dancer', #moves their body rhythmically with or without musical accompaniment.
-        'Dangerous', 
-        'Darksider', 
-        'Day Laborer', 
+        'Day Laborer', #A person employed on day to day jobs normally working during daylight hours
         'Deacon', #an ordained minister of an order ranking below that of priest.
-        'Dean',
+        'Dean', #the head of a college or university.
         'Debt Collector', #recovers money owed on delinquent accounts. 
-        'Defender', 
-        'Defiler', 
-        'Deist', 
-        'Demon-Binder', 
-        'Demon-Keeper',
+        'Defender', #a person who defends someone or something
+        'Defiler', #a person or organization that causes pollution of the environment
+        'Demon-Binder', #A spellcaster who specializes in binding Demons to it's will
+        'Demon-Keeper', #A person who specializes in trapping Demons and keeping them for personal use
+        'Deserter', #a member of the armed forces who has deserted
         'Detective/Investigator', #investigates and solves crimes. 
-        'Devil', 
-        'Devil-Binder', 
-        'Devil-Keeper', 
-        'Diabolist', 
-        'Dice rattler',
+        'Devil-Binder', #A spellcaster who specializes in binding Devils to it's will
+        'Devil-Keeper', #A person who specializes in trapping Devils and keeping them for personal use
+        'Diabolist', #someone who worships devils
         'Diplomat', #an official representing a country abroad.
-        'Disciple', 
-        'Ditch Digger', 
+        'Disgraced Noble', #a person of high birth who has since loss their respect, honor, or esteem in some or all noble circles
+        'Disciple', #a follower or student of a teacher, leader, or philosopher
+        'Ditch Digger', #A person who digs ditches
         'Diviner', #seeks ultimate divination in order to further understand or meet godly substance.
-        'Dock worker', 
-        'Dragon-Binder', 
-        'Dragon-Keeper',
+        'Dock worker', #A person who works on the docks usually on fishing boats and boats incoming/outgoing from port
+        'Doctor/Physician', #a qualified practitioner of medicine.
+        'Dragon-Binder', #A spellcaster who specializes in binding Dragons to it's will
+        'Dragon-Keeper', #A person who specializes in trapping Dragons and keeping them for personal use
+        'Drakologist', #studies or is an expert in the branch of zoology concerned with dragons.
         'Draper', #an alcohol merchant. 
-        'Dreamer', 
         'Drug Dealer', #dealer of illegal substances.
         'Drug Lord', #controls a network of persons involved in the illegal drugs trade and transactions.
         'Drummer/Fifer', #a non-combatant foot soldier who sounds signals for changes in formation in combat.
+        'Drunkard', #a person who is habitually drunk and considers themselves a professional in the task
         'Duelist', #skilled in one-on-one combat.
         'Duke/Duchess', #rules over a duchy and is of the highest rank below the monarch.
+        'Dungeon Delver', #navigates underground labyrinths in search of any treasure they may find.
         'Dyer', #dyes cloth and other materials. 
-        'Ecclesiast', 
-        'Elder', 
+        'Ecclesiast', #Someone who adminsters a church or other religious gathering/group
+        'Elder', #a person of a greater age, especially one with a respected position in society.
         'Elementalist', #manipulates nature’s elements to their will.
-        'Embezzler',
+        'Embezzler', #someone who secretly takes money that is in their care or that belongs to an organization or business they work for
         'Embroiderer', #ornaments with needlework. 
         'Emperor/Empress', #the supreme sovereign ruler of an extensive group of states or countries under a single authority.
         'Enchanter', #uses sorcery to put someone or something under a spell.
-        'Encylopaedist',
+        'Encylopaedist', #a person who writes, edits, or contributes to an encyclopedia
         'Engraver', #incises a design onto a hard surface by cutting grooves into it. 
-        'Ensorceller', 
-        'Ensqualmer', 
+        'Engineer', #designer of a machine or structure.
+        'Entomologist', #studies or is an expert in the branch of zoology concerned with insects.
         'Entrepreneur', #organizes and operates a business or businesses, taking on greater than normal financial risks in order to do so.
-        'Epicure',
+        'Epicure', #a person who takes particular pleasure in fine food and drink
         'Equilibrist', #performs balancing feats. 
-        'Eternal', 
-        'Evangelist', 
-        'Evil eye', 
+        'Evangelist', #A person who seeks to convert others to their faith especially by public preaching
         'Evoker', #manipulates energy or taps into an unseen source of power in order to produce a desired kinetic end.
-        'Ex-Adventurer',
-        'Ex-Noble', 
+        'Ex-Adventurer', #Someone who has retired from traveling the world for adventure and treasure
+        'Ex-Criminal', #a person who has been convicted of a crime and has since served their sentence, or who has preemptively given up their life of crime
+        'Ex-Noble', #Someone who used to be part of the noble class either stepping down or stripped of their title
         'Executioner', #carries out a sentence of death on a legally condemned person.
-        'Exemplar', 
+        'Exemplar', #a person or thing serving as a typical example or excellent model
+        'Exile', #lives away from their native country, either from choice or compulsion 
         'Exorcist', #expels or attempts to expel evil spirits from a person or place.
-        'Explorer',
+        'Explorer', #explores unfamiliar areas in search of geographical or scientific information
         'Exterminator', #exterminates unwanted rodents and insects.
         'Extortioner', #extorts money from someone by threatening to expose embarrassing information about them. 
-        'Factotum',
-        'Faithful', 
-        'Falconer',
-        'Farmer',
+        'Falconer', #someone who practises the sport of pursuing live prey with a raptor, such as a hawk, falcon or eagle
+        'Farmer', #a person who owns or manages a farm
         'Farrier', #trims and shoes horses’ hooves. 
         'Fashion Designer', #applies design, aesthetics and natural beauty to garments and their accessories.
-        'Father', 
         'Fence', #deals in stolen goods.
-        'Fencer', 
-        'Filcher',
+        'Fencer', #a person who practices the art of fencing with a sword, foil, etc.
+        'Ferryman', #operates a ferry. 
+        'Filcher', #A thief
         'Firefighter', #extinguishes fires.
-        'Fisher',
+        'First Mate', #the deck officer second in command to the master of a ship.
+        'Fisher', #Someone who hunts in rivers, seas, and oceans and sells their catch for a living
         'Fletcher', #makes and repairs arrows.
-        'Florist', 
+        'Florist', #someone who arranges flowers and other plant elements into a pleasing design
         'Food & Drink Taster', #ingests food that was prepared for someone else to confirm it is safe to eat.
-        'Footman', 
-        'Footpad',
-        'Forager', 
-        'Forester', 
+        'Folk Hero', #a celebrity who is greatly admired by many people of a particular kind or in a particular place
+        'Footman', #a liveried servant whose duties include admitting visitors and waiting at table
+        'Footpad', #a highwayman operating on foot rather than riding a horse
+        'Forager', #a person or animal that searches widely for food or provisions
+        'Forester', #a person in charge of a forest or skilled in planting, managing, or caring for trees
         'Forger', #produces fraudulent copies or imitations.
-        'Fortune Teller', 
-        'Fortunist',
-        'Fowler', 
-        'Freelancer', 
-        'Friar', 
+        'Fortune Teller', #a person who is supposedly able to predict a person's future by palmistry, using a crystal ball, or similar methods
+        'Fowler', #a person who hunts wildfowl
+        'Freelancer', #a person who works freelance
+        'Friar', #a member of any of certain religious orders of men
         'Fugitive', #a person who has escaped from a place or is in hiding, especially to avoid arrest or persecution.
-        'Fulgurator',
         'Furniture Artisan', #makes and repairs furniture.
         'Furrier', #prepares furs for adornment. 
-        'Gallant', 
-        'Gambler',
+        'Gambler', #bets money on sports, card games, or games of chance in the hope of a profit.
         'Gamekeeper' #breeds and protects game, typically for a large estate
         'Gammoner', # A thief's accomplice who distracts the victim while the thief steals.
         'Gardener/Landscaper', #tends and cultivates a garden.
         'General', #the chief commander of an army.
         'General Contractor', #supervises a construction site, manages its vendors and trades, and communicates information to all involved parties. 
-        'Gentleman', 
-        'Giant', 
-        'Giant-Binder', 
-        'Giant-Keeper', 
+        'Giant-Binder', #A spellcaster who specializes in binding Giants to it's will
+        'Giant-Keeper', #A person who specializes in trapping Giants and keeping them for personal use
         'Gladiator', # fights against other people, wild animals, or monsters in an arena.
         'Glassworker', # blows glass planes and items.
         'Glasspainter', #produces colorful designs on or in glass.
         'Glazier', #fits glass into windows and doors. 
         'Glovemaker', #makes and repairs gloves.
-        'Godfather', 
+        'Godfather', #a man who is influential or pioneering in a movement or organization
         'Goldsmith/Silversmith', #a smith who specializes in precious metals.
         'Gong Farmer', #digs out and removes excrement from privies and cesspits.
         'Government Official',
-        'Governor', 
-        'Gravedigger', #digs graves for the purposes of a funeral ceremony.
-        'Grave Tender', 
-        'Grenadier',
+        'Governor', #the head of a public institution
+        'Gravedigger', #digs graves for the purposes of a funeral ceremony.    
+        'Grave Tender', #Tends to the upkeep of graves and mausoleums in a cemetary
+        'Grenadier', #A soldier specialized in working with explosive devices
         'Grocer', #a food merchant.
         'Groom', #cleans and brushes the coats horses, dogs, or other animals.
         'Groundskeeper', #maintains an athletic field, a park, or the grounds of a graveyard or other institution.\
         'Guard/Sentinel', #a person who keeps watch, especially a soldier or other person formally assigned to protect a person or to control access to a place. 
-        'Guardian', 
-        'Guerilla', 
-        'Guild Beggar', 
+        'Guardian', #a defender, protector, or keeper
+        'Guerilla', #a member of a small independent group taking part in irregular fighting, typically against larger regular forces
+        'Guild Beggar', #Someone who hangs outside of guildhalls begging for money
         'Guildmaster', #leads an economically independent producer (a “guild,” an association of craftsmen or merchants that often holds considerable bureaucratic power).
-        'Guildsman', 
-        'Gypsy', 
-        'Haberdasher', 
-        'Harbinger', 
-        'Haruspex',
+        'Guildsman', #a member of a guild
+        'Gypsy', #a nomadic or free-spirited person
+        'Haberdasher', #a dealer in men's clothing
+        'Haruspex', #a religious official who interpreted omens by inspecting the entrails of sacrificial animals.
         'Hatter/Milliner', #makes and repairs headwear. 
-        'Headman', 
+        'Headman', #the chief or leader of a community or tribe.
         'Healer', #able to cure a disease or injury using magic.
         'Hearth Witch/Hearth Wizard', #incorporates spells and enchantments in cooking.
-        'Heathen-slayer', 
-        'Hedge creeper', 
+        'Heathen-slayer', #Someone who belongs to a church and specializes in destroying those who stand for the opposite of what the religion stands for
+        'Hedge creeper', #a common or cheap prostitute, one who would lay on her back in the open air 
+        'Helmsman', #steers a ship or boat
         'Herald', #a messenger who carries important news.
-        'Herbalist', 
+        'Herbalist', #practices healing by the use of herbs.
         'Herder', #supervises a herd of livestock or makes a living from keeping livestock, especially in open country.
-        'Hierophant',
+        'Heretic', #differs in opinion from established religious dogma
+        'Hermit', #lives in solitude, typically as a religious or spiritual discipline
+        'Hierophant', #A person who interprets sacred mysteries or esoteric principles
         'High Priest/Pope', #the chief priest of a religion.
         'Highwayman', #robs travelers on a road.
-        'Hit man', 
-        'Horologist', 
-        'Horseman',
-        'Horse Trainer', #tends to horses and teaches them different disciplines. 
+        'Historian', #an expert in or student of history, especially that of a particular period, geographical region, or social phenomenon.
+        'Hit man', #a person who is paid to kill someone, especially for a criminal or political organization
+        'Horologist', #a scholar of time and entropy. 
+        'Horse Trainer', #tends to horses and teaches them different disciplines.
+        'Housewife/Househusband', #cares for his or her family by managing household affairs and completing housework 
         'Hunter', #hunts game or other wild animals.
-        'Huntsman', 
-        'Hydra-Binder', 
-        'Hydra-Keeper', 
-        'Hypnotist',
+        'Hydra-Binder', #A spellcaster who specializes in binding Hydra to it's will
+        'Hydra-Keeper', #A person who specializes in trapping Hydra and keeping them for personal use
+        'Hypnotist', #a person who carries out hypnosis, either for medical reasons or for entertainment
         'Illuminator', #paints and calligraphs to adorn or enlighten scrolls and manuscripts. 
         'Illusionist', #performs tricks and spells that deceive the senses.
-        'Imam', 
-        'Immolator', 
-        'Impaler', 
-        'Indentured servant', 
-        'Infinitist', 
-        'Informer', 
-        'Initiate', 
+        'Imam', #the person who leads prayers in a mosque
+        'Indentured servant', #Someone who took out a loan and works as a servant to whomever they owe until the debt has been paid 
+        'Initiate', #A person who is instructed or adept in some special field
         'Innkeeper', #owns and runs an inn.
         'Inquisitor', #seeks to eliminate heresy and other things contrary to the doctrine or teachings of their faith.
-        'Insidiator',
         'Inspection Officer', #responsible for the inspection of military units to ensure they meet appropriate standards of training and efficiency.
         'Instrument Maker', #makes and repairs musical instruments.
         'Intelligence Officer', #collects, compiles and organizes information about the enemy.
         'Interpreter', #interprets language and its meaning, especially within ancient manuscripts.
-        'Investigator',
+        'Investigator', #a person who carries out a formal inquiry or investigation
         'Jailer', #supervises a jail and the prisoners in it.
-        'Janissary', 
+        'Janissary', #a devoted follower or supporter
         'Jester', #professional joker or “fool” at court, typically wearing a cap with bells on it and carrying a mock scepter.
         'Jeweler', #designs, makes, and repairs necklaces, bracelets, watches, etc., often containing jewels.
-        'Jongleur', 
-        'Journeyman', 
-        'Jouster', 
+        'Jongleur', #an itinerant minstrel
+        'Journeyman', #a trained worker who is employed by someone else
+        'Jouster', #A knight who specializes in lance and horse combat
         'Judge', #decides cases in a court of law.
         'Juggler', #keeps several objects in motion in the air at the same time by alternately tossing and catching them. 
-        'Junkman', 
-        'Justicar', 
-        'Keeper', 
-        'Khan',
+        'Junkman', #a person who buys, trades, or collects disparate items (scrap and usable/repairable things) considered of little or no value to their owners
+        'Justicar', #A representative and enforcer of the king or ruler's justice
+        'Keeper', #An attendant, a guard, a warden,or gamekeeper
+        'Khan', #A warrior politician
         'Kidnapper', #abducts people and holds them captive, typically to obtain a ransom. 
-        'Killer', 
+        'Killer', #Someone who murders either for money or fun
         'King/Queen', #the ruler of an independent state and its people.
         'Kitchen Drudge', #performs menial work in a kitchen.
         'Knacker', #disposes of dead or unwanted animals.
-        'Knave', 
+        'Knave', #a dishonest or unscrupulous man
         'Knight', #serves his or her sovereign after being bestowed a rank of royal honor.
-        'Labor Boss', 
         'Lady-in-Waiting', #attends a queen, princess, or other high-ranking feminine nobleperson.
-        'Lama', 
+        'Lama', #A spiritual leader
         'Lamplighter', #lights street or road lights at dusk.
-        'Lancer',
+        'Lancer', #A cavalryman who fights with a lance
         'Land Surveyor', #establishes maps and boundaries for ownership or other purposes required by government or civil law.
         'Lapidary', #turns stone, minerals, or gemstones into decorative items such as cabochons, engraved gems, and faceted designs.
         'Laundry Worker', #a laborer who takes part in the washing, drying, and ironing of clothes and other fabric items. 
         'Lawyer/Advocate', #practices or studies law, typically an attorney or a counselor.
         'Leatherworker', #makes items from leather such as pouches, scabbards, straps, etc. 
         'Lector', #reads to others while they work for entertainment.
-        'Legionnaire',
-        'Legbreaker', 
-        'Liar', 
-        'Lich', 
+        'Legionnaire', #A member of a military legion
+        'Librarian', #administers or assists in a library.
+        'Lich', #A person usually a wizard who has reached immortality via a difficult ritual that turns them into an undead
         'Lieutenant', #an officer of middle rank in the armed forces.
         'Limner', #paints portraits or miniatures.
         'Linguist', #studies the essence of communication, including the units, nature, structure, and modification of language.
         'Loan Shark', #charges extremely high rates of interest for moneylending, typically under illegal conditions.
         'Locksmith', #makes and repairs locks.
-        'Logician', 
+        'Logician', #An expert in or student of logic
         'Longshoreman', #loads and unloads ships in a port.
-        'Lorist',
+        'Lorist', #A person who studies epic's, a long narrative poem usually related to heroic deeds of a person of an unusually courage and unparalleled bravery
         'Lumberjack', #fells trees, cuts them into logs, and transports them to a sawmill. 
         'Luthier', #makes and repairs stringed instruments.
-        'Lyrist',
-        'Made man', 
+        'Lyrist', #A person who plays the lyre
+        'Made man', #A person who has been officially inducted into a criminal organization
         'Mage', #a magic-user.
-        'Magician', 
-        'Magic-User',
-        'Magistrate',
-        'Magnate', 
-        'Magsman', 
-        'Magus',
+        'Magician', #A person who performs magic tricks for entertainment
+        'Magic-User', #One who has skill with magic
+        'Magistrate', #A civil officer or lay judge who adminsters the law
+        'Magnate', #A wealthy an influential person, especially in business
+        'Magsman', #A con man who tries to deceive members of the public
+        'Magus', #A sorcerer or a member of a priestly caste
         'Maid', #a domestic servant of a household. 
         'Makeup Artist', #applies cosmetics to models, actors, nobles, etc.
-        'Man-at-arms', 
-        'Manslayer', 
-        'Marauder', 
-        'Marine', 
-        'Mariner',
-        'Marketeer',
-        'Marksman/Archer', 
+        'Man-at-arms', #Soldier well versed in the use of arms and served as a fully armoured heavy cavalryman
+        'Manslayer', #A criminal who commits homicide
+        'Marauder', #A person who marauds, a raider
+        'Marine', #Veteran warriors
+        'Mariner', #A Sailor
+        'Marketeer', #A person who sells goods or services in a market
+        'Marksman/Archer', #A person skilled in shooting, especially with a pistol, rifle, or bow
         'Marquess/Marchioness', #a nobleperson ranking above a count and below a duke.
         'Marshall', #has the charge of the cavalry in the household of a monarch.
-        'Marvelous',
         'Master-of-Coin', #supervises the royal treasury, advises the monarch on financial matters, and is responsible for raising money through taxation.
         'Master-of-Horses', #supervises and commands all horses under a jurisdiction.
         'Master-of-Hounds', #maintains a pack of hounds and their associated staff, equipment, and hunting arrangements. 
         'Master-of-the-Revels', #responsible for overseeing royal festivities.
+        'Mathematician', #a scholar of the abstract science of number, quantity, and space.
         'Medic', #a medical practitioner equipped for the battlefield. 
         'Medium', #uses extrasensory perception, magic, or divine powers to identify information hidden from the normal senses. 
-        'Medusa-Binder', 
-        'Medusa-Keeper', 
-        'Mendicant', 
-        'Mentalist', 
+        'Medusa-Binder', #A spellcaster who specializes in binding a Medusa to it's will
+        'Medusa-Keeper', #A person who specializes in trapping Giants and keeping them for personal use
+        'Mendicant', #A beggar
+        'Mentalist', # People who have the talent for mind reading, often used on stage to entertain
         'Mercenary', #a soldier without allegiance who works for money, typically a member of a company or guild.
         'Mercer', #weaves textile fabrics, especially silks, velvets, and other fine materials.
         'Merchant', #sells and trades goods.
         'Messenger', #carries messages between recipients.
         'Meteorologist', #forecasts and manipulates weather.
-        'Mezmerizer', 
         'Miller/baker', #owns or works in a grain mill. 
-        'Mind-reader', 
         'Miner', #works underground in mines in order to obtain minerals such as coal, diamonds, or gold
         'Minister' #assists with the administration of business.
         'Minstrel', #recites lyric or heroic poetry for nobility.
         'Missionary', #goes on a religious mission to promote their faith in a foreign place.
-        'Mistress', 
-        'Mnemonist',
+        'Mnemonist', #Someone able to perform unusual feats of memory
         'Moneychanger', #exchanges one currency for another. 
         'Moneylender', #lends money to others who pay interest.
         'Model', #poses as a subject for an artist, fashion designer, or sculptor.
+        'Mortician', #prepares dead bodies for burial or cremation and makes arrangements for funerals.
         'Monster Collector', #collects and deals in rare and exotic animals and monsters.
         'Monster Handler', #Handles and managers exotic animals and monsters
-        'Mugger', 
-        'Mullah', 
-        'Mummer', 
-        'Muse', 
-        'Mushroom farmer',
+        'Mugger', #A person who attacks and robs another in a public place 
+        'Mummer', #A masked mime
+        'Mushroom farmer', #A farmer who specializes in the growth and harvesting of Mushrooms
         'Musician', #plays a musical instrument. 
-        'Myrmidon', 
-        'Mysteriarch', 
-        'Mystic',
+        'Myrmidon', #A subordinate of a powerful person who carries out orders unquestioningly
+        'Mysteriarch', #One that presides over mysteries
+        'Mystic', #A person who claims to attain insight into mysteries transcending ordinary human knowledge via direct communication with the divine or in a state of spiritual ecstasy
         'Nanny/Nursemaid', #a servant employed to look after a young child or children. 
-        'Navigator', 
-        'Necrope', 
+        'Navigator', #directs the route or course of a ship or other form of transportation, especially by using instruments and maps.
         'Necromancer', #communicates with and conjures the spirits of the dead.
         'Noble/Aristocrat', #a person belonging to a class with high social or political status.
         'Notary', #performs certain legal formalities, especially to draw up or certify contracts, deeds, and other documents for use in other jurisdictions.
         'Nun', #a member of a religious community of women, especially a cloistered one, living under vows of poverty, chastity, and obedience.
-        'Oath-keeper', 
-        'Oath-taker', 
-        'Occultist', 
-        'Omen-bringer',
+        'Nurse', #cares for the sick or infirm, especially in a hospital.
+        'Occultist', #One who studies the action or influence of supernatural or supernormal powers
+        'Omen-bringer', #One who studies and shares stories of great omens within the culture they reside
         'Operator', #a laborer who operates equipment, typically in construction.
         'Optician' #makes and repairs eyeglasses.
+        'Optometrist', #examines the eyes for visual defects and prescribes eyeglasses.
         'Orator/Spokesman', #makes statements on behalf of a group or individual nobleperson. 
-        'Orphan', 
-        'Ostler', 
-        'Outlaw', 
-        'Ovate', 
-        'Padre',
+        'Ostler', #a groom or stableman, who is employed in a stable to take care of horses 
+        'Outlaw', #a person who has broken the law, especially one who remains at large or is a fugitive
+        'Padre', #A chaplain in the armed services
         'Page', #a young attendant to a person of noble rank. 
         'Painter', #paints pictures.
-        'Palmist', 
+        'Palmist', #A palm raider 
         'Pardoner', #raises money for religious works by soliciting offerings and granting indulgences.
-        'Parsnip Farmer', 
-        'Parson',
+        'Parsnip Farmer', #A farmer who specializes in the growth and harvesting of Parsnips
+        'Parson', #Priest of a church not affiliated with a monastic organization
         'Pastry Chef', #makes desserts, especially cakes and pastries.
         'Pathfinder', #scouts ahead and discovers a path or way for others. 
-        'Patriarch', 
-        'Pawnbroker', 
-        'Pedant', 
+        'Pawnbroker', #a person who lends money at interest on the security of an article pawned. 
         'Peddler', #travels from place to place selling assorted items.
-        'Petitioner', 
-        'Phantasmist', 
-        'Philosopher',
-        'Physician',
-        'Pick Pocket',
-        'Pilgrim',
+        'Philosopher', #a scholar of the fundamental nature of knowledge, reality, and existence.
+        'Pick Pocket', # person who steals from people's pockets.
+        'Pilgrim', #journeys to some sacred place as an act of religious devotion, occasionally to settle there
         'Pimp/Madame', #controls prostitutes and arranges clients for them, taking part of their earnings in return. 
-        'Pious',
         'Pirate', #attacks and robs ships at sea.
         'Plantation Owner', #an owner of an estate on which crops are cultivated by resident labor, typically slave labor.
         'Plasterer', #applies plaster to walls, ceilings, or other surfaces.
         'Playwright', #writes plays or musicals.
         'Plumber', #installs and repairs the fittings of water supply and sanitation.
         'Plumer', #hunts birds for their plumes.
-        'Plutocrat',
+        'Plutocrat', #a person whose power derives from their wealth
         'Poacher', #hunts illegal game.
         'Poet', #writes ballads, epics, sonnets, or other forms of poetry.
         'Poisoner', #makes poisons to harm or kill.
-        'Pontiff', 
+        'Pontiff', #The pope/head of a large monastic religion
         'Porter', #carries luggage and other loads. 
         'Potato Farmer', #A farmer who specializes in potatoes
         'Potter', #makes pots, bowls, plates, etc., out of clay.
-        'Preceptor', 
-        'Prestidigitator', 
+        'Preceptor', #a teacher or instructor.
+        'Prestidigitator', #a sleight-of-hand artist
         'Priest', #has the authority to perform certain rites and administer certain sacraments.
-        'Primate',
         'Prince/Princess', #the direct descendant of a monarch.
         'Printer', #a person who applies pressure to an inked surface resting upon a print medium (such as paper or cloth), thereby transferring the ink to manufacture a text. 
+        'Prisoner', #held in confinement as a punishment for crimes they have been convicted of
         'Privateer', #engages in maritime warfare under a commission of war.
-        'Prognosticator', 
+        'Professor', #a teacher of the highest rank in a college or university.
+        'Prognosticator', #a person who foretells or prophesies a future event
         'Prophet', #regarded as an inspired teacher or proclaimer of the will of God.
-        'Proprietor',
-        'Prosecutor', 
-        'Proselytizer',
+        'Proprietor', #the owner of a business, or a holder of property
+        'Prosecutor', #a lawyer who conducts the case against a defendant in a criminal court
         'Prospector', #searches for mineral deposits, especially by drilling and excavation. 
         'Prostitute', #engages in sexual activity for payment.
-        'Protector', 
-        'Psalmist', 
-        'Psychic', 
-        'Pugilist', 
-        'Pupil',
+        'Psalmist', #the author or composer of a psalm
+        'Psychic', #a person considered or claiming to have psychic powers
+        'Pugilist', #a boxer 
+        'Pupil', #a student in school.
+        'Purser', #keeps the accounts of a ship, especially as the head steward on a passenger vessel.
         'Quarryman/Quarrywoman', #quarries stone.
         'Quartermaster', #responsible for providing quarters, rations, clothing, and other supplies.
-        'Quixotic', 
-        'Rabbi', 
-        'Racaraide', 
-        'Raconteur', 
-        'Radish Farmer',
+        'Rabbi', #A religious scholar or teacher
+        'Radish Farmer', #A farmer who specializes in the growth and harvesting of Radishes
+        'Rag-and-Bone Man', #collects unwanted household items and sells them to merchants.
         'Raider/Marauder', #makes sudden, unprompted attacks against defenseless or near-defenseless settlements. 
-        'Rake', 
-        'Rakshasa', 
-        'Rascal', 
-        'Rat catcher', 
-        'Ravager', 
-        'Reaver', 
-        'Rector',
+        'Rat catcher', #a person who practices rat-catching as a professional form of pest control.
+        'Rebel/Political Dissident', #rises in opposition or armed resistance against an established government or ruler 
+        'Rector', #the head of certain universities, colleges, and schools
+        'Refugee', #leaves their home in order to escape war, persecution, or natural disaster
         'Renderer', #converts waste animal tissue into usable materials.
         'Restorer', #repairs or renovates a work of art so as to return it to its original condition. 
-        'Reverend', 
-        'Revivalist', 
-        'Rhymer', 
-        'Rice Farmer',
+        'Reverend', #a member of the clergy
+        'Revivalist', #a person who holds, promotes, or presides over religious revivals
+        'Rhymer', #One who makes, composes, or recites rhymes or simple poems
+        'Rice Farmer', #A farmer who specializes in the growth and harvesting of Rice
         'Ringmaster/Ringmistress', #master of ceremony who introduces the circus acts to the audience.
         'Ritualist', #practices or advocates the observance of ritual (formula intended to trigger a magical effect on a person or objects).
         'Roadlayer/Streetlayer', #paves roads or streets. 
-        'Robber', 
-        'Rogue',
+        'Robber', #a person who commits robbery.
         'Roofer/Thatcher', #builds and repairs roofs. 
         'Rope maker', #braids rope.
         'Ropewalker', #walks along a tightrope to entertain others. 
-        'Rowdy',
         'Royal Guard', #responsible for the protection of a royal person.
         'Rugmaker', #makes and repairs rugs by braiding, hooking, weaving, etc.
+        'Runaway Slave', #a slave who has left their master and traveled without authorization
         'Runecaster', #uses special alphabets to create runes (symbols possessing magical effects capable of being used multiple times). 
         'Runner', #carries information between lines in wartime.
-        'Rutabaga Farmer', 
-        'Rutterkin',
+        'Rutabaga Farmer', #A farmer who specializes in the growth and harvesting of Rutabagas
         'Saddler', #makes and repairs saddlery. 
         'Sage', #a wise and experienced magic-user.
-        'Saint',
+        'Saint', #a person who is recognized as having an exceptional degree of holiness or likeness or closeness to God
+        'Sailor', #works as a member of the crew of a commercial or naval ship or boat.
         'Sapper', #a soldier responsible for tasks such as building and repairing roads and bridges, laying and clearing mines, etc. 
-        'Savant', 
-        'Scallywag', 
-        'Scammer', 
-        'Scholar', 
-        'Scientist', 
-        'Scoundrel', 
+        'Savant', #a learned person, especially a distinguished scientist.
+        'Scammer', #a person who commits fraud or participates in a dishonest scheme. 
+        'Scavenger/Mudlark/Tosher', #searches for and collects discarded items
+        'Scholar', #a specialist in a particular branch of study who pursues the acquisition of knowledge.
+        'Scientist', #a person who is studying or has expert knowledge of one or more of the natural or physical sciences
         'Scout', #sent ahead of a main force so as to gather information about the enemy’s position, strength, or movements.
-        'Scribe',
+        'Scribe', #copies out manuscripts.
         'Sculptor', #crafts art by carving or casting blocks of marble, stones, or other hardened minerals.
+        'Sea Captain', #commands a ship.
         'Seamstress/Tailor', #makes, alters, repairs, as well as occasionally designing garments.
-        'Seancer', 
-        'Second story man', 
-        'Seeker', 
         'Seer/Oracle', #able to see what the future holds through supernatural insight.
         'Senator', #partakes in governmental decision-making after being elected. 
-        'Sensei', 
-        'Sentinel', 
+        'Sensei', #A teacher of the martial arts
+        'Sentinel', #a soldier or guard whose job is to stand and keep watch
         'Sergeant', #an officer instructed with a protective duty, typically worth “half a knight” in regard.
         'Sergeant-at-Arms', #charged with keeping order during meetings and, if necessary, participates in battle. 
-        'Sermonizer', 
+        'Sermonizer', #someone whose occupation is preaching the gospel.
         'Servant', #performs duties for others, especially a person employed in a house or as a personal attendant.
         'Sexton', #looks after a church and churchyard, sometimes acting as bell-ringer and formerly as a gravedigger.
-        'Shabbat', 
-        'Shadow walker', 
         'Shapeshifter', #a person with the ability to change their physical form.
-        'Shark', 
-        'Sharper', 
-        'Sharpshooter', 
+        'Sharper', #A swindler, especially at cards 
+        'Sharpshooter', #An expert shot with a ranged weapon
         'Shepherd', #herds, tends, and guards sheep.
         'Sheriff', #the chief executive officer in a county, having various administrative and judicial functions. 
-        'Shield-bearer', 
-        'Shiv', 
-        'Shrinist',
+        'Shield-bearer', #An attendant who carries a warriors shield
+        'Shipwright', #a carpenter skilled in ship construction and repair.
         'Siege Artillerist', #works the artillery machines of an army.
         'Singer/Soprano', #sings with or without instrumental accompaniment.
         'Skald', #composes and recites poems honoring heroes and their deeds.
-        'Skirmisher', 
+        'Skirmisher', #a soldier usually sent ahead of a main body of troops to harass the enemy
         'Slave Driver', #oversees and urges on slaves at work.
         'Slave Trader', #A merchant who specializes in the buying/trading of enslaved people
-        'Slave', 
-        'Slaver', 
+        'Slave', #a person who is the legal property of another and forced to obey them
+        'Slaver', #a person dealing in or owning slaves
         'Smuggler', #manages the import or export of goods secretly, in violation of the law, especially without payment of legal duty.
         'Soaper', #makes soap from accumulated mutton fat, wood ash, and natural soda. 
         'Soldier/Man-at-Arms', #serves in an army. 
-        'Sonneteer', 
-        'Soothsayer', 
-        'Sophist', 
-        'Soul-saver', 
-        'Speaker',
+        'Sonneteer', #a writer of sonnets
+        'Soothsayer', #a person supposed to be able to foresee the future.
+        'Sophist', #a paid teacher of philosophy and rhetoric
+        'Speaker', #A person paid to give speeches to large groups
         'Special Force Soldier', #carries out special operations.
         'Speculator', #invests in stocks, property, or other ventures in the hope of making a profit. 
-        'Spellbinder', 
-        'Spellslinger', 
-        'Spellweaver', 
-        'Spice Merchant',
-        'Spirit-raiser',
+        'Spice Merchant', #A merchant who specializes in the sale of various herbs and spices usually from far off locations
         'Spy', #secretly collects and reports information on the activities, movements, and plans of an enemy or competitor.
-        'Spymaster', #directs a network of subordinate espionage agents for a state, kingdom, or empire. 
+        'Spymaster', #directs a network of subordinate espionage agents for a state, kingdom, or empire.
+        'Squatter', #unlawfully occupies an uninhabited building or unused land 
         'Squire', #acts as an attendant to a knight before attempting to become a knight themselves.
-        'Standard-bearer',
+        'Standard-bearer', #a soldier who is responsible for carrying the distinctive flag of a unit, regiment, or army
         'Stablehand', #works in a stable.
         'Stage Magician', #deceives their audience with seemingly impossible feats while using only natural means.
         'Stagehand', #moves scenery or props before or during the performance of a theatrical production.
         'Steward', #supervises both the estate and household of his lord or lady while they are away.
         'Street Cleaner', #cleans streets and alleyways after dark. 
         'Stonemason', #cuts and prepares stone for use in construction.
+        'Student', #attends school or learns under other to enter and pursue a particular subject.
         'Stuntman/Stuntwoman', #performs dangerous stunts for their audience.
         'Summoner', #a mage able to summon forth magical beasts, creatures, and monsters. 
-        'Swindler', 
-        'Swordsman', 
+        'Surgeon/Chirurgeon', #practices surgery.
+        'Swindler', #a person who uses deception to deprive someone of money or possessions 
+        'Swordsman', #A person skilled at using swords in sport or comba
         'Tactician', #uses a carefully planned military strategy to achieve a specific end.
         'Talent Scout', #searches for talented individuals who can be employed or promoted.
         'Tanner', #treats the skins and hides of animals to produce leather.
         'Tattooist', #illustrates the skin with indelible patterns, pictures, legends, etc.
         'Tax Collector', #collects unpaid taxes from people, guilds, or businesses.
         'Taxidermist', #prepares, stuffs, and mounts the skins of animals. 
+        'Taxonomist', #groups organisms into categories.
         'Tea House Owner', #Someone who owns a Tea House business
+        'Teacher', #instructs on a particular skill or subject.
         'Templar', #fights in a religious military order. 
-        'Telepath', 
-        'Templar', 
-        'Teratologist', 
-        'Thaumaturgist',
+        'Telepath', #one who is able to communicate by telepathy
+        'Templar', #a knight of a religious military order
+        'Teratologist', #One who studies abnormalities of physiological development
+        'Thaumaturgist', #a performer of miracles
         'Theater Director', #supervises and orchestrates the mounting of a theatre production by unifying various endeavors and aspects of production. 
-        'Theist', 
-        'Theurgist', 
+        'Theologian', #engages in the study of the nature of God and religious belief.
         'Thief', #steals people’s property, especially by stealth and without using force or violence. 
-        'Thought Master',
         'Thresher', #separates grain from the plants by beating. 
-        'Thug',
+        'Thug', #a violent person, especially a criminal
         'Thriftdealer', #deals in secondhand items.
         'Tinker', #travels from place to place mending utensils. 
-        'Titan',
         'Tollkeeper', #collects tolls at a bridge, road etc. where a charge is made. 
-        'Tomb robber', 
+        'Tomb robber/Grave Robber', #steals valuables from graves and tombs 
         'Torturer', #inflicts severe pain on someone as a punishment or in order to force them to do or say something.
         'Town Crier', #makes public announcements in the streets or marketplace.
         'Toymaker', #makes and repairs toys.
         'Tradesman', #deals exclusively in bartering. 
         'Trainer', #trains someone in a particular skill, usually physical, for money.
-        'Transformer', 
         'Translator', #translates between languages.
-        'Transmogrifier', 
         'Transmuter', #alters matter in form, appearance, or nature.
         'Trapper', #traps wild animals, especially for their fur.
-        'Trapsmith', 
-        'Treasure hunter', 
-        'Trickster', 
-        'Trooper', 
-        'Troubadour', 
-        'Truth-teller',
+        'Trapsmith', #A person who specializes in the creation of traps
+        'Traveler/Wanderer/Vagabond', #wanders from place to place without a permanent home or job
+        'Treasure hunter', #A person who spends their time searching for sunken, buried, lost, or hidden treasure and artifacts
+        'Trickster', #a person who cheats or deceives people
+        'Trooper', #a private soldier in a cavalry, armored, or airborne unit.
+        'Troubadour', #a poet who writes verse to music
         'Tunner', #fills casks in a brewery or winery. 
         'Turnip Farmer', #A farmer who specializes in Turnip production 
-        'Tyro', 
-        'Urchin', 
-        'Vagrant', 
-        'Vampire-Binder', 
-        'Vampire-Keeper', 
-        'Vanquisher',
+        'Tutor', #charged with the instruction and guidance of another.
+        'Urchin', #a child who lives or spends most of their time in the streets, occasionally working as a thief or pickpocket
+        'Vagrant', #A beggar
+        'Vampire-Binder', #A person who binds vampires to their will
+        'Vampire-Keeper', #A person who catches and keeps Vampires as pets or for show or some other purpose
         'Vendor', #deals items in the street. 
-        'Vicar', 
-        'Victor', 
-        'Vigilant', 
-        'Viking', 
-        'Villain', 
-        'Vindicator',
+        'Veterinarian', #treats diseased or injured animals.
         'Vintner', #engages in winemaking, especially with monitoring and harvesting the grapes. 
         'Viscount/Viscountess', #a nobleperson ranking above a baron and below a count.
-        'Visionist', 
-        'Vowmaker', 
-        'Waghalter', 
-        'Wainwright', 
-        'Wanderer', 
+        'Visionist', #One who sees, or believes that he sees, visions
+        'Wainwright', #A trades person skilled in the making and repairing of wagons and carts
+        'Wanderer', #An aimless traveler
         'Ward', #a member of a noble house who has been taken in by another noble family to be raised for a time.
         'Warden' #responsible for the supervision of a particular place or thing or for ensuring that regulations associated with it are obeyed.
-        'Warlord', 
+        'Warlord', #a military commander, especially an aggressive regional commander with individual autonomy
         'Warmage', #a soldier skilled in destructive battle magic.
-        'Warmonger',
-        'Watch leader', 
+        'Warmonger', #a person who encourages or advocates aggression towards other countries or groups
+        'Watch leader', #Leader of the guard of a particular distract, area, or town
         'Watchmaker', #makes and repairs watches and clocks.
         'Water Bearer', #brings water from rivers, wells, and lakes back to their settlement.
         'Weaponsmith', #specializes in making and repairing weapons.   
@@ -898,17 +840,15 @@ class NPC_Generator(BoxLayout):
         'Wheat Farmer', #A farmer specialized in growing wheat
         'Wheelwright', #makes and repairs wooden wheels.
         'Whittler/Woodcarver', #fashions wood into various shapes.
-        'Whore',
-        'Wildling', 
-        'Witness', 
-        'Wizard\'s apprentice', 
-        'Wonder worker', 
-        'Woodcutter'
+        'Whore', #A prostitute
+        'Wizard\'s apprentice', #The understudy or student to a wizard or other spellcaster
+        'Woodcutter' #Someone who specializes in felling trees and processing of wood
         'Wordsmith' #draws their power from language and casts by dictation.
         'Wrestler', #performs in matches involving grappling and grappling-type techniques.
         'Writer', #commits his or her thoughts, ideas, etc., into written language. 
-        'Zealot',
-        'Zookeeper') #maintains and cares for animals or monsters in a zoo.
+        'Zealot', #a person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals
+        'Zookeeper' #maintains and cares for animals or monsters in a zoo.
+        'Zoologist') #an expert in or a student of the behavior, physiology, classification, and distribution of animals.
         self.ids.occupation_label.text = " ".join(['Occupation: ', (str(random.choice(Occupation)))]) #Picks a random occupation 
    
         Char_Title = (
@@ -1396,7 +1336,7 @@ class NPC_Generator(BoxLayout):
                               'Laconic Speaker', 
                               'Lazy',
                               'Lies poorly on purpose',
-                              'Likes to eat like it\'s his last meal',
+                              'Likes to eat like it\'s their last meal',
                               'Likes to swim',
                               'Local sports champion',
                               'Loudly worships a deity',
@@ -1587,6 +1527,10 @@ class NPC_Generator(BoxLayout):
         self.ids.Unique_Trait.text = ''
         self.ids.Age.text = ''
         self.ids.Family.text = ''
+        App.get_running_app().root.ids.Aberrations.text = ''
+        App.get_running_app().root.ids.AberrationImage.source = ''
+        App.get_running_app().root.ids.Humanoids.text = ''
+        App.get_running_app().root.ids.HumanoidImage.source = ''
         App.get_running_app().root.ids.Dragons.text = ''
         App.get_running_app().root.ids.DragonImage.source = ''
 
@@ -1632,7 +1576,7 @@ class NameGenOriginal():
         First_Name = []
         Last_Name = []
 #Opens the csv file that contains the random names
-        with open(r'C:\Users\Aaron\Desktop\Names_List.csv') as f:
+        with open(r'Names_List.csv') as f:
             reader = csv.reader(f, skipinitialspace=True)         
             for col in reader: 
                 #This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
@@ -1654,7 +1598,7 @@ class NameGenOriginal():
     def Random_Male(self, *args):
         First_Name = []
         Last_Name = []
-        with open(r'C:\Users\Aaron\Desktop\Names_List.csv') as f:
+        with open(r'Names_List.csv') as f:
             reader = csv.reader(f, skipinitialspace=True)         
             for col in reader: 
                 ##This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
@@ -1680,19 +1624,75 @@ class MonsterGenerator(GridLayout):
     # Monster Generation - Gives users buttons to select to randomly generate a monster
     def MonsterGeneration(self):
 
-        layout      = GridLayout(cols=2, padding=10)
+        layout      = GridLayout(cols=5, padding=10)
+        
+        AberrationButton  = Button(text  = "Click for a random Aberration type monster")        
 
-       
+        BeastButton  = Button(text  = "Click for a random Beast type monster")
 
-        DragonButton  = Button(text  = "Click for a random dragon type monster")
+        CelestialButton  = Button(text  = "Click for a random Celestial type monster")
+               
+        ConstructButton  = Button(text  = "Click for a random Construct type monster")
+        
+        DemonButton  = Button(text  = "Click for a random Demon type monster")
+        
+        DevilButton  = Button(text  = "Click for a random Devil type monster")
+                
+        DragonButton  = Button(text  = "Click for a random Dragon type monster")
+        
+        ElementalButton  = Button(text  = "Click for a random Elemental type monster")
 
-        HumanoidButton = Button(text = "Click for a random humanoid type monster")
+        FeyButton  = Button(text  = "Click for a random Fey type monster")
+        
+        FiendButton  = Button(text  = "Click for a random Fiend type monster")
+        
+        GiantButton  = Button(text  = "Click for a random Giant type monster")
 
+        HumanoidButton = Button(text = "Click for a random Humanoid type monster")
+        
+        MonstrosityButton = Button(text = "Click for a random Monstrosity type monster")
+
+        OozeButton = Button(text = "Click for a random Ooze type monster")
+
+        PlantButton = Button(text = "Click for a random Plant type monster")
+        
+        SwarmButton = Button(text = "Click for a random Swarm monster")
+        
+        UndeadButton = Button(text = "Click for a random Undead type monster")
+
+        layout.add_widget(AberrationButton)
+
+        layout.add_widget(BeastButton)
+
+        layout.add_widget(CelestialButton)
  
-
+        layout.add_widget(ConstructButton)
+        
+        layout.add_widget(DemonButton)
+        
+        layout.add_widget(DevilButton)
+        
         layout.add_widget(DragonButton)
+        
+        layout.add_widget(ElementalButton)
+        
+        layout.add_widget(FeyButton)
+        
+        layout.add_widget(FiendButton)
+        
+        layout.add_widget(GiantButton)
 
-        layout.add_widget(HumanoidButton)       
+        layout.add_widget(HumanoidButton)   
+
+        layout.add_widget(MonstrosityButton)
+        
+        layout.add_widget(OozeButton)
+        
+        layout.add_widget(PlantButton)
+        
+        layout.add_widget(SwarmButton)
+        
+        layout.add_widget(UndeadButton)    
 
    
 
@@ -1706,221 +1706,2086 @@ class MonsterGenerator(GridLayout):
 
        
         # Dismiss causes the popup to go away. Release generates the call to the monster generator specified
+        AberrationButton.bind(on_press=popup.dismiss)
+        AberrationButton.bind(on_release = self.Aberration_gen)
+        
+        BeastButton.bind(on_press=popup.dismiss)
+        BeastButton.bind(on_release = self.Beast_gen)
+        
+        CelestialButton.bind(on_press=popup.dismiss)
+        CelestialButton.bind(on_release = self.Celestial_gen)
+        
+        ConstructButton.bind(on_press=popup.dismiss)
+        ConstructButton.bind(on_release = self.Construct_gen)
+        
+        DemonButton.bind(on_press=popup.dismiss)
+        DemonButton.bind(on_release = self.Demon_gen)
+        
+        DevilButton.bind(on_press=popup.dismiss)
+        DevilButton.bind(on_release = self.Devil_gen)
+        
         DragonButton.bind(on_press=popup.dismiss)
         DragonButton.bind(on_release = self.Dragon_kind_gen)
+        
+        ElementalButton.bind(on_press=popup.dismiss)
+        ElementalButton.bind(on_release = self.Elemental_gen)
+        
+        FeyButton.bind(on_press=popup.dismiss)
+        FeyButton.bind(on_release = self.Fey_gen)
+        
+        FiendButton.bind(on_press=popup.dismiss)
+        FiendButton.bind(on_release = self.Fiend_gen)
+        
+        GiantButton.bind(on_press=popup.dismiss)
+        GiantButton.bind(on_release = self.Giant_gen)
+        
         HumanoidButton.bind(on_press=popup.dismiss)
         HumanoidButton.bind(on_press = self.Humanoid_gen)
         
+        MonstrosityButton.bind(on_press=popup.dismiss)
+        MonstrosityButton.bind(on_press = self.Monstrosity_gen)
+        
+        OozeButton.bind(on_press=popup.dismiss)
+        OozeButton.bind(on_press = self.Ooze_gen)
+        
+        PlantButton.bind(on_press=popup.dismiss)
+        PlantButton.bind(on_press = self.Plant_gen)
+        
+        SwarmButton.bind(on_press=popup.dismiss)
+        SwarmButton.bind(on_press = self.Swarm_gen)
+        
+        UndeadButton.bind(on_press=popup.dismiss)
+        UndeadButton.bind(on_press = self.Undead_gen)
+
+#Aberration Monster Generation
+    def Aberration_gen(self, *args):
+        Aberrations = ('Aboleth', 'Aboleth')        
+        App.get_running_app().root.ids.Aberrations.text = " ".join(['Monster:',(str(random.choice(Aberrations)))])
+        if App.get_running_app().root.ids.Aberrations.text == 'Monster: Aboleth':
+            App.get_running_app().root.ids.AberrationImage.opacity = 1
+            App.get_running_app().root.ids.AberrationImage.source = 'Aberrations\Aboleth.jpg'
+            App.get_running_app().root.ids.AberrationImage.pos = (800, 50)
+            App.get_running_app().root.ids.Aberrations.halign = 'center'
+            App.get_running_app().root.ids.Aberrations.text_size = (500, 700)
+        if App.get_running_app().root.ids.Aberrations.text == 'Monster: Chuul':
+            App.get_running_app().root.ids.AberrationImage.opacity = 1
+            App.get_running_app().root.ids.AberrationImage.source = 'Aberrations\Chuul.jpg'
+            App.get_running_app().root.ids.AberrationImage.pos = (800, 50)
+            App.get_running_app().root.ids.Aberrations.halign = 'center'
+            App.get_running_app().root.ids.Aberrations.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Aberrations.text == 'Monster: Cloaker':
+            App.get_running_app().root.ids.AberrationImage.opacity = 1
+            App.get_running_app().root.ids.AberrationImage.source = 'Aberrations\Cloaker.jpg'
+            App.get_running_app().root.ids.AberrationImage.pos = (800, 50)
+            App.get_running_app().root.ids.Aberrations.halign = 'center'
+            App.get_running_app().root.ids.Aberrations.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Aberrations.text == 'Monster: Gibbering Mouther':
+            App.get_running_app().root.ids.AberrationImage.opacity = 1
+            App.get_running_app().root.ids.AberrationImage.source = 'Aberrations\Gibbering Mouther.jpg'
+            App.get_running_app().root.ids.AberrationImage.pos = (800, 50)
+            App.get_running_app().root.ids.Aberrations.halign = 'center'
+            App.get_running_app().root.ids.Aberrations.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Aberrations.text == 'Monster: Otyugh':
+            App.get_running_app().root.ids.AberrationImage.opacity = 1
+            App.get_running_app().root.ids.AberrationImage.source = 'Aberrations\Otyugh.jpg'
+            App.get_running_app().root.ids.AberrationImage.pos = (800, 50)
+            App.get_running_app().root.ids.Aberrations.halign = 'center'
+            App.get_running_app().root.ids.Aberrations.text_size = (500, 1785)                      
+
+#Beast Monster Generation
+    def Beast_gen(self, *args):
+        Beasts = ('Ape', 'Ape')        
+        App.get_running_app().root.ids.Beasts.text = " ".join(['Monster:',(str(random.choice(Beasts)))])
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Ape':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Ape.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Axe Beak':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Axe Beak.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Baboon':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Baboon.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Badger':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Badger.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)         
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Bat':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Bat.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)      
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Black Bear':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Black Bear.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)             
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Blood Hawk':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Blood Hawk.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)             
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Boar':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Boar.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Brown Bear':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Brown Bear.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)             
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Camel':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Camel.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Cat':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Cat.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Beasts Snake':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Constrictor Snake.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)                    
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Crab':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Crab.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Crocodile':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Crocodile.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Deer':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Deer.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Dire Wolf':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Dire Wolf.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Draft Horse':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Draft Horse.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)         
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Eagle':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Eagle.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Elephant':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Elephant.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)      
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Elk':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Elk.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Flying Snake':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Flying Snake.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Frog':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Frog.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Ape':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Ape.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Crab':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Badger.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Bat':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Crab.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Boar':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Boar.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Centipede':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Centipede.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)             
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Crab':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Constrictor Snake.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)                     
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Crab':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Crab.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Crocodile':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Crocodile.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)             
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Eagle':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Eagle.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)         
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Elk':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Elk.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Fire Beetle':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Fire Beetle.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)               
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Frog':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Frog.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Goat':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Goat.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Hyena':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Hyena.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)         
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Lizard':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Lizard.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Octopus':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Octopus.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)           
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Owl':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Owl.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Poisonous Snake':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Poisonous Snake.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)                   
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Rat':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Rat.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Scorpion':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Scorpion.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)            
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Sea Horse':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Sea Horse.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)             
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Shark':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Shark.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)         
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Spider':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Spider.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Toad':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Toad.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Vulture':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Vulture.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)           
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Wasp':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Wasp.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Weasel':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Weasel.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Giant Wolf Spider':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Giant Wolf Spider.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)               
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Goat':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Goat.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Hawk':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Hawk.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Hunter Shark':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Hunter Shark.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Hyena':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Hyena.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Jackal':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Jackal.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Killer Whale':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Killer Whale.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Lion':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\lion.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Lizard':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Lizard.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Mammoth':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Mammoth.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)     
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Mastiff':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Mastiff.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)     
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Mule':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Mule.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Octopus':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Octopus.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)     
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Owl':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Owl.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Panther':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Panther.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)     
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Plesiosaurus':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Plesiosaurus.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Poisonous Snake':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Poisonous Snake.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)             
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Polar Bear':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Polar Bear.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Pony':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Pony.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Quipper':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Quipper.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)     
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Rat':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Rat.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Raven':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Raven.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Reef Shark':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Reef Shark.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Rhinoceros':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Rhinoceros.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)        
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Riding Horse':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Riding Horse.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)          
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Saber-Toothed Tiger':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Saber-Toothed Tiger.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)                 
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Scorpion':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Scorpion.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)      
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Sea Horse':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Sea Horse.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)       
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Spider':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Spider.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Stirge':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Stirge.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Tiger':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Tiger.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Triceratops':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Triceratops.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)         
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Tyrannosaurus Rex':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Tyrannosaurus Rex.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)               
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Vulture':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Vulture.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)     
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Warhorse':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Warhorse.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)      
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Weasel':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Weasel.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Beasts.text == 'Monster: Wolf':
+            App.get_running_app().root.ids.BeastImage.opacity = 1
+            App.get_running_app().root.ids.BeastImage.source = 'Beasts\Wolf.jpg'
+            App.get_running_app().root.ids.BeastImage.pos = (800, 50)
+            App.get_running_app().root.ids.Beasts.halign = 'center'
+            App.get_running_app().root.ids.Beasts.text_size = (500, 1785)                                                                          
+                                                                                                                                                                                                  
+                                                                                                                                        
+#Celestial Monster Generation
+    def Celestial_gen(self, *args): 
+        Celestials = ('Couatl', 'Couatl')        
+        App.get_running_app().root.ids.Celestials.text = " ".join(['Monster:',(str(random.choice(Celestials)))])
+        if App.get_running_app().root.ids.Celestials.text == 'Monster: Couatl':
+            App.get_running_app().root.ids.CelestialImage.opacity = 1
+            App.get_running_app().root.ids.CelestialImage.source = 'Celestials\Couatl.jpg'
+            App.get_running_app().root.ids.CelestialImage.pos = (800, 50)
+            App.get_running_app().root.ids.Celestials.halign = 'center'
+            App.get_running_app().root.ids.Celestials.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Celestials.text == 'Monster: Deva':
+            App.get_running_app().root.ids.CelestialImage.opacity = 1
+            App.get_running_app().root.ids.CelestialImage.source = 'Celestials\Deva.jpg'
+            App.get_running_app().root.ids.CelestialImage.pos = (800, 50)
+            App.get_running_app().root.ids.Celestials.halign = 'center'
+            App.get_running_app().root.ids.Celestials.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Celestials.text == 'Monster: Pegasus':
+            App.get_running_app().root.ids.CelestialImage.opacity = 1
+            App.get_running_app().root.ids.CelestialImage.source = 'Celestials\Pegasus.jpg'
+            App.get_running_app().root.ids.CelestialImage.pos = (800, 50)
+            App.get_running_app().root.ids.Celestials.halign = 'center'
+            App.get_running_app().root.ids.Celestials.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Celestials.text == 'Monster: Planetar':
+            App.get_running_app().root.ids.CelestialImage.opacity = 1
+            App.get_running_app().root.ids.CelestialImage.source = 'Celestials\Planetar.jpg'
+            App.get_running_app().root.ids.CelestialImage.pos = (800, 50)
+            App.get_running_app().root.ids.Celestials.halign = 'center'
+            App.get_running_app().root.ids.Celestials.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Celestials.text == 'Monster: Solar':
+            App.get_running_app().root.ids.CelestialImage.opacity = 1
+            App.get_running_app().root.ids.CelestialImage.source = 'Celestials\Solar.jpg'
+            App.get_running_app().root.ids.CelestialImage.pos = (800, 50)
+            App.get_running_app().root.ids.Celestials.halign = 'center'
+            App.get_running_app().root.ids.Celestials.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Celestials.text == 'Monster: Unicorn':
+            App.get_running_app().root.ids.CelestialImage.opacity = 1
+            App.get_running_app().root.ids.CelestialImage.source = r'Celestials\Unicorn.jpg'
+            App.get_running_app().root.ids.CelestialImage.pos = (800, 50)
+            App.get_running_app().root.ids.Celestials.halign = 'center'
+            App.get_running_app().root.ids.Celestials.text_size = (500, 1785)                                                                   
+
+#Construct Monster Generation
+    def Construct_gen(self, *args): 
+        Constructs = ('Animated Armor', 'Animated Armor')        
+        App.get_running_app().root.ids.Constructs.text = " ".join(['Monster:',(str(random.choice(Constructs)))])
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Animated Armor':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Animated Armor.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Clay Golem':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Clay Golem.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Flesh Golem':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Flesh Golem.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Flying Sword':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Flying Sword.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Homunculus':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Homunculus.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Iron Golem':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Iron Golem.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Rug of Smothering':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Rug of Smothering.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Servitor Construct':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Servitor Construct.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Shield Guardian':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Shield Guardian.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: Stone Golem':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\Stone Golem.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Constructs.text == 'Monster: War Construct':
+            App.get_running_app().root.ids.ConstructImage.opacity = 1
+            App.get_running_app().root.ids.ConstructImage.source = 'Constructs\War Construct.jpg'
+            App.get_running_app().root.ids.ConstructImage.pos = (800, 50)
+            App.get_running_app().root.ids.Constructs.halign = 'center'
+            App.get_running_app().root.ids.Constructs.text_size = (500, 1785)                                                                                                             
+#Demon Monster Generation
+    def Demon_gen(self, *args):
+        Demons = ('Balor', 'Balor')        
+        App.get_running_app().root.ids.Demons.text = " ".join(['Monster:',(str(random.choice(Demons)))])
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Balor':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Balor.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Dretch':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Dretch.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Glabrezu':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Glabrezu.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Hezrou':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Hezrou.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Marilith':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Marilith.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Nalfeshnee':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = r'Demons\Nalfeshnee.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Quasit':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Quasit.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Succubus/Incubus':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Succubus-Incubus.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Tengu Demon':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Tengu Demon.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Demons.text == 'Monster: Vrock':
+            App.get_running_app().root.ids.DemonImage.opacity = 1
+            App.get_running_app().root.ids.DemonImage.source = 'Demons\Vrock.jpg'
+            App.get_running_app().root.ids.DemonImage.pos = (800, 50)
+            App.get_running_app().root.ids.Demons.halign = 'center'
+            App.get_running_app().root.ids.Demons.text_size = (500, 1785)                                                                                         
+
+#Devil Monster Generation
+    def Devil_gen(self, *args):
+        Devils = ('Barbed Devil', 'Barbed Devil')        
+        App.get_running_app().root.ids.Devils.text = " ".join(['Monster:',(str(random.choice(Devils)))])
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Barbed Devil':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Barbed Devil.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Bearded Devil':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Bearded Devil.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Bone Devil':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Bone Devil.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Chain Devil':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Chain Devil.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Erinyes':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Erinyes.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Horned Devil':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Horned Devil.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Ice Devil':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Ice Devil.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Imp':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Imp.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Lemure':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Lemure.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Pig Devil':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Pig Devil.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Devils.text == 'Monster: Pit Fiend':
+            App.get_running_app().root.ids.DevilImage.opacity = 1
+            App.get_running_app().root.ids.DevilImage.source = 'Devils\Pit Fiend.jpg'
+            App.get_running_app().root.ids.DevilImage.pos = (800, 50)
+            App.get_running_app().root.ids.Devils.halign = 'center'
+            App.get_running_app().root.ids.Devils.text_size = (500, 1785)                                                                                                                
 #Dragon-kind Monster Generation
     def Dragon_kind_gen(self, *args): 
-        Dragons = ('Adult Gold Dragon', 'Adult Gold Dragon')        
+        Dragons = ('Adult Black Dragon', 'Adult Blue Dragon', 'Adult Brass Dragon', 'Adult Bronze Dragon', 'Adult Copper Dragon', 'Adult Gold Dragon', 'Adult Green Dragon', 'Adult Red Dragon', 'Adult Silver Dragon', 'Adult White Dragon', 'Ancient Black Dragon', 'Ancient Blue Dragon', 'Ancient Brass Dragon', 'Ancient Bronze Dragon', 'Ancient Copper Dragon', 'Ancient Gold Dragon', 'Ancient Green Dragon', 'Ancient Red Dragon', 'Ancient Silver Dragon', 'Ancient White Dragon', 'Black Dragon Wyrmling', 'Blue Dragon Wyrmling', 'Brass Dragon Wyrmling', 'Bronze Dragon Wyrmling', 'Copper Dragon Wyrmling', 'Dragon Turtle', 'Gold Dragon Wyrmling', 'Green Dragon Wyrmling', 'Pseudodragon', 'Red Dragon Wyrmling', 'Silver Dragon Wyrmling', 'White Dragon Wyrmling', 'Wyvern', 'Young Black Dragon', 'Young Blue Dragon', 'Young Brass Dragon', 'Young Bronze Dragon', 'Young Copper Dragon', 'Young Gold Dragon', 'Young Green Dragon', 'Young Red Dragon', 'Young Silver Dragon', 'Young White Dragon')           
         App.get_running_app().root.ids.Dragons.text = " ".join(['Monster:',(str(random.choice(Dragons)))])
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Black Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Black Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (710, 500)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1400)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Blue Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Blue Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (750, 540)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Brass Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Brass Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (800, 440)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Bronze Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Bronze Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (680, 140)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Copper Dragon':
+            App.get_running_app().root.ids.DragonImage.opacity = 1
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Copper Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (630, 380)
+            App.get_running_app().root.ids.Dragons.halign = 'center'
+            App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Gold Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Adult Gold Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Gold Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (630, 380)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Green Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Adult Green Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Green Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (680, 480)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Red Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Adult Red Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Red Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (680, 480)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult Silver Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Adult Silver Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult Silver Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (870, 580)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Adult White Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Adult White Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Adult White Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (700, 520)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Black Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Black Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Black Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (770, 450)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Blue Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Blue Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Blue Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (500, 250)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Brass Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Brass Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Brass Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (760, 450)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Bronze Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Bronze Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Bronze Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (720, 350)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Copper Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Copper Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Copper Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (850, 525)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Gold Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Gold Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Gold Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (670, 325)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Green Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Green Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Green Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (740, 330)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Red Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Red Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Red Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (650, 500)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient Silver Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient Silver Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient Silver Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (750, 350)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Ancient White Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Ancient White Dragon.png'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Ancient White Dragon.png'
             App.get_running_app().root.ids.DragonImage.pos = (500, 250)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Black Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Black Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Black Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (630, 250)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Blue Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Blue Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Blue Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (700, 350)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Brass Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Brass Dragon Wyrmling.jpg'
-            App.get_running_app().root.ids.DragonImage.pos = (700, 400)
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Brass Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (820, 540)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Bronze Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Bronze Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Bronze Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (850, 600)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Copper Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Copper Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Copper Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (500, 200)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Dragon Turtle':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Dragon Turtle.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Dragon Turtle.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (810, 650)
             App.get_running_app().root.ids.Dragons.halign = 'center'
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Gold Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Gold Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Gold Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (600, 50)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Green Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Green Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Green Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (600, 150)
             App.get_running_app().root.ids.Dragons.halign = 'center'
             App.get_running_app().root.ids.Dragons.text_size = (500, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Pseudodragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Pseudodragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Pseudodragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (650, 20)
             App.get_running_app().root.ids.Dragons.halign = 'center'
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Red Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Red Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Red Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (600, 250)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Silver Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Silver Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Silver Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (600, 200)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: White Dragon Wyrmling':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'White Dragon Wyrmling.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\White Dragon Wyrmling.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (600, 300)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Wyvern':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Wyvern.jpg'
-            App.get_running_app().root.ids.DragonImage.pos = (750, 600)
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Wyvern.jpg'
+            App.get_running_app().root.ids.DragonImage.pos = (840, 650)
+            App.get_running_app().root.ids.Dragons.text_size = (200, 1785)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Black Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Black_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Black_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (700, 50)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Blue Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Blue_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Blue_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (700, 50)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Brass Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Brass_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Brass_Dragon.jpg'
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Bronze Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Bronze_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Bronze_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (700, 400)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Copper Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Copper_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Copper_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (660, 350)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Gold Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Gold_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Gold_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (660, 100)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Green Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Green_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Green_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (850, 600)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Red Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Red_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Red_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (850, 600)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young Silver Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_Silver_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_Silver_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (850, 600)
         if App.get_running_app().root.ids.Dragons.text == 'Monster: Young White Dragon':
             App.get_running_app().root.ids.DragonImage.opacity = 1
-            App.get_running_app().root.ids.DragonImage.source = 'Young_White_Dragon.jpg'
+            App.get_running_app().root.ids.DragonImage.source = 'Dragons\Young_White_Dragon.jpg'
             App.get_running_app().root.ids.DragonImage.pos = (600, 150)
-                
+
+#Elemental Monster Generation
+    def Elemental_gen(self, *args): 
+        Elementals = ('Air Elemental', 'Air Elemental')        
+        App.get_running_app().root.ids.Elementals.text = " ".join(['Monster:',(str(random.choice(Elementals)))])
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Air Elemental':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Air Elemental.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Azer':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Azer.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Djinni':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Djinni.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785)    
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Dust Mephit':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Dust Mephit.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Earth Elemental':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Earth Elemental.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Gargoyle':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Gargoyle.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Ice Mephit':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Ice Mephit.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Invisible Stalker':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Invisible Stalker.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Magma Mephit':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Magma Mephit.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Magmin':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Magmin.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Salamander':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Salamander.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Steam Mephit':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Steam Mephit.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Water Elemental':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Water Elemental.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Elementals.text == 'Monster: Xorn':
+            App.get_running_app().root.ids.ElementalImage.opacity = 1
+            App.get_running_app().root.ids.ElementalImage.source = 'Elementals\Xorn.jpg'
+            App.get_running_app().root.ids.ElementalImage.pos = (800, 50)
+            App.get_running_app().root.ids.Elementals.halign = 'center'
+            App.get_running_app().root.ids.Elementals.text_size = (500, 1785)                                                                                                                                                    
+    
+#Fey Monster Generation
+    def Fey_gen(self, *args):
+        Feys = ('Blink Dog', 'Blink Dog')        
+        App.get_running_app().root.ids.Feys.text = " ".join(['Monster:',(str(random.choice(Feys)))])
+        if App.get_running_app().root.ids.Feys.text == 'Monster: Blink Dog':
+            App.get_running_app().root.ids.FeyImage.opacity = 1
+            App.get_running_app().root.ids.FeyImage.source = 'Feys\Blink Dog.jpg'
+            App.get_running_app().root.ids.FeyImage.pos = (800, 50)
+            App.get_running_app().root.ids.Feys.halign = 'center'
+            App.get_running_app().root.ids.Feys.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Feys.text == 'Monster: Dryad':
+            App.get_running_app().root.ids.FeyImage.opacity = 1
+            App.get_running_app().root.ids.FeyImage.source = 'Feys\Dryad.jpg'
+            App.get_running_app().root.ids.FeyImage.pos = (800, 50)
+            App.get_running_app().root.ids.Feys.halign = 'center'
+            App.get_running_app().root.ids.Feys.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Feys.text == 'Monster: Green Hag':
+            App.get_running_app().root.ids.FeyImage.opacity = 1
+            App.get_running_app().root.ids.FeyImage.source = 'Feys\Green Hag.jpg'
+            App.get_running_app().root.ids.FeyImage.pos = (800, 50)
+            App.get_running_app().root.ids.Feys.halign = 'center'
+            App.get_running_app().root.ids.Feys.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Feys.text == 'Monster: Satyr':
+            App.get_running_app().root.ids.FeyImage.opacity = 1
+            App.get_running_app().root.ids.FeyImage.source = 'Feys\Satyr.jpg'
+            App.get_running_app().root.ids.FeyImage.pos = (800, 50)
+            App.get_running_app().root.ids.Feys.halign = 'center'
+            App.get_running_app().root.ids.Feys.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Feys.text == 'Monster: Sea Hag':
+            App.get_running_app().root.ids.FeyImage.opacity = 1
+            App.get_running_app().root.ids.FeyImage.source = 'Feys\Sea Hag.jpg'
+            App.get_running_app().root.ids.FeyImage.pos = (800, 50)
+            App.get_running_app().root.ids.Feys.halign = 'center'
+            App.get_running_app().root.ids.Feys.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Feys.text == 'Monster: Sprite':
+            App.get_running_app().root.ids.FeyImage.opacity = 1
+            App.get_running_app().root.ids.FeyImage.source = 'Feys\Sprite.jpg'
+            App.get_running_app().root.ids.FeyImage.pos = (800, 50)
+            App.get_running_app().root.ids.Feys.halign = 'center'
+            App.get_running_app().root.ids.Feys.text_size = (500, 1785)                                                          
+
+#Fiend Monster Generation
+    def Fiend_gen(self, *args):
+        Fiends = ('Hell Hound', 'Hell Hound')        
+        App.get_running_app().root.ids.Fiends.text = " ".join(['Monster:',(str(random.choice(Fiends)))])
+        if App.get_running_app().root.ids.Fiends.text == 'Monster: Hell Hound':
+            App.get_running_app().root.ids.FiendImage.opacity = 1
+            App.get_running_app().root.ids.FiendImage.source = 'Fiends\Hell Hound.jpg'
+            App.get_running_app().root.ids.FiendImage.pos = (800, 50)
+            App.get_running_app().root.ids.Fiends.halign = 'center'
+            App.get_running_app().root.ids.Fiends.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Fiends.text == 'Monster: Night Hag':
+            App.get_running_app().root.ids.FiendImage.opacity = 1
+            App.get_running_app().root.ids.FiendImage.source = r'Fiends\Night Hag.jpg'
+            App.get_running_app().root.ids.FiendImage.pos = (800, 50)
+            App.get_running_app().root.ids.Fiends.halign = 'center'
+            App.get_running_app().root.ids.Fiends.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Fiends.text == 'Monster: Nightmare':
+            App.get_running_app().root.ids.FiendImage.opacity = 1
+            App.get_running_app().root.ids.FiendImage.source = r'Fiends\Nightmare.jpg'
+            App.get_running_app().root.ids.FiendImage.pos = (800, 50)
+            App.get_running_app().root.ids.Fiends.halign = 'center'
+            App.get_running_app().root.ids.Fiends.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Fiends.text == 'Monster: Rakshasa':
+            App.get_running_app().root.ids.FiendImage.opacity = 1
+            App.get_running_app().root.ids.FiendImage.source = 'Fiends\Rakshasa.jpg'
+            App.get_running_app().root.ids.FiendImage.pos = (800, 50)
+            App.get_running_app().root.ids.Fiends.halign = 'center'
+            App.get_running_app().root.ids.Fiends.text_size = (500, 1785)                                  
+
+#Giant Monster Generation
+    def Giant_gen(self, *args):
+        Giants = ('Cloud Giant', 'Cloud Giant')        
+        App.get_running_app().root.ids.Giants.text = " ".join(['Monster:',(str(random.choice(Giants)))])
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Cloud Giant':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Cloud Giant.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785)   
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Ettin':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Ettin.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Fire Giant':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Fire Giant.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Frost Giant':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Frost Giant.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Hill Giant':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Hill Giant.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Ogre':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Ogre.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785)
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Oni':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Oni.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785) 
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Storm Giant':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Storm Giant.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785)  
+        if App.get_running_app().root.ids.Giants.text == 'Monster: Troll':
+            App.get_running_app().root.ids.GiantImage.opacity = 1
+            App.get_running_app().root.ids.GiantImage.source = 'Giants\Troll.jpg'
+            App.get_running_app().root.ids.GiantImage.pos = (800, 50)
+            App.get_running_app().root.ids.Giants.halign = 'center'
+            App.get_running_app().root.ids.Giants.text_size = (500, 1785)                                                                                                    
 
 #Humanoid Monster Generation
     def Humanoid_gen(self, *args): 
-        pass
+        Humanoids = ('Acolyte', 'Archmage')        
+        App.get_running_app().root.ids.Humanoids.text = " ".join(['Monster:',(str(random.choice(Humanoids)))])
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Acolyte':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Acolyte.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (880, 550)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Archmage':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Archmage.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Assassin':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Assassin.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Bandit':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Bandit.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)                       
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Bandit Captain':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Bandit Captain.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Berserker':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Berserker.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Bugbear':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Bugbear.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Commoner':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Commoner.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)     
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Cult Fanatic':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Cult Fanatic.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Cultist':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Cultist.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Deep Gnome':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Deep Gnome.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)                                                                      
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Drow':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Drow.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Druid':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Druid.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Duergar':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Duergar.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Dwarf':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Dwarf.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Elf':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Elf.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Gladiator':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Gladiator.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Gnoll':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Gnoll.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Goblin':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Goblin.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Grimlock':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Grimlock.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Guard':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Guard.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Halfling':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Halfling.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Half-Red Dragon Veteran':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Half-Red Dragon Veteran.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Hobgoblin':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Hobgoblin.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Human':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Human.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Knight':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Knight.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Kobold':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Kobold.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)     
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Lizardfolk':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Lizardfolk.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Mage':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Mage.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Merfolk':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Merfolk.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)    
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Noble':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = r'Humanoids\Noble.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Orc':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Orc.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Priest':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Priest.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Sahaugain':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Sahaugain.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Scout':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Scout.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Spy':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Spy.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Thug':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Thug.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Tribal Warrior':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Tribal Warrior.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Veteran':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Veteran.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Werebear':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Werebear.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Wereboar':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Wereboar.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Wererat':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Wererat.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Weretiger':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Weretiger.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Humanoids.text == 'Monster: Werewolf':
+            App.get_running_app().root.ids.HumanoidImage.opacity = 1
+            App.get_running_app().root.ids.HumanoidImage.source = 'Humanoids\Werewolf.jpg'
+            App.get_running_app().root.ids.HumanoidImage.pos = (780, 380)
+            App.get_running_app().root.ids.Humanoids.halign = 'center'
+            App.get_running_app().root.ids.Humanoids.text_size = (500, 1685)                                                                                                                                                                                                                                                                                                                                                  
+                    
+#Monstrosity Monster Generation
+    def Monstrosity_gen(self, *args):
+        Monstrosities = ('Androsphinx', 'Androsphinx')        
+        App.get_running_app().root.ids.Monstrosities.text = " ".join(['Monster:',(str(random.choice(Monstrosities)))])
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Androsphinx':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Androsphinx.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Ankheg':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Ankheg.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Basilisk':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Basilisk.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Behir':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Behir.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Bulette':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Bulette.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)    
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Centaur':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Centaur.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Centipede Woman':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Centipede Woman.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Chimera':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Chimera.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Cockatrice':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Cockatrice.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Darkmantle':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Darkmantle.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Death Dog':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Death Dog.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Doppelganger':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Doppelganger.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Drider':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Drider.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Ettercap':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Ettercap.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Giant Spider':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Giant Spider.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Giant Squid':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Giant Squid.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)    
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Gorgon':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Gorgon.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Grick':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Grick.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Griffon':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Griffon.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Guardian Naga':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Guardian Naga.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Gynosphinx':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Gynosphinx.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Harpy':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Harpy.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Hippogriff':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Hippogriff.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Hydra':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Hydra.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Kraken':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Kraken.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Lamia':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Lamia.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Manticore':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Manticore.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Merrow':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Merrow.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Mimic':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Mimic.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)  
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Minotaur':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Minotaur.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Owlbear':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Owlbear.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Phase spider':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Phase spider.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Purple Worm':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Purple Worm.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Remorhaz':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Remorhaz.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Roc':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Roc.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Roper':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Roper.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Rust Monster':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Rust Monster.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Tarrasque':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Tarrasque.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Winter Wolf':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Winter Wolf.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)   
+        if App.get_running_app().root.ids.Monstrosities.text == 'Monster: Worg':
+            App.get_running_app().root.ids.MonstrosityImage.opacity = 1
+            App.get_running_app().root.ids.MonstrosityImage.source = 'Monstrosities\Worg.jpg'
+            App.get_running_app().root.ids.MonstrosityImage.pos = (880, 550)
+            App.get_running_app().root.ids.Monstrosities.halign = 'center'
+            App.get_running_app().root.ids.Monstrosities.text_size = (500, 1685)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    
+#Ooze Monster Generation
+    def Ooze_gen(self, *args):
+        Oozes = ('Black Pudding', 'Black Pudding')        
+        App.get_running_app().root.ids.Oozes.text = " ".join(['Monster:',(str(random.choice(Oozes)))])
+        if App.get_running_app().root.ids.Oozes.text == 'Monster: Black Pudding':
+            App.get_running_app().root.ids.OozeImage.opacity = 1
+            App.get_running_app().root.ids.OozeImage.source = 'Oozes\Black Pudding.jpg'
+            App.get_running_app().root.ids.OozeImage.pos = (880, 550)
+            App.get_running_app().root.ids.Oozes.halign = 'center'
+            App.get_running_app().root.ids.Oozes.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Oozes.text == 'Monster: Gelatinous Cube':
+            App.get_running_app().root.ids.OozeImage.opacity = 1
+            App.get_running_app().root.ids.OozeImage.source = 'Oozes\Gelatinous Cube.jpg'
+            App.get_running_app().root.ids.OozeImage.pos = (880, 550)
+            App.get_running_app().root.ids.Oozes.halign = 'center'
+            App.get_running_app().root.ids.Oozes.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Oozes.text == 'Monster: Gray ooze':
+            App.get_running_app().root.ids.OozeImage.opacity = 1
+            App.get_running_app().root.ids.OozeImage.source = 'Oozes\Gray ooze.jpg'
+            App.get_running_app().root.ids.OozeImage.pos = (880, 550)
+            App.get_running_app().root.ids.Oozes.halign = 'center'
+            App.get_running_app().root.ids.Oozes.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Oozes.text == 'Monster: Ochre Jelly':
+            App.get_running_app().root.ids.OozeImage.opacity = 1
+            App.get_running_app().root.ids.OozeImage.source = 'Oozes\Ochre Jelly.jpg'
+            App.get_running_app().root.ids.OozeImage.pos = (880, 550)
+            App.get_running_app().root.ids.Oozes.halign = 'center'
+            App.get_running_app().root.ids.Oozes.text_size = (500, 1685)                                   
+   
+#Plant Monster Generation
+    def Plant_gen(self, *args):
+        Plants = ('Awakened Shrub', 'Awakened Shrub')        
+        App.get_running_app().root.ids.Plants.text = " ".join(['Monster:',(str(random.choice(Plants)))])
+        if App.get_running_app().root.ids.Plants.text == 'Monster: Awakened Shrub':
+            App.get_running_app().root.ids.PlantImage.opacity = 1
+            App.get_running_app().root.ids.PlantImage.source = 'Plants\Awakened Shrub.jpg'
+            App.get_running_app().root.ids.PlantImage.pos = (880, 550)
+            App.get_running_app().root.ids.Plants.halign = 'center'
+            App.get_running_app().root.ids.Plants.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Plants.text == 'Monster: Awakened Tree':
+            App.get_running_app().root.ids.PlantImage.opacity = 1
+            App.get_running_app().root.ids.PlantImage.source = 'Plants\Awakened Tree.jpg'
+            App.get_running_app().root.ids.PlantImage.pos = (880, 550)
+            App.get_running_app().root.ids.Plants.halign = 'center'
+            App.get_running_app().root.ids.Plants.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Plants.text == 'Monster: Shambling Mound':
+            App.get_running_app().root.ids.PlantImage.opacity = 1
+            App.get_running_app().root.ids.PlantImage.source = 'Plants\Shambling Mound.jpg'
+            App.get_running_app().root.ids.PlantImage.pos = (880, 550)
+            App.get_running_app().root.ids.Plants.halign = 'center'
+            App.get_running_app().root.ids.Plants.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Plants.text == 'Monster: Shrieker':
+            App.get_running_app().root.ids.PlantImage.opacity = 1
+            App.get_running_app().root.ids.PlantImage.source = 'Plants\Shrieker.jpg'
+            App.get_running_app().root.ids.PlantImage.pos = (880, 550)
+            App.get_running_app().root.ids.Plants.halign = 'center'
+            App.get_running_app().root.ids.Plants.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Plants.text == 'Monster: Violet Fungus':
+            App.get_running_app().root.ids.PlantImage.opacity = 1
+            App.get_running_app().root.ids.PlantImage.source = 'Plants\Violet Fungus.jpg'
+            App.get_running_app().root.ids.PlantImage.pos = (880, 550)
+            App.get_running_app().root.ids.Plants.halign = 'center'
+            App.get_running_app().root.ids.Plants.text_size = (500, 1685)                                                              
 
-      
+#Swarm Monster Generation
+    def Swarm_gen(self, *args):
+        Swarms = ('Swarm of Bats', 'Swarm of Bats')
+        App.get_running_app().root.ids.Swarms.text = " ".join(['Monster:',(str(random.choice(Swarms)))])
+        if App.get_running_app().root.ids.Swarms.text == 'Monster: Swarm of Bats':
+            App.get_running_app().root.ids.SwarmImage.opacity = 1
+            App.get_running_app().root.ids.SwarmImage.source = 'Swarms\Swarm of Bats.jpg'
+            App.get_running_app().root.ids.SwarmImage.pos = (880, 550)
+            App.get_running_app().root.ids.Swarms.halign = 'center'
+            App.get_running_app().root.ids.Swarms.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Swarms.text == 'Monster: Swarm of Insects':
+            App.get_running_app().root.ids.SwarmImage.opacity = 1
+            App.get_running_app().root.ids.SwarmImage.source = 'Swarms\Swarm of Insects.jpg'
+            App.get_running_app().root.ids.SwarmImage.pos = (880, 550)
+            App.get_running_app().root.ids.Swarms.halign = 'center'
+            App.get_running_app().root.ids.Swarms.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Swarms.text == 'Monster: Swarm of Poisonous Snakes':
+            App.get_running_app().root.ids.SwarmImage.opacity = 1
+            App.get_running_app().root.ids.SwarmImage.source = 'Swarms\Swarm of Poisonous Snakes.jpg'
+            App.get_running_app().root.ids.SwarmImage.pos = (880, 550)
+            App.get_running_app().root.ids.Swarms.halign = 'center'
+            App.get_running_app().root.ids.Swarms.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Swarms.text == 'Monster: Swarm of Quippers':
+            App.get_running_app().root.ids.SwarmImage.opacity = 1
+            App.get_running_app().root.ids.SwarmImage.source = 'Swarms\Swarm of Quippers.jpg'
+            App.get_running_app().root.ids.SwarmImage.pos = (880, 550)
+            App.get_running_app().root.ids.Swarms.halign = 'center'
+            App.get_running_app().root.ids.Swarms.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Swarms.text == 'Monster: Swarm of Rats':
+            App.get_running_app().root.ids.SwarmImage.opacity = 1
+            App.get_running_app().root.ids.SwarmImage.source = 'Swarms\Swarm of Rats.jpg'
+            App.get_running_app().root.ids.SwarmImage.pos = (880, 550)
+            App.get_running_app().root.ids.Swarms.halign = 'center'
+            App.get_running_app().root.ids.Swarms.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Swarms.text == 'Monster: Swarm of Ravens':
+            App.get_running_app().root.ids.SwarmImage.opacity = 1
+            App.get_running_app().root.ids.SwarmImage.source = 'Swarms\Swarm of Ravens.jpg'
+            App.get_running_app().root.ids.SwarmImage.pos = (880, 550)
+            App.get_running_app().root.ids.Swarms.halign = 'center'
+            App.get_running_app().root.ids.Swarms.text_size = (500, 1685)                                                             
+
+#Undead Monster Generation
+    def Undead_gen(self, *args):
+        Undead = ('Ghast', 'Ghast')
+        App.get_running_app().root.ids.Undead.text = " ".join(['Monster:',(str(random.choice(Undead)))])
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Ghast':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Ghast.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Ghost':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Ghost.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Ghoul':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Ghoul.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Lich':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Lich.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Lich':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Lich.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Minotaur Skeleton':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Minotaur Skeleton.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Mummy':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Mummy.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Mummy Lord':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Mummy Lord.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Ogre Zombie':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Ogre Zombie.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Shadow':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Shadow.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Skeleton':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Skeleton.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Specter':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Specter.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Vampire':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Vampire.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Vampire Spawn':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Vampire Spawn.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Warhorse Skeleton':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Warhorse Skeleton.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Wight':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Wight.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Will-o-wisp':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Will-o-wisp.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Wraith':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Wraith.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685) 
+        if App.get_running_app().root.ids.Undead.text == 'Monster: Zombie':
+            App.get_running_app().root.ids.UndeadImage.opacity = 1
+            App.get_running_app().root.ids.UndeadImage.source = 'Undead\Zombie.jpg'
+            App.get_running_app().root.ids.UndeadImage.pos = (880, 550)
+            App.get_running_app().root.ids.Undead.halign = 'center'
+            App.get_running_app().root.ids.Undead.text_size = (500, 1685)   
+            
+                
+
+
+            
+class DCCGenerator(GridLayout):  
+    # Generator for creating Dungeon Crawl Classic characters
+    def DCCCharacterGenerator(self):
+        App.get_running_app().root.ids.select_level.pos = (500, 980) #Positioning the select level spinner
+        App.get_running_app().root.ids.select_level.opacity = 1      #Changing opacity so the select level spinner appears
+
+        
+    def set_level(self): 
+        DCCCharacterLevel = App.get_running_app().root.ids.select_level.text #Creating the DCCCharacterLevel variable to hold the current level selected 
+
+        if DCCCharacterLevel == '0th': 
+            self.DCCZeroLevel_Gen()     #Calling the zero level generator when our level is 0th
+        if DCCCharacterLevel != '0th':
+            self.DCCClassLevel_Gen()    #Calling the class level generator when our level is 1st or higher
+            
+    def set_class(self):
+        DCCCharacterClass = App.get_running_app().root.ids.select_class.text #Creating the DCCCharacterClass variable to hold the current class selected
+        
+        
+#NEED TO WORK ON THE SUBMIT BUTTON AND GENERATOR OUTPUT            
+    def DCCZeroLevel_Gen(self):
+        App.get_running_app().root.ids.select_class.opacity = 0     #Changing opacity so the select class spinner disappears if 0th level is selected
+    
+    def DCCClassLevel_Gen(self):
+        App.get_running_app().root.ids.select_class.pos = (500, 880) #Positioning the select class spinner
+        App.get_running_app().root.ids.select_class.opacity = 1      #Changing opacity so the select class spinner appears
+        
+        
+        
+        
 class app1(App):
     Name_Variable = NameGenOriginal()  
     Louche_Variable = Louche()  
     Monster_Variable = MonsterGenerator()
+    DCC_Variable = DCCGenerator()
     def build(self):
         return Builder.load_file('SoloRPG.kv')
     

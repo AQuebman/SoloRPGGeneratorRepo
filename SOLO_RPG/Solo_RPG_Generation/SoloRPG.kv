@@ -3,14 +3,17 @@ NPC_Generator:
         orientation: 'vertical'   #Orientation is Vertical instead of horizontal
         canvas:
             Color:
-                rgba: 0, .0, 0, .0
+                rgb: 0, 255, 0
             Rectangle:
                 pos: self.pos
-                size: self.size        
+                size: 385, 1100
+                        
     	Button:
         	text: 'Generic Generators'
+#			text: '[color=ff3333]Unselectable item[/color]' #An example of adding color to the text of the button
+            markup: True			
         	height: '50dp'
-			size_hint: 0.20, None
+			size_hint: .4, .005
         	on_parent: drop1.dismiss()
         	on_release: drop1.open(self)           
             
@@ -41,7 +44,7 @@ NPC_Generator:
             	on_press: root.clear() 
             	on_release: root.Gen_Char_Gen()
             	on_release: drop1.dismiss()
-            	
+              	
             Button:
             	text: "Random Monster Generator"
             	size_hint_y: None
@@ -50,27 +53,29 @@ NPC_Generator:
             	on_release: app.Monster_Variable.MonsterGeneration()
             	on_release: drop1.dismiss()
             	
-
     	Button:
-        	text: 'Scarlet Heroes'
+        	text: 'Dungeon Crawl Classics'
         	height: '50dp'
-			size_hint: 0.20, None
+			size_hint: .4, .005
         	on_parent: drop2.dismiss()
-        	on_release: drop2.open(self) 
+        	on_release: drop2.open(self)  
         	
     	DropDown:
         	id: drop2
         	on_select: btn.text = '{}'.format(args[1])
 
         	Button:
-            	text: 'First Item'
+            	text: 'Character Generator'
             	size_hint_y: None
-            	on_release: dropdown.select('First Item')
+            	height: 45
+            	on_press: root.clear() 
+            	on_release: app.DCC_Variable.DCCCharacterGenerator()
+            	on_release: drop2.dismiss()
             	           
     	Button:
-        	text: 'Drop 3'
+        	text: 'Scarlet Heroes'
         	height: '50dp'
-			size_hint: 0.20, None
+			size_hint: .4, .005
         	on_parent: drop_content.dismiss()
         	on_release: drop_content.open(self)           
             
@@ -86,7 +91,7 @@ NPC_Generator:
     	Button:
         	text: 'Drop 4'
         	height: '50dp'
-			size_hint: 0.20, None
+			size_hint: .4, .005
         	on_parent: drop4.dismiss()
         	on_release: drop4.open(self) 
         	
@@ -99,94 +104,101 @@ NPC_Generator:
             	size_hint_y: None
             	on_release: dropdown.select('First Item')
 
+    GridLayout:   # left side of App
+		cols: 2
+        canvas:
+            Color:
+                rgb: 255, 0, 0
+            Rectangle:
+                pos: 385, 0
+                size: 1525, 1110   
         Label:					#Random Table Output label in the top center of the app
             text: "Random Table Output"
             font_size: 24
-            text_size: (300, 430)
-            valign: 'top'
-            halign: 'center'      
+            text_size: (400, 30)
+            valign: 'top'     
         Label:					#Starter label in the center of the app that disappears when the generators are activated
             id: main_label
             text: "Press a random generator on the side and output will display here."
-            text_size: (1000, 500)
+            text_size: 1750, 900
             font_size: 24
             valign: 'bottom'
-            halign: 'center'   
+            halign: 'left'                            
         Label:					#Label for where Name Prints
             id: Char_Title
             font_size: 24
-            text_size: (750, 520)
+            text_size: (750, 320)
             valign: 'top'
     		halign: 'left'
         Label:					#Label for where Name Prints
             id: Char_Name
             text: " "
             font_size: 24
-            text_size: (770, 540)
+            text_size: (1800, 40)
     		valign: 'top'
     		halign: 'left'
         Label:					#Label for class choice
             id: class_label
             text: " "
             font_size: 24
-            text_size: (770, 555)
+            text_size: (770, 355)
     		valign: 'top' 
     		halign: 'left'
         Label:					#Label for race choice
             id: race_label
             text: " "
             font_size: 24
-            text_size: (770, 570)
+            text_size: (770, 370)
     		valign: 'top'  
     		halign: 'left' 
         Label:					#Label for race choice
             id: Age
             text: " "
             font_size: 24
-            text_size: (770, 590)
+            text_size: (770, 390)
     		valign: 'top'  
     		halign: 'left' 
     	Label:					#Label for Relationship Status
             id: Relationship_Status
             text: " "
             font_size: 24
-            text_size: (770, 340)
+            text_size: (770, 140)
     		valign: 'top'
     		halign: 'left'		
     	Label:					#Label for Sexual Orientation
             id: Sexual_Orientation
             text: " "
             font_size: 24
-            text_size: (770, 470)
+            text_size: (770, 270)
     		valign: 'top'
     		halign: 'left'	
     	Label:					#Label for Personality Traits
             id: Personalitylabel
             text: " "
             font_size: 34
-            text_size: (770, 330)
+            text_size: (770, 130)
     		valign: 'top'
     		halign: 'left'
     	Label:					#Label for Personality Traits
             id: Personality_Traits
             text: " "
             font_size: 24
-            text_size: (770, 410)
+            text_size: (770, 210)
     		valign: 'top'
     		halign: 'left'
     	Label:					#Label for Unique Traits
             id: Unique_Trait
             text: " "
             font_size: 24
-            text_size: (770, 540)
+            text_size: (770, 340)
     		valign: 'top'
     		halign: 'left'
 		Label:					#Label for Number of Siblings
             id: Family
             text: " "
             font_size: 34
-            text_size: (770, 70)
-    		valign: 'top'
+            text_size: (1370, 600)
+    		valign: 'bottom'
     		halign: 'left'   		
 		Label:					#Label for Number of Siblings
             id: siblings_label
@@ -227,49 +239,49 @@ NPC_Generator:
             id: Mother_Status
             text: " "
             font_size: 24
-            text_size: (770, 70)
-    		valign: 'top'
+            text_size: (1330, 460)
+    		valign: 'bottom'
     		halign: 'left'
     	Label:					#Label for Father's health status
             id: Father_Status
             text: " "
             font_size: 24
-            text_size: (770, 30)
-    		valign: 'top'
+            text_size: (2270, 400)
+    		valign: 'bottom'
     		halign: 'left'	
     	Label:					#Label for body type
             id: Height
             text: " "
             font_size: 24
-            text_size: (500, 1640)
+            text_size: (500, 1340)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for body type
             id: bodytype_label
             text: " "
             font_size: 24
-            text_size: (500, 1650)
+            text_size: (500, 1350)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Occupation
             id: occupation_label
             text: " "
             font_size: 24
-            text_size: (620, 1815)
+            text_size: (620, 1515)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Eye Color
             id: Eye_Color
             text: " "
             font_size: 24
-            text_size: (500, 1730)
+            text_size: (500, 1430)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Hair Style
             id: Hair_Style
             text: " "
             font_size: 24
-            text_size: (600, 1740)
+            text_size: (600, 1440)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Hair Style
@@ -277,14 +289,95 @@ NPC_Generator:
             text: " "
             markup: True
             font_size: 24
-            text_size: (580, 1750)
+            text_size: (580, 950)
     		halign: 'right'	
     		valign: 'top'
     		color:  0.071, 0.541, 1
     		on_ref_press:
         		import webbrowser
         		webbrowser.open(args[1])               
-    	Label:					#Label for Dragon Color
+
+
+
+    	Label:					#Label for Aberration Generation
+            id: Aberrations
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: AberrationImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)
+    	Label:					#Label for Beast Generation
+            id: Beasts
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: BeastImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)         
+    	Label:					#Label for Celestial Generation
+            id: Celestials
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: CelestialImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)
+    	Label:					#Label for Construct Generation
+            id: Constructs
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: ConstructImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)
+    	Label:					#Label for Demon Generation
+            id: Demons
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: DemonImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)    
+    	Label:					#Label for Devil Generation
+            id: Devils
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: DevilImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)           	
+    	Label:					#Label for Dragon generation
             id: Dragons
             text: " "
             font_size: 24
@@ -297,3 +390,150 @@ NPC_Generator:
             	opacity: 0
             	size: self.texture_size
             	pos: (500, 10)
+    	Label:					#Label for Elemental generation
+            id: Elementals
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: ElementalImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)
+    	Label:					#Label for Fey generation
+            id: Feys
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: FeyImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)  
+    	Label:					#Label for Fiend generation
+            id: Fiends
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: FiendImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)  
+    	Label:					#Label for Giant generation
+            id: Giants
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: GiantImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)            	           	          	
+    	Label:					#Label for Humanoid Generation
+            id: Humanoids
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: HumanoidImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)
+    	Label:					#Label for Monstrosity Generation
+            id: Monstrosities
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: MonstrosityImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)   
+    	Label:					#Label for Ooze Generation
+            id: Oozes
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: OozeImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)  
+    	Label:					#Label for Plant Generation
+            id: Plants
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: PlantImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)  
+    	Label:					#Label for Swarm Generation
+            id: Swarms
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: SwarmImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)  
+    	Label:					#Label for Undead Generation
+            id: Undead
+            text: " "
+            font_size: 24
+            text_size: (350, 1785)
+    		halign: 'justify'	
+    		valign: 'top'
+        	Image: 
+        		id: UndeadImage
+            	source: ' '
+            	opacity: 0
+            	size: self.texture_size
+            	pos: (500, 10)        	            	   
+    	Spinner:	
+            id: select_level
+            text: "Character Level"
+            values: ('0th', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th')
+            opacity: 0
+            background_color: [0, 0, 1, 1]    # blue colour
+            on_text:
+        		app.DCC_Variable.set_level()
+    	Spinner:	
+            id: select_class
+            text: "Character Class"
+            values: ('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief', 'Wizard')
+            opacity: 0
+            background_color: [0, 0, 1, 1]    # blue colour
+            on_text:
+        		app.DCC_Variable.set_class()            	
+            	           	            	           	               	         	
