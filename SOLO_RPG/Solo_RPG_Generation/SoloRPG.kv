@@ -527,13 +527,30 @@ NPC_Generator:
             opacity: 0
             background_color: [0, 0, 1, 1]    # blue colour
             on_text:
-        		app.DCC_Variable.set_level()
+        		app.DCC_Variable.CheckSelections()
     	Spinner:	
             id: select_class
             text: "Character Class"
             values: ('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief', 'Wizard')
             opacity: 0
             background_color: [0, 0, 1, 1]    # blue colour
+    		
+    	Spinner:	
+            id: Amount_to_Generate
+            text: "Amount you want to generate"
+            values: ('1 Character', '2 Characters', '3 Characters', '4 Characters')
+            opacity: 0
+            background_color: [0, 0, 1, 1]    # blue colour
             on_text:
-        		app.DCC_Variable.set_class()            	
+        		app.DCC_Variable.CheckSelections()        		
+        		
+        Button:
+        	id: DCCSubmitButton
+            text: 'Submit'
+            size_hint_y: None
+            height: 45
+            opacity: 0
+            on_press: app.DCC_Variable.DCCSubmit()     
+
+            	
             	           	            	           	               	         	

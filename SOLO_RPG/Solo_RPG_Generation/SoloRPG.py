@@ -31,8 +31,6 @@ from kivy.uix.popup import Popup
 #Imports the kivy layout of Grid
 from kivy.uix.gridlayout import GridLayout 
 
-from kivy.uix.spinner import Spinner
-
         
 class Louche():
 #Generates random LOUCHE choice for 7-9 rolls in Dungeon World  
@@ -3756,29 +3754,43 @@ class DCCGenerator(GridLayout):
     def DCCCharacterGenerator(self):
         App.get_running_app().root.ids.select_level.pos = (500, 980) #Positioning the select level spinner
         App.get_running_app().root.ids.select_level.opacity = 1      #Changing opacity so the select level spinner appears
+        App.get_running_app().root.ids.Amount_to_Generate.opacity = 1 #Changing opacity so the generate opacity spinner appears
+        App.get_running_app().root.ids.Amount_to_Generate.pos = (500, 780) #Positioning the Amount to Generate spinner       
+        
+              
+        
+    def CheckSelections(self): #This will verify if we are 0th level and remove view of class selection or 1st or higher and show class selection
+        if App.get_running_app().root.ids.select_level.text != '0th' and App.get_running_app().root.ids.select_level.text != 'Character Level':
+            App.get_running_app().root.ids.select_class.opacity = 1
+        else:
+            App.get_running_app().root.ids.select_class.opacity = 0
+
+        if App.get_running_app().root.ids.select_level.text == '0th' and App.get_running_app().root.ids.Amount_to_Generate.text != 'Amount you want to generate':
+            App.get_running_app().root.ids.DCCSubmitButton.opacity = 1 #Show submit button if select level is 0th and a selection has been made for Amount to Generate
+        else:
+            App.get_running_app().root.ids.DCCSubmitButton.opacity = 0
+        
 
         
-    def set_level(self): 
-        DCCCharacterLevel = App.get_running_app().root.ids.select_level.text #Creating the DCCCharacterLevel variable to hold the current level selected 
-
-        if DCCCharacterLevel == '0th': 
-            self.DCCZeroLevel_Gen()     #Calling the zero level generator when our level is 0th
-        if DCCCharacterLevel != '0th':
-            self.DCCClassLevel_Gen()    #Calling the class level generator when our level is 1st or higher
-            
-    def set_class(self):
-        DCCCharacterClass = App.get_running_app().root.ids.select_class.text #Creating the DCCCharacterClass variable to hold the current class selected
         
-        
-#NEED TO WORK ON THE SUBMIT BUTTON AND GENERATOR OUTPUT            
+#NEED TO WORK ON all the shit down here            
     def DCCZeroLevel_Gen(self):
         App.get_running_app().root.ids.select_class.opacity = 0     #Changing opacity so the select class spinner disappears if 0th level is selected
+        App.get_running_app().root.ids.Amount_to_Generate.opacity = 1
     
     def DCCClassLevel_Gen(self):
         App.get_running_app().root.ids.select_class.pos = (500, 880) #Positioning the select class spinner
         App.get_running_app().root.ids.select_class.opacity = 1      #Changing opacity so the select class spinner appears
-        
-        
+        App.get_running_app().root.ids.Amount_to_Generate.pos = (500, 780) #Positioning the select class spinner
+        App.get_running_app().root.ids.Amount_to_Generate.opacity = 1 #Changing opacity so the amount to generate spinner appears
+    
+
+    def DCCSubmit(self):  
+        if App.get_running_app().root.ids.select_class.text != 'Character Class'  and App.get_running_app().root.ids.select_level.text != 'Character Level' and  App.get_running_app().root.ids.Amount_to_Generate.text != 'Amount you want to generate':
+            App.get_running_app().root.ids.DCCSubmitButton.opacity = 1
+        else: 
+            App.get_running_app().root.ids.DCCSubmitButton.opacity = 0
+            print(App.get_running_app().root.ids.select_class.text)  
         
         
 class app1(App):
