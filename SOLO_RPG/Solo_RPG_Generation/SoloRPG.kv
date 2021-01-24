@@ -124,13 +124,13 @@ NPC_Generator:
             font_size: 24
             valign: 'bottom'
             halign: 'left'                            
-        Label:					#Label for where Name Prints
+        Label:					#Label for where Character Title Prints
             id: Char_Title
             font_size: 24
             text_size: (750, 320)
             valign: 'top'
     		halign: 'left'
-        Label:					#Label for where Name Prints
+        Label:					#Label for where Character Name Prints
             id: Char_Name
             text: " "
             font_size: 24
@@ -267,7 +267,7 @@ NPC_Generator:
             id: occupation_label
             text: " "
             font_size: 24
-            text_size: (620, 1515)
+            text_size: (770, 210)
     		halign: 'right'	
     		valign: 'top'
     	Label:					#Label for Eye Color
@@ -533,8 +533,9 @@ NPC_Generator:
             text: "Character Class"
             values: ('Cleric', 'Dwarf', 'Elf', 'Fighter', 'Halfling', 'Thief', 'Wizard')
             opacity: 0
-            background_color: [0, 0, 1, 1]    # blue colour
-    		
+            background_color: [0, 0, 1, 1]    # blue colour  
+            on_text:
+        		app.DCC_Variable.CheckSelections() 	
     	Spinner:	
             id: Amount_to_Generate
             text: "Amount you want to generate"
@@ -542,15 +543,49 @@ NPC_Generator:
             opacity: 0
             background_color: [0, 0, 1, 1]    # blue colour
             on_text:
-        		app.DCC_Variable.CheckSelections()        		
-        		
+        		app.DCC_Variable.CheckSelections()        		        		
         Button:
         	id: DCCSubmitButton
             text: 'Submit'
             size_hint_y: None
             height: 45
             opacity: 0
-            on_press: app.DCC_Variable.DCCSubmit()     
-
+            on_press: root.clear() 
+            on_release: app.DCC_Variable.DCCSubmit()  
+        Button:
+        	id: DCCResetButton
+            text: 'Reset'
+            size_hint_y: None
+            height: 45
+            opacity: 0
+            on_press: app.DCC_Variable.DCCReset()              
+        Label:					#Label for where DCC Character Name 1 Prints
+            id: DCCChar_Name1
+            text: " "
+            font_size: 24
+            text_size: (1400, 1980)
+    		valign: 'top'
+    		halign: 'left'
+        Label:					#Label for where DCC Character Name 2 Prints
+            id: DCCChar_Name2
+            text: " "
+            font_size: 24
+            text_size: (400, 1980)
+    		valign: 'top'
+    		halign: 'right'   
+        Label:					#Label for where DCC Character Name 3 Prints
+            id: DCCChar_Name3
+            text: " "
+            font_size: 24
+            text_size: (1400, 980)
+    		valign: 'top'
+    		halign: 'right'  
+        Label:					#Label for where DCC Character Name 4 Prints
+            id: DCCChar_Name4
+            text: " "
+            font_size: 24
+            text_size: (2100, 980)
+    		valign: 'top'
+    		halign: 'left'      		    		 		
             	
             	           	            	           	               	         	

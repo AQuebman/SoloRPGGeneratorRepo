@@ -173,6 +173,7 @@ class NPC_Generator(BoxLayout):
         'Abbot/Abbess', #the head of an abbey of monks.
         'Abcedarian', #teaches the illiterate.
         'Abjurer', #a mage focused in protective spells.
+        'Academic', #a teacher or scholar in a college or institute of higher education
         'Acater', #provides and prepares foodstuffs or delicacies for events such as festivals.
         'Accoucheur/Obstetrician/Midwife', #assists in childbirth and the care of women giving birth. 
         'Accountant', #keeps and inspects financial accounts.
@@ -189,13 +190,17 @@ class NPC_Generator(BoxLayout):
         'Agister', #affords pasture to the livestock of others for a price.
         'Alchemist', #transforms or creates something within nature through (usually) ritualist magic.
         'Alderman', #a civic dignitary in the local council ranked below the mayor.
+        'Alien Abductee', #Someone who has been abducted and held by an alien force
         'Alienist', #assesses the competence of a defendant in a court of law.
         'Almoner', #distributes money and food to poor people.
+        'Anarchist', #a person who believes in or tries to bring about anarchy.
         'Animal Collector', #collects and deals in rare and exotic animals and monsters.
         'Animal Handler', #care for, train, and study animals in such places as zoos, parks, research laboratories, animal breeding facilities, rodeos, and museums
         'Animal Trainer', #knows how to teach dogs, horses, or even marine animals to display certain behaviors or keep them from exhibiting others
+        'Ant Breeder', #A person who cares for and carefully breeds Ants
         'Anthropologist', #studies the customs, beliefs, and relationships of humanoids and intellectually and culturally advanced creatures. 
         'Apostle', #A religious teacher
+        'Apothecary Test Subject', #Someone who has been used with or without their permission to test medicines, drugs, and/or potions
         'Apothecarist', #prepares and sells medicines, drugs, and potions. 
         'Apparitionist', #A believer in apparitions
         'Appraiser', #assesses the monetary value of something. 
@@ -218,23 +223,29 @@ class NPC_Generator(BoxLayout):
         'Assayer', #determiner of the proportions of metal in ore and the amount of copper, silver, gold, or platinum in coins.
         'Astrologer', #uses astrology to tell others about their character or to predict their future.
         'Astronomer', #makes observations of celestial and scientific phenomena within the material plane.
+        'Asylum Guard', #A guard who protects an Asylum
         'Athlete', #proficient in sports and other forms of physical exercise.
+        'Atilliator' #A skilled castle worker who makes crossbows
         'Auctioneer', #conducts auctions by accepting bids and declaring goods sold. 
         'Augurer', #a priest and official whose main role is the practice of augury: Interpreting the will of the gods by studying the flight of birds
         'Bagniokeeper', #owner of a bath house or brothel.
         'Bailiff', #looks after prisoners.
         'Baker', #bakes bread and cakes.
         'Balladeer', #a singer or composer of ballads
+        'Baliff', #an official in a court of law who keeps order, looks after prisoners, etc.
         'Bandit', #a robber or outlaw belonging to a gang and typically operating in an isolated or lawless area.
         'Banker', #an officer or owner of a bank or group of banks.
         'Barber', #cuts hair and shaves or trims beards.
-        'Barkeep', #works and serves drinks in a bar.
+        'Barkeep/Bartender', #works and serves drinks in a bar.
+        'Barley Farmer', #A farmer who specializes in the growth and care of Barley
         'Barmaid/Barboy', #serves drinks and food in a bar as well as engaging with customers.
         'Baron/Baroness', #a member of the lowest order of the British nobility.
         'Barrister', # lawyer entitled to practice as an advocate
         'Battler', #a person who battles or fights
         'Beadle', #ceremonial officer of a church, college, or similar institution  
         'Beekeeper', #a person who owns and breeds bees, especially for their honey
+        'Bee Breeder', #A person who cares for and carefully breeds bees
+        'Beetle Breeder', #A person who cares for and carefully breeds Beetles
         'Beggar/Pauper', #lives by asking for money or food. 
         'Beguiler', #someone who leads you to believe something that is not true
         'Berserker', #A warrior who fights in a wild frenzy
@@ -257,11 +268,13 @@ class NPC_Generator(BoxLayout):
         'Botanist', #an expert in or student of the scientific study of plants.
         'Bosun', #in charge of organizing the equipment and crew of a ship.
         'Bouncer', #prevents troublemakers from entering or to eject them from the premises of an establishment.
+        'Bottler', #Someone who bottles liquids in a carrying vessel
         'Bounty hunter', #pursues a criminal or fugitive for whom a reward is offered
         'Bowyer', #makes bows and crossbows.
+        'Brain Grub Breeder', #A person who raises and breeds brain grubs
         'Brawler', #a person who engages in rough or noisy fights or quarrels
         'Breeder', #a person who breeds livestock, racehorses, other animals, or plants
-        'Brewer', #brews ale.
+        'Brewer', #brewer of ale.
         'Brickmaker', #crafts bricks from clay, stone, or other materials.
         'Brickmason', #builds with mineral products such as stones, bricks, cinder blocks, or tiles, usually with the use of mortar as a bonding agent. 
         'Brigand', #a member of a gang that ambushes and robs people in forests and mountains
@@ -274,6 +287,7 @@ class NPC_Generator(BoxLayout):
         'Busker/Street Musician', #performs in a public place, often for money. 
         'Butcher', #cuts up and sells meat.
         'Butler', #the chief servant of a household.
+        'Cabbage Farmer', #A farmer who specializes in the growth and care of Cabbage
         'Cabbie/Wagoner', #drives a horse-drawn wagon.
         'Cabin Boy/Cabin Girl', #waits on the orders of a ship’s officers and passengers.
         'Cadet', #a young trainee in the armed services or police force
@@ -282,6 +296,7 @@ class NPC_Generator(BoxLayout):
         'Cantor', #sings liturgical music and leads prayer in a synagogue.
         'Capo', #Captain or leadership in a criminal organization
         'Captain', #an army officer of high rank in charge of commanding squadrons of soldiers.
+        'Caravan Driver', #A person who drives a caravan
         'Caravan Guard', #A guard who protects a caravan
         'Caravaneer', #travels or lives in a caravan.
         'Card shark', #a person who cheats at cards in order to win money
@@ -294,6 +309,7 @@ class NPC_Generator(BoxLayout):
         'Castellan', #the governor of a castle.
         'Cavalryman/Cavalier', #a skilled horseback rider.
         'Celebrity', #a famous person.
+        'Centipede Breeder', #A person who cares for and carefully breeds Centipedes
         'Chamberlain', #n officer who manages the household of a monarch or noble
         'Champion', #a person who has defeated or surpassed all rivals in a competition
         'Chancellor', #a senior state or legal official.
@@ -320,6 +336,7 @@ class NPC_Generator(BoxLayout):
         'Clerk', #undertakes routine administrative duties in a business or bank. 
         'Clockworker', #A person who specializes in creation and repair of clocks and clock like devices
         'Clown', #comic entertainer who wears a traditional costume and exaggerated makeup. 
+        'Coal Miner', #Someone who digs in caves collecting Coal ore
         'Cobbler', #makes and repairs footwear.
         'Cockfighter/Gamefighter', #engages in arena matches in which animals or monsters are pitted against one another, typically to the death.
         'Collector', #collects things of a specified type, professionally or as a hobby.
@@ -335,11 +352,13 @@ class NPC_Generator(BoxLayout):
         'Cooper/Hooper', #makes and repairs casks and barrels. 
         'Conqueror', #a person who conquers a place or people
         'Conservationist', #advocates for the protection and preservation of the environment and wildlife.
+        'Conspiracy Theorist', #Someone who spends their days in the study/worship of conspiracies about all of life and it's events
         'Construction Worker', #a laborer in the physical construction of a built environment and its infrastructure. 
         'Contortionist', #twists and bends their body into strange and unnatural positions.
         'Cooper', #a maker or repairer of casks and barrels
         'Copyist', #makes copies of handwritten documents or music. 
         'Corn Farmer', #A farmer who specializes in the production of Corn
+        'Corpse Gatherer', #A person who collects the corpses in an area
         'Costermonger', #a person who sells goods, especially fruit and vegetables, from a handcart in the street
         'Costumer', #makes theatrical costumes.
         'Count/Earl/Countess', #a nobleperson ranking above a viscount and below a marquess.
@@ -352,6 +371,7 @@ class NPC_Generator(BoxLayout):
         'Crossing Sweeper', #sweeps a path ahead of people crossing dirty urban streets in exchange for a gratuity 
         'Croupier', #runs a gaming table by gathering in and paying out money or tokens.
         'Cryomancer', #A user of magic who focuses on cold related spells and spell like effects
+        'Crystal Farmer', #A farmer/raiser of crystalline structures
         'Cult Leader', #the organizational leader of a cult who is occasionally also the founder.
         'Cultist', #a member of a cult who generally lives outside of conventional society and worships an unorthodox patron.
         'Curator', #keeper and custodian of a museum or other collections of precious items.
@@ -383,6 +403,7 @@ class NPC_Generator(BoxLayout):
         'Diviner', #seeks ultimate divination in order to further understand or meet godly substance.
         'Dock worker', #A person who works on the docks usually on fishing boats and boats incoming/outgoing from port
         'Doctor/Physician', #a qualified practitioner of medicine.
+        'Dog Breeder and Trainer', #Trainer and breeder of Canines 
         'Dragon-Binder', #A spellcaster who specializes in binding Dragons to it's will
         'Dragon-Keeper', #A person who specializes in trapping Dragons and keeping them for personal use
         'Drakologist', #studies or is an expert in the branch of zoology concerned with dragons.
@@ -403,12 +424,16 @@ class NPC_Generator(BoxLayout):
         'Emperor/Empress', #the supreme sovereign ruler of an extensive group of states or countries under a single authority.
         'Enchanter', #uses sorcery to put someone or something under a spell.
         'Encylopaedist', #a person who writes, edits, or contributes to an encyclopedia
+        'Enforcer', #a person or group that compels observance of or compliance with a law, rule, or obligation
         'Engraver', #incises a design onto a hard surface by cutting grooves into it. 
         'Engineer', #designer of a machine or structure.
         'Entomologist', #studies or is an expert in the branch of zoology concerned with insects.
+        'Entrails Reader', #Someone who specializes in reading magic power held within the entrails of a creature.
         'Entrepreneur', #organizes and operates a business or businesses, taking on greater than normal financial risks in order to do so.
         'Epicure', #a person who takes particular pleasure in fine food and drink
         'Equilibrist', #performs balancing feats. 
+        'Escaped Slave', #Someone who has escaped forceful control of another
+        'Eunuch Servant', #A servant whose genitals have been forcefully removed
         'Evangelist', #A person who seeks to convert others to their faith especially by public preaching
         'Evoker', #manipulates energy or taps into an unseen source of power in order to produce a desired kinetic end.
         'Ex-Adventurer', #Someone who has retired from traveling the world for adventure and treasure
@@ -422,6 +447,7 @@ class NPC_Generator(BoxLayout):
         'Exterminator', #exterminates unwanted rodents and insects.
         'Extortioner', #extorts money from someone by threatening to expose embarrassing information about them. 
         'Falconer', #someone who practises the sport of pursuing live prey with a raptor, such as a hawk, falcon or eagle
+        'False Prophet', #A member of the cloth who spouts untruths for nefarious purposes either their own or someone elses or someone who is simply insanely babbling nonsense
         'Farmer', #a person who owns or manages a farm
         'Farrier', #trims and shoes horses’ hooves. 
         'Fashion Designer', #applies design, aesthetics and natural beauty to garments and their accessories.
@@ -432,8 +458,11 @@ class NPC_Generator(BoxLayout):
         'Firefighter', #extinguishes fires.
         'First Mate', #the deck officer second in command to the master of a ship.
         'Fisher', #Someone who hunts in rivers, seas, and oceans and sells their catch for a living
+        'Flax Farmer', #A farmer who specializes in the growth and care of Flax
         'Fletcher', #makes and repairs arrows.
+        'Flimflam', #Someone who makes money by swindling others
         'Florist', #someone who arranges flowers and other plant elements into a pleasing design
+        'Fly Breeder', #A person who cares for and carefully breeds flies
         'Food & Drink Taster', #ingests food that was prepared for someone else to confirm it is safe to eat.
         'Folk Hero', #a celebrity who is greatly admired by many people of a particular kind or in a particular place
         'Footman', #a liveried servant whose duties include admitting visitors and waiting at table
@@ -452,6 +481,7 @@ class NPC_Generator(BoxLayout):
         'Gamekeeper' #breeds and protects game, typically for a large estate
         'Gammoner', # A thief's accomplice who distracts the victim while the thief steals.
         'Gardener/Landscaper', #tends and cultivates a garden.
+        'Gem Cutter', #Someone who cuts gem's usually for use in jewelry
         'General', #the chief commander of an army.
         'General Contractor', #supervises a construction site, manages its vendors and trades, and communicates information to all involved parties. 
         'Giant-Binder', #A spellcaster who specializes in binding Giants to it's will
@@ -462,6 +492,7 @@ class NPC_Generator(BoxLayout):
         'Glazier', #fits glass into windows and doors. 
         'Glovemaker', #makes and repairs gloves.
         'Godfather', #a man who is influential or pioneering in a movement or organization
+        'Gold Miner', #Someone who digs in caves collecting Gold ore
         'Goldsmith/Silversmith', #a smith who specializes in precious metals.
         'Gong Farmer', #digs out and removes excrement from privies and cesspits.
         'Government Official',
@@ -488,6 +519,7 @@ class NPC_Generator(BoxLayout):
         'Heathen-slayer', #Someone who belongs to a church and specializes in destroying those who stand for the opposite of what the religion stands for
         'Hedge creeper', #a common or cheap prostitute, one who would lay on her back in the open air 
         'Helmsman', #steers a ship or boat
+        'Hemp Farmer', #A farmer of hemp
         'Herald', #a messenger who carries important news.
         'Herbalist', #practices healing by the use of herbs.
         'Herder', #supervises a herd of livestock or makes a living from keeping livestock, especially in open country.
@@ -517,6 +549,7 @@ class NPC_Generator(BoxLayout):
         'Intelligence Officer', #collects, compiles and organizes information about the enemy.
         'Interpreter', #interprets language and its meaning, especially within ancient manuscripts.
         'Investigator', #a person who carries out a formal inquiry or investigation
+        'Iron Miner', #Someone who digs in caves collecting iron ore
         'Jailer', #supervises a jail and the prisoners in it.
         'Janissary', #a devoted follower or supporter
         'Jester', #professional joker or “fool” at court, typically wearing a cap with bells on it and carrying a mock scepter.
@@ -547,10 +580,13 @@ class NPC_Generator(BoxLayout):
         'Lawyer/Advocate', #practices or studies law, typically an attorney or a counselor.
         'Leatherworker', #makes items from leather such as pouches, scabbards, straps, etc. 
         'Lector', #reads to others while they work for entertainment.
+        'Leech Breeder', #A person who cares for and carefully breeds Leeches
         'Legionnaire', #A member of a military legion
+        'Lentils Farmer', #A farmer who specializes in the growth and care of Lentils
         'Librarian', #administers or assists in a library.
         'Lich', #A person usually a wizard who has reached immortality via a difficult ritual that turns them into an undead
         'Lieutenant', #an officer of middle rank in the armed forces.
+        'Lignite Farmer', #A Farmer who cares for and produces Lignite
         'Limner', #paints portraits or miniatures.
         'Linguist', #studies the essence of communication, including the units, nature, structure, and modification of language.
         'Loan Shark', #charges extremely high rates of interest for moneylending, typically under illegal conditions.
@@ -608,6 +644,7 @@ class NPC_Generator(BoxLayout):
         'Mortician', #prepares dead bodies for burial or cremation and makes arrangements for funerals.
         'Monster Collector', #collects and deals in rare and exotic animals and monsters.
         'Monster Handler', #Handles and managers exotic animals and monsters
+        'Muckracker', #reform-minded journalists 
         'Mugger', #A person who attacks and robs another in a public place 
         'Mummer', #A masked mime
         'Mushroom farmer', #A farmer who specializes in the growth and harvesting of Mushrooms
@@ -618,10 +655,12 @@ class NPC_Generator(BoxLayout):
         'Nanny/Nursemaid', #a servant employed to look after a young child or children. 
         'Navigator', #directs the route or course of a ship or other form of transportation, especially by using instruments and maps.
         'Necromancer', #communicates with and conjures the spirits of the dead.
+        'Night Watchman', #a person whose job is to guard a building at night
         'Noble/Aristocrat', #a person belonging to a class with high social or political status.
         'Notary', #performs certain legal formalities, especially to draw up or certify contracts, deeds, and other documents for use in other jurisdictions.
         'Nun', #a member of a religious community of women, especially a cloistered one, living under vows of poverty, chastity, and obedience.
         'Nurse', #cares for the sick or infirm, especially in a hospital.
+        'Oat Farmer', #A farmer who specializes in the growth and care of Oats
         'Occultist', #One who studies the action or influence of supernatural or supernormal powers
         'Omen-bringer', #One who studies and shares stories of great omens within the culture they reside
         'Operator', #a laborer who operates equipment, typically in construction.
@@ -630,6 +669,7 @@ class NPC_Generator(BoxLayout):
         'Orator/Spokesman', #makes statements on behalf of a group or individual nobleperson. 
         'Ostler', #a groom or stableman, who is employed in a stable to take care of horses 
         'Outlaw', #a person who has broken the law, especially one who remains at large or is a fugitive
+        'Pack Rat' #a person who obsessively hoards objects
         'Padre', #A chaplain in the armed services
         'Page', #a young attendant to a person of noble rank. 
         'Painter', #paints pictures.
@@ -639,13 +679,18 @@ class NPC_Generator(BoxLayout):
         'Parson', #Priest of a church not affiliated with a monastic organization
         'Pastry Chef', #makes desserts, especially cakes and pastries.
         'Pathfinder', #scouts ahead and discovers a path or way for others. 
-        'Pawnbroker', #a person who lends money at interest on the security of an article pawned. 
+        'Pawnbroker', #a person who lends money at interest on the security of an article pawned.
+        'Pea Farmer', #A farmer who specializes in the growth and care of Peas 
         'Peddler', #travels from place to place selling assorted items.
         'Philosopher', #a scholar of the fundamental nature of knowledge, reality, and existence.
+        'Physician', #a person qualified to practice medicine
         'Pick Pocket', # person who steals from people's pockets.
+        'Pig Wrestler', #Someone who spends their time wrestling pig's as a side show
         'Pilgrim', #journeys to some sacred place as an act of religious devotion, occasionally to settle there
         'Pimp/Madame', #controls prostitutes and arranges clients for them, taking part of their earnings in return. 
         'Pirate', #attacks and robs ships at sea.
+        'Pit Fighter', #A gladiator who fights in underground pits
+        'Plague Doctor', #A physician who specializes in treating plagues
         'Plantation Owner', #an owner of an estate on which crops are cultivated by resident labor, typically slave labor.
         'Plasterer', #applies plaster to walls, ceilings, or other surfaces.
         'Playwright', #writes plays or musicals.
@@ -678,9 +723,12 @@ class NPC_Generator(BoxLayout):
         'Pugilist', #a boxer 
         'Pupil', #a student in school.
         'Purser', #keeps the accounts of a ship, especially as the head steward on a passenger vessel.
+        'Pus Diviner', #A mystic who can divine through the pus from a body
         'Quarryman/Quarrywoman', #quarries stone.
         'Quartermaster', #responsible for providing quarters, rations, clothing, and other supplies.
         'Rabbi', #A religious scholar or teacher
+        'Rabid Raven Fanatic', #A person who has dedicated/obssessed their lives to the care and love of raven's
+        'Racketeer', #a person who engages in dishonest and fraudulent business dealings
         'Radish Farmer', #A farmer who specializes in the growth and harvesting of Radishes
         'Rag-and-Bone Man', #collects unwanted household items and sells them to merchants.
         'Raider/Marauder', #makes sudden, unprompted attacks against defenseless or near-defenseless settlements. 
@@ -707,13 +755,16 @@ class NPC_Generator(BoxLayout):
         'Runecaster', #uses special alphabets to create runes (symbols possessing magical effects capable of being used multiple times). 
         'Runner', #carries information between lines in wartime.
         'Rutabaga Farmer', #A farmer who specializes in the growth and harvesting of Rutabagas
+        'Rye Farmer', #A farmer who specializes in the growth and harvesting of Rye
         'Saddler', #makes and repairs saddlery. 
         'Sage', #a wise and experienced magic-user.
         'Saint', #a person who is recognized as having an exceptional degree of holiness or likeness or closeness to God
         'Sailor', #works as a member of the crew of a commercial or naval ship or boat.
         'Sapper', #a soldier responsible for tasks such as building and repairing roads and bridges, laying and clearing mines, etc. 
+        'Sapphire Miner', #Someone who digs in caves collecting Sapphires   
         'Savant', #a learned person, especially a distinguished scientist.
         'Scammer', #a person who commits fraud or participates in a dishonest scheme. 
+        'Scat Scooper', #Someone who gets paid to pick up feces
         'Scavenger/Mudlark/Tosher', #searches for and collects discarded items
         'Scholar', #a specialist in a particular branch of study who pursues the acquisition of knowledge.
         'Scientist', #a person who is studying or has expert knowledge of one or more of the natural or physical sciences
@@ -722,6 +773,7 @@ class NPC_Generator(BoxLayout):
         'Sculptor', #crafts art by carving or casting blocks of marble, stones, or other hardened minerals.
         'Sea Captain', #commands a ship.
         'Seamstress/Tailor', #makes, alters, repairs, as well as occasionally designing garments.
+        'Seed Farmer', #A farmer who specializes in working with seeds of a diverse variety
         'Seer/Oracle', #able to see what the future holds through supernatural insight.
         'Senator', #partakes in governmental decision-making after being elected. 
         'Sensei', #A teacher of the martial arts
@@ -738,6 +790,7 @@ class NPC_Generator(BoxLayout):
         'Sheriff', #the chief executive officer in a county, having various administrative and judicial functions. 
         'Shield-bearer', #An attendant who carries a warriors shield
         'Shipwright', #a carpenter skilled in ship construction and repair.
+        'Sideshow Freak', #Someone who gets paid showing off a deformity or some other oddity they can perform in front of a crowd
         'Siege Artillerist', #works the artillery machines of an army.
         'Singer/Soprano', #sings with or without instrumental accompaniment.
         'Skald', #composes and recites poems honoring heroes and their deeds.
@@ -747,6 +800,7 @@ class NPC_Generator(BoxLayout):
         'Slave', #a person who is the legal property of another and forced to obey them
         'Slaver', #a person dealing in or owning slaves
         'Smuggler', #manages the import or export of goods secretly, in violation of the law, especially without payment of legal duty.
+        'Snake Handler', #Someone who handles and usually sells/cares for snakes
         'Soaper', #makes soap from accumulated mutton fat, wood ash, and natural soda. 
         'Soldier/Man-at-Arms', #serves in an army. 
         'Sonneteer', #a writer of sonnets
@@ -756,6 +810,7 @@ class NPC_Generator(BoxLayout):
         'Special Force Soldier', #carries out special operations.
         'Speculator', #invests in stocks, property, or other ventures in the hope of making a profit. 
         'Spice Merchant', #A merchant who specializes in the sale of various herbs and spices usually from far off locations
+        'Spider Breeder', #A person who cares for and carefully breeds Spiders
         'Spy', #secretly collects and reports information on the activities, movements, and plans of an enemy or competitor.
         'Spymaster', #directs a network of subordinate espionage agents for a state, kingdom, or empire.
         'Squatter', #unlawfully occupies an uninhabited building or unused land 
@@ -764,11 +819,14 @@ class NPC_Generator(BoxLayout):
         'Stablehand', #works in a stable.
         'Stage Magician', #deceives their audience with seemingly impossible feats while using only natural means.
         'Stagehand', #moves scenery or props before or during the performance of a theatrical production.
+        'Steel Miner', #Someone who digs in caves collecting Steel ore
         'Steward', #supervises both the estate and household of his lord or lady while they are away.
         'Street Cleaner', #cleans streets and alleyways after dark. 
+        'Street Performer', #Someone who performs in the street for tips
         'Stonemason', #cuts and prepares stone for use in construction.
         'Student', #attends school or learns under other to enter and pursue a particular subject.
         'Stuntman/Stuntwoman', #performs dangerous stunts for their audience.
+        'Swamp Farmer', #A farmer who specializes in items that grow in a swamp environment
         'Summoner', #a mage able to summon forth magical beasts, creatures, and monsters. 
         'Surgeon/Chirurgeon', #practices surgery.
         'Swindler', #a person who uses deception to deprive someone of money or possessions 
@@ -793,12 +851,15 @@ class NPC_Generator(BoxLayout):
         'Thresher', #separates grain from the plants by beating. 
         'Thug', #a violent person, especially a criminal
         'Thriftdealer', #deals in secondhand items.
+        'Tick Breeder', #A person who cares for and carefully breeds Ticks
         'Tinker', #travels from place to place mending utensils. 
+        'Tinkerer', #a person who enjoys fixing and experimenting with machines and their parts
         'Tollkeeper', #collects tolls at a bridge, road etc. where a charge is made. 
         'Tomb robber/Grave Robber', #steals valuables from graves and tombs 
         'Torturer', #inflicts severe pain on someone as a punishment or in order to force them to do or say something.
         'Town Crier', #makes public announcements in the streets or marketplace.
         'Toymaker', #makes and repairs toys.
+        'Tracker', #Someone who makes a living tracking people and things
         'Tradesman', #deals exclusively in bartering. 
         'Trainer', #trains someone in a particular skill, usually physical, for money.
         'Translator', #translates between languages.
@@ -813,12 +874,14 @@ class NPC_Generator(BoxLayout):
         'Tunner', #fills casks in a brewery or winery. 
         'Turnip Farmer', #A farmer who specializes in Turnip production 
         'Tutor', #charged with the instruction and guidance of another.
+        'Undertaker', #a person whose business is preparing dead bodies for burial or cremation and making arrangements for funerals.
         'Urchin', #a child who lives or spends most of their time in the streets, occasionally working as a thief or pickpocket
         'Vagrant', #A beggar
         'Vampire-Binder', #A person who binds vampires to their will
         'Vampire-Keeper', #A person who catches and keeps Vampires as pets or for show or some other purpose
         'Vendor', #deals items in the street. 
         'Veterinarian', #treats diseased or injured animals.
+        'Vicar', #member of the clergy in charge of a chapel
         'Vintner', #engages in winemaking, especially with monitoring and harvesting the grapes. 
         'Viscount/Viscountess', #a nobleperson ranking above a baron and below a count.
         'Visionist', #One who sees, or believes that he sees, visions
@@ -837,11 +900,14 @@ class NPC_Generator(BoxLayout):
         'Wet Nurse', #a woman employed to suckle another woman’s child.
         'Wheat Farmer', #A farmer specialized in growing wheat
         'Wheelwright', #makes and repairs wooden wheels.
+        'Wheellock Gunsmith', #A metal smith who makes guns with wheellock technology
         'Whittler/Woodcarver', #fashions wood into various shapes.
         'Whore', #A prostitute
         'Wizard\'s apprentice', #The understudy or student to a wizard or other spellcaster
-        'Woodcutter' #Someone who specializes in felling trees and processing of wood
-        'Wordsmith' #draws their power from language and casts by dictation.
+        'Woodcutter', #Someone who specializes in felling trees and processing of wood
+        'Wordsmith', #draws their power from language and casts by dictation.
+        'Worm Harvester', #Someone who harvest's worm's for a living
+        'Wrangler', #a person in charge of horses or other livestock on a ranch
         'Wrestler', #performs in matches involving grappling and grappling-type techniques.
         'Writer', #commits his or her thoughts, ideas, etc., into written language. 
         'Zealot', #a person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals
@@ -1531,7 +1597,12 @@ class NPC_Generator(BoxLayout):
         App.get_running_app().root.ids.HumanoidImage.source = ''
         App.get_running_app().root.ids.Dragons.text = ''
         App.get_running_app().root.ids.DragonImage.source = ''
-
+        App.get_running_app().root.ids.DCCChar_Name1.text = ''
+        App.get_running_app().root.ids.DCCChar_Name2.text = ''
+        App.get_running_app().root.ids.DCCChar_Name3.text = ''
+        App.get_running_app().root.ids.DCCChar_Name4.text = ''
+        App.get_running_app().root.ids.select_class.text = 'Character Class' 
+        App.get_running_app().root.ids.select_level.text = 'Character Level'                
 
 class NameGenOriginal():
     # Name Gen Orig - Create a popup dialog with a label and a close button
@@ -3759,40 +3830,81 @@ class DCCGenerator(GridLayout):
         
               
         
-    def CheckSelections(self): #This will verify if we are 0th level and remove view of class selection or 1st or higher and show class selection
-        if App.get_running_app().root.ids.select_level.text != '0th' and App.get_running_app().root.ids.select_level.text != 'Character Level':
+    def CheckSelections(self): 
+#This will verify if we are 0th level and remove view of class selection or if it's 1st or higher then we will show class selection
+        if App.get_running_app().root.ids.select_level.text != '0th' and App.get_running_app().root.ids.select_level.text != 'Character Level': 
             App.get_running_app().root.ids.select_class.opacity = 1
-        else:
+        elif App.get_running_app().root.ids.select_level.text == '0th' or App.get_running_app().root.ids.select_level.text == 'Character Level':
             App.get_running_app().root.ids.select_class.opacity = 0
-
+        else:
+            print("Something is wrong the level isn't a valid value")
+ 
+#This verifies that every field has a valid entry before showing the submit button            
         if App.get_running_app().root.ids.select_level.text == '0th' and App.get_running_app().root.ids.Amount_to_Generate.text != 'Amount you want to generate':
-            App.get_running_app().root.ids.DCCSubmitButton.opacity = 1 #Show submit button if select level is 0th and a selection has been made for Amount to Generate
+            App.get_running_app().root.ids.DCCSubmitButton.opacity = 1
+            App.get_running_app().root.ids.DCCResetButton.opacity = 1            
+        elif App.get_running_app().root.ids.select_level.text != 'Character Level' and App.get_running_app().root.ids.select_level.text != '0th' and App.get_running_app().root.ids.Amount_to_Generate.text != 'Amount you want to generate'and App.get_running_app().root.ids.select_class.text != 'Character Class':
+            App.get_running_app().root.ids.DCCSubmitButton.opacity = 1
+            App.get_running_app().root.ids.DCCResetButton.opacity = 1               
         else:
             App.get_running_app().root.ids.DCCSubmitButton.opacity = 0
-        
+            App.get_running_app().root.ids.DCCResetButton.opacity = 0 
 
-        
-        
-#NEED TO WORK ON all the shit down here            
-    def DCCZeroLevel_Gen(self):
-        App.get_running_app().root.ids.select_class.opacity = 0     #Changing opacity so the select class spinner disappears if 0th level is selected
-        App.get_running_app().root.ids.Amount_to_Generate.opacity = 1
-    
-    def DCCClassLevel_Gen(self):
-        App.get_running_app().root.ids.select_class.pos = (500, 880) #Positioning the select class spinner
-        App.get_running_app().root.ids.select_class.opacity = 1      #Changing opacity so the select class spinner appears
-        App.get_running_app().root.ids.Amount_to_Generate.pos = (500, 780) #Positioning the select class spinner
-        App.get_running_app().root.ids.Amount_to_Generate.opacity = 1 #Changing opacity so the amount to generate spinner appears
     
 
-    def DCCSubmit(self):  
-        if App.get_running_app().root.ids.select_class.text != 'Character Class'  and App.get_running_app().root.ids.select_level.text != 'Character Level' and  App.get_running_app().root.ids.Amount_to_Generate.text != 'Amount you want to generate':
-            App.get_running_app().root.ids.DCCSubmitButton.opacity = 1
-        else: 
+    def DCCSubmit(self): 
+        
+#NEED TO FIGURE OUT HOW TO ASK FOR MALE OR FEMALE OR GIVE THEM WHATEVER 
+    #POSSIBLY ADD A RADIO BUTTON TO LET USERS CHOOSE       
             App.get_running_app().root.ids.DCCSubmitButton.opacity = 0
-            print(App.get_running_app().root.ids.select_class.text)  
+            App.get_running_app().root.ids.DCCResetButton.opacity = 0 
+            App.get_running_app().root.ids.select_class.opacity = 0
+            App.get_running_app().root.ids.select_level.opacity = 0
+            App.get_running_app().root.ids.Amount_to_Generate.opacity = 0  
         
-        
+                               
+            #Declares the array variables of First_Name and Last_Name
+            First_Name = []
+            Last_Name = []
+            #Opens the csv file that contains the random names
+            with open(r'Names_List.csv') as f:
+                reader = csv.reader(f, skipinitialspace=True)         
+                for col in reader: 
+                    #This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
+                    if not col[1] or col[1] == "Female First Name": continue
+                    else:
+                        #This appends column 1 to First_Name
+                        First_Name.append(col[1])
+                        #This verifies it doesn't get a blank or the column title and if it does it continues until it doesn't get a blank
+                        if not col[2]: continue
+                        if not col[2] or col[2] == "Last Names": continue
+                        else:
+                            #This appends column 2 to Last_Name
+                            Last_Name.append(col[2])
+                
+            #Print a random first and last name for females
+            if App.get_running_app().root.ids.Amount_to_Generate.text == '1 Character':
+                App.get_running_app().root.ids.DCCChar_Name1.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])
+            elif App.get_running_app().root.ids.Amount_to_Generate.text == '2 Characters':
+                App.get_running_app().root.ids.DCCChar_Name1.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])
+                App.get_running_app().root.ids.DCCChar_Name2.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)]) 
+            elif App.get_running_app().root.ids.Amount_to_Generate.text == '3 Characters':
+                App.get_running_app().root.ids.DCCChar_Name1.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])
+                App.get_running_app().root.ids.DCCChar_Name2.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)]) 
+                App.get_running_app().root.ids.DCCChar_Name3.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)]) 
+            elif App.get_running_app().root.ids.Amount_to_Generate.text == '4 Characters':
+                App.get_running_app().root.ids.DCCChar_Name1.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])
+                App.get_running_app().root.ids.DCCChar_Name2.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)]) 
+                App.get_running_app().root.ids.DCCChar_Name3.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])  
+                App.get_running_app().root.ids.DCCChar_Name4.text = " ".join(['Name: ', random.choice(First_Name), ' ', random.choice(Last_Name)])                                                   
+            else:
+                print('Something has gone horribly wrong with the DCC Character Name Generator')               
+
+    def DCCReset(self):         
+        App.get_running_app().root.ids.select_class.text = 'Character Class' 
+        App.get_running_app().root.ids.select_level.text = 'Character Level'
+        App.get_running_app().root.ids.Amount_to_Generate.text = 'Amount you want to generate'                                           
+            
 class app1(App):
     Name_Variable = NameGenOriginal()  
     Louche_Variable = Louche()  
